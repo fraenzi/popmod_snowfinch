@@ -1,0 +1,89 @@
+# multi-event model to model ring and bird survival
+
+
+# states
+# 1 = alive with colour ring
+# 2 = alive without colour ring
+# 3 = dead/emigrated
+
+# event
+# 1 = resighted or recaptured with colour ring
+# 2 = recaptured with colour ring lost
+# 3 = not seen and not captured
+
+
+model{
+  ## transition probabilities
+for(i in 1:nreleases){
+  for(t in first[i]:last[i]){
+  ps[1,i,t,1] <- (1-m)*s[individual[i],t]
+  ps[1,i,t,2] <- m*s[individual[i],t]
+  ps[1,i,t,3] <- 1-s[individual[i],t]
+ 
+  ps[2,i,t,1] <- 0
+  ps[2,i,t,2] <- s[individual[i],t]
+  ps[2,i,t,3] <- 1-s[individual[i],t]
+  
+  ps[3,i,t,1] <- 0
+  ps[3,i,t,2] <- 0
+  ps[3,i,t,3] <- 1
+
+  po[1,i,t,1] <- pr[individual[i],t]
+  po[1,i,t,2] <- 0
+  po[1,i,t,3] <- 1-pr[individual[i],t]
+
+  po[2,i,t,1] <- 0
+  po[2,i,t,2] <- p[individual[i],t]
+  po[2,i,t,3] <- 1-p[individual[i],t]
+ 
+  po[3,i,t,1] <- 0
+  po[3,i,t,2] <- 0
+  po[3,i,t,3] <- 1 
+    } # t
+} # i
+
+  ## likelihood 
+  for(i in 1:nreleases){
+    zeta[i,first[i],1]  <- equals(y[i,first[i]],1)
+    zeta[i,first[i],2]  <- equals(y[i,first[i]],2)
+    zeta[i,first[i],3]  <- 0
+     for(t in (first[i]+1):last[i]) { 
+      for(j in 1:3){  
+      zeta[i,t,j] <- inprod(zeta[i, t-1,], ps[,i,t-1,j])*po[j,i,t,y[i,t]] 
+      }
+    }
+   lik[i]<- sum(zeta[i,last[i],]) # sum the likelihood over all states (should have one number only)
+   fr[i] ~ dbin(lik[i],fr1[i])  # fr and fr1 are the same but with different names, number of observed capture histories (can be ones only)
+  }
+
+  ## linear predictors
+  for(i in 1:nind){
+    ## impute unknown sexes
+    sex[i] ~ dcat(propsex)
+    for(t in firstpind[i]:nocc){
+      logit(s[i,t]) <-  b0[sex[i], age[i,t], season[t]]  
+      logit(p[i,t]) <-  a0[sex[i], age[i,t], season[t]]  
+      logit(pr[i,t]) <-  d0[sex[i], age[i,t], season[t]]  
+
+    }
+   }
+
+  propsex[1:2] ~ ddirch(alpha[1:2])
+for(k in 1:3){
+  b0[1,1,k] ~ dnorm(0, 0.44)  # = Normal(0,1.5) für Intercept 
+  b0[2,1,k] ~ dnorm(0, 0.44)
+  b0[1,2,k] ~ dnorm(0, 0.44)
+  b0[2,2,k] ~ dnorm(0, 0.44)
+
+  a0[1,1,k] ~ dnorm(0, 0.44)  # = Normal(0,1.5) für Intercept 
+  a0[2,1,k] ~ dnorm(0, 0.44)
+  a0[1,2,k] ~ dnorm(0, 0.44)
+  a0[2,2,k] ~ dnorm(0, 0.44)
+
+  d0[1,1,k] ~ dnorm(0, 0.44)  # = Normal(0,1.5) für Intercept 
+  d0[2,1,k] ~ dnorm(0, 0.44)
+  d0[1,2,k] ~ dnorm(0, 0.44)
+  d0[2,2,k] ~ dnorm(0, 0.44)
+  }
+ m ~ dbeta(1,1) 
+}
