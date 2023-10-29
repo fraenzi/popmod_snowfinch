@@ -73,7 +73,7 @@ We use a hierarchical meta-analysis to combine the information from the differen
 The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.19 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
-For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.21 to account for the fact that we know little about this demographic parameter. 
+For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.22 to account for the fact that we know little about this demographic parameter. 
 
 We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions defined by the intercept are used for average temperature values. 
 
@@ -152,7 +152,7 @@ The preliminary results presented here, need to be handled with care because imp
 
 We are happy to hear of further thoughts and ideas on how to improve the survival estimation. 
 
-We fitted the model using Markov chain Monte Carlo simulations as implemented in Jags [@Plummer2003]. The [Jags code](jags/survmod_bird_ring.txt) is provided within this Github project. 
+We fitted the model using Markov chain Monte Carlo simulations as implemented in Jags [@Plummer2003]. The Jags code is provided in the code repository of this Github project. 
 
 
 <div class="figure">

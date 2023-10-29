@@ -6,7 +6,7 @@
 Global warming is changing the environment for wildlife all over the world but over proportionally in mountain areas [@Pepin.2015, @adler_cross-chapter_2022]. The understanding of how species population dynamics react to environmental changes is crucial for predicting trends in biodiversity and for assessing the consequences of human activities for nature. The study of demography in species with their distribution restricted to mountain areas, in many cases, is difficult because they often are rare and live in remote and inaccessible places. Such species, therefore, are highly understudied. Any empirical data, even of low sample size, and studies on how demographic parameters and species behavior are influenced by the environment contribute to improve the understanding of how mountain specialists react to changes in the environment.  
 The aim of this online material is to collate and provide demographic data together with a population model of a high-elevation specialist bird species, the White-winged Snowfinch *Montifringilla nivalis nivalis*, hereafter Snowfinch (Figure \@ref(fig:sffoto)). 
 
-```{r sffoto, fig.cap="The White-winged Snowfinch *Montifringilla nivalis* is a high-elevation specialist spending the winter above the treeline.", echo=FALSE}
+```{r sffoto, echo=FALSE, fig.cap="The White-winged Snowfinch *Montifringilla nivalis* is a high-elevation specialist spending the winter above the treeline."}
 
 knitr::include_graphics('figures/sf.jpg')
 
@@ -23,7 +23,7 @@ We do not need to be contacted, if you download the code of the population model
 The model consists of a mid-winter (January) and a pre-breeding (Mai) census of first year and adult individuals of both sexes (Figure \@ref(fig:modelstr)). The two population census within one year allows for separately modeling environmental influences on the survival from Mai to January ("summer survival") and from January to Mai ("winter survival"). 
 The model also includes a pair building process. Currently, only random mating with new pairs in each year is implemented. The parameter $p$ is a vector containing three probabilities, to skip breeding, and to do one or two broods. The three probabilities sum to one. The parameter $f$ is the number of fledglings produced by a pair. We assume a sex ratio of 1:1 among the fledglings.  
 
-```{r modelstr, fig.cap="Structure of the population model. The model contains a pair building process, e.g. random pairing. It further includes demographic parameters that may depend on environmental variables: p = probability vector for doing 0, 1 or 2 broods; f = fecundity, i.e., the number of fledglings produced by one female in one breeding season; summer and winter survival for adults and first year birds of both sexes.", echo=FALSE}
+```{r modelstr, echo=FALSE, fig.cap="Structure of the population model. The model contains a pair building process, e.g. random pairing. It further includes demographic parameters that may depend on environmental variables: p = probability vector for doing 0, 1 or 2 broods; f = fecundity, i.e., the number of fledglings produced by one female in one breeding season; summer and winter survival for adults and first year birds of both sexes."}
 
 knitr::include_graphics('figures/Overview_model.jpg')
 
@@ -393,7 +393,7 @@ The preliminary results presented here, need to be handled with care because imp
 
 We are happy to hear of further thoughts and ideas on how to improve the survival estimation. 
 
-We fitted the model using Markov chain Monte Carlo simulations as implemented in Jags [@Plummer2003]. The [Jags code](jags/survmod_bird_ring.txt) is provided within this Github project. 
+We fitted the model using Markov chain Monte Carlo simulations as implemented in Jags [@Plummer2003]. The Jags code is provided in the code repository of this Github project. 
 
 
 ```{r survest, fig.cap="Three-months apparent survival estimates for juvenile (first half year) and adult Snowfinches in the Swiss Alps. Vertical bars are 95% intervals of the posterior distributions.", echo=FALSE}
@@ -477,7 +477,7 @@ Table: Half-year apparent survival estimates (preliminary results). Note, winter
 From the survival analyses that are available up to now, we collated a survival function that produces a survival probability for summer and winter for each age and sex class dependent on a standardised environmental variable (Fig. \@ref(fig:survivalfunctions)). Intercepts are taken from the analyses of our own data (presented above) and effect of the environmental variables are taken from the long-term data from Austria [@zauner_apparent_2022]. For every run of the population model, we draw a random intercept and slope for each age and sex class and we keep that values for the whole population trajectory. In this way, the uncertainty of survival propagates into the uncertainty of the population trajectory. 
 
 
-```{r survivalfunctions, fig.cap="Survival function used in the predictive population model.", echo=FALSE}
+```{r survivalfunctions, fig.cap="Survival function used in the predictive population model.", echo=FALSE, fig.asp=0.45}
 
 # increase estimated apparent survival of first year by 10% to account for dispersal/transients
 dispfactor <- 1.1

@@ -164,7 +164,7 @@ Figure 3.2: Reported proportion of second broods in different studies (point) wi
 </p>
 </div>
 <p>The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.19 to 0.97, and the mean is 0.75 (Figure <a href="data.html#fig:metanrbrood">3.2</a>).</p>
-<p>For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.21 to account for the fact that we know little about this demographic parameter.</p>
+<p>For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.22 to account for the fact that we know little about this demographic parameter.</p>
 <p>We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions defined by the intercept are used for average temperature values.</p>
 <p>Citizen science data (ornitho.ch) revealed that during the last 20 years, the Snowfinch breeding season started mid May when June temperatures were high and it started mid June, when June temperatures were low (Niffenegger in prep.). Also, we saw that the end of the breeding season varied between the beginning of August to the end of August depending on July temperature. The warmer in July, the earlier was the end of the breeding season. Thus, both temperature variables (June and July temperature) may affect the number of broods by one brood (for which around one month is needed) along their ranges of values. We derive effect sizes for June and July temperature that correspond to a change by one brood from the lowest to the highest temperature values.</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
@@ -221,7 +221,7 @@ Figure 3.4: Marking- and capture/resighting data of Snowfinches in the project o
 <li><p>Resightings made outside our study area could be used to model movements and, consequently, we could get closer to true instead of apparent survival.</p></li>
 </ul>
 <p>We are happy to hear of further thoughts and ideas on how to improve the survival estimation.</p>
-<p>We fitted the model using Markov chain Monte Carlo simulations as implemented in Jags <span class="citation">(<a href="#ref-Plummer2003">Plummer 2003</a>)</span>. The <a href="jags/survmod_bird_ring.txt">Jags code</a> is provided within this Github project.</p>
+<p>We fitted the model using Markov chain Monte Carlo simulations as implemented in Jags <span class="citation">(<a href="#ref-Plummer2003">Plummer 2003</a>)</span>. The Jags code is provided in the code repository of this Github project.</p>
 <div class="figure"><span style="display:block;" id="fig:survest"></span>
 <img src="predictive_model_files/figure-html/survest-1.png" alt="Three-months apparent survival estimates for juvenile (first half year) and adult Snowfinches in the Swiss Alps. Vertical bars are 95% intervals of the posterior distributions." width="672" />
 <p class="caption">
