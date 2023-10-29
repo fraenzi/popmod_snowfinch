@@ -7,6 +7,7 @@ fig:dataprepsurv
 fig:survest
 fig:survivalfunctions
 fig:vispop
+preface
 introduction
 background
 model-structure

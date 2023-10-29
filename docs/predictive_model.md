@@ -6,11 +6,6 @@
 Global warming is changing the environment for wildlife all over the world but over proportionally in mountain areas [@Pepin.2015, @adler_cross-chapter_2022]. The understanding of how species population dynamics react to environmental changes is crucial for predicting trends in biodiversity and for assessing the consequences of human activities for nature. The study of demography in species with their distribution restricted to mountain areas, in many cases, is difficult because they often are rare and live in remote and inaccessible places. Such species, therefore, are highly understudied. Any empirical data, even of low sample size, and studies on how demographic parameters and species behavior are influenced by the environment contribute to improve the understanding of how mountain specialists react to changes in the environment.  
 The aim of this online material is to collate and provide demographic data together with a population model of a high-elevation specialist bird species, the White-winged Snowfinch *Montifringilla nivalis nivalis*, hereafter Snowfinch (Figure \@ref(fig:sffoto)). 
 
-
-```r
-knitr::include_graphics('figures/sf.jpg')
-```
-
 <div class="figure">
 <img src="figures/sf.jpg" alt="The White-winged Snowfinch *Montifringilla nivalis* is a high-elevation specialist spending the winter above the treeline." width="2592" />
 <p class="caption">(\#fig:sffoto)The White-winged Snowfinch *Montifringilla nivalis* is a high-elevation specialist spending the winter above the treeline.</p>
@@ -26,11 +21,6 @@ We do not need to be contacted, if you download the code of the population model
 
 The model consists of a mid-winter (January) and a pre-breeding (Mai) census of first year and adult individuals of both sexes (Figure \@ref(fig:modelstr)). The two population census within one year allows for separately modeling environmental influences on the survival from Mai to January ("summer survival") and from January to Mai ("winter survival"). 
 The model also includes a pair building process. Currently, only random mating with new pairs in each year is implemented. The parameter $p$ is a vector containing three probabilities, to skip breeding, and to do one or two broods. The three probabilities sum to one. The parameter $f$ is the number of fledglings produced by a pair. We assume a sex ratio of 1:1 among the fledglings.  
-
-
-```r
-knitr::include_graphics('figures/Overview_model.jpg')
-```
 
 <div class="figure">
 <img src="figures/Overview_model.jpg" alt="Structure of the population model. The model contains a pair building process, e.g. random pairing. It further includes demographic parameters that may depend on environmental variables: p = probability vector for doing 0, 1 or 2 broods; f = fecundity, i.e., the number of fledglings produced by one female in one breeding season; summer and winter survival for adults and first year birds of both sexes." width="640" />
@@ -57,32 +47,16 @@ Environmental variables that have, up to now, been shown to affect population dy
 Average temperature values early and late during the breeding season, timing and duration of snowmelt were obtained from meteoschweiz for the years 1999 to 2021 [reference?].
 
 
-
-```r
-load("data/dwbreeding.rda")
-pairs(dwbreeding[,c(2:5)])
-```
-
 <div class="figure">
 <img src="predictive_model_files/figure-html/unnamed-chunk-1-1.png" alt="Scatter plot of (standardised) temperature early and late during the breeding season, time and duration of snowmelt. All variables are standardised so that their mean is zero and their standard deviation one." width="672" />
 <p class="caption">(\#fig:unnamed-chunk-1)Scatter plot of (standardised) temperature early and late during the breeding season, time and duration of snowmelt. All variables are standardised so that their mean is zero and their standard deviation one.</p>
 </div>
-
-```r
-# TODO: we could used a colour grade for the year
-```
 
 
 ## Demographic data
 
 ### Number of broods
 
-```r
-load("data/broods.rda")
-nbroodspyear <- table(dat$femaleID, dat$year)
-nsec <- apply(nbroodspyear, 2, function(x) sum(x==2))
-n <- apply(nbroodspyear, 2, function(x) sum(x>0))
-```
 
 The number of broods a female raises in one year is only known for a few study sites. In the Apennine, 26 out of 26 females did a second brood [@strinella_biologia_2011]. In the Pyrenees, @grange_biologie_2008 observed that 50% of the breeding pairs did a second brood. Little is known for the Alps. @Aichhorn.1966 found in the Austrian Alps that 9 of 11 breeding pairs did a second brood. In our study in the Swiss Alps, we could detect only 7 females doing a second brood out of 48 females that were reported to breed. However, we may have missed a large part of the second broods because females may leave the study area for the second brood. 
 The proportion of non-breeding females is not known at all.
@@ -91,212 +65,22 @@ To more precisely assess the proportion of females that skip breeding, do one or
 
 We use a hierarchical meta-analysis to combine the information from the different studies including our own. To do so, we use a binomial mixed model for the number of females that were reported to do a second brood. The study was used as a random factor to account for among-study variance. 
 
-
-```r
-litdat <- read.table("data/demography_lit.txt", header=TRUE, sep=";")
-litdat$FirstAuthor[litdat$FirstAuthor=="Grang\xe9"] <- "Grange"
-index <- litdat$parameter_name=="prop_second_brood"
-y <- litdat$par_value[index]
-y.n <- litdat$sample_size[index]
-
-yb <- cbind(round(y*y.n), round((1-y)*y.n))
-studyID <- paste(litdat$FirstAuthor[index], litdat$Jahr[index])
-
-yb <- rbind(yb, c(sum(nsec), sum(n)-sum(nsec)))
-studyID <- c(studyID, "own data")
-yb <- yb[rev(1:nrow(yb)),]
-studyID <- rev(studyID)
-
-lwr <- qbeta(p=0.025, yb[,1], yb[,2])
-upr <- qbeta(p=0.975, yb[,1], yb[,2])
-
-
-mod <- glmer(yb~1 +(1|studyID), family=binomial)
-nsim <- 5000
-bsim <- sim(mod, n.sim=nsim)
-my <- plogis(mean(fixef(bsim)[,1]))
-my.lwr <- plogis(quantile(fixef(bsim)[,1], probs=0.025))
-my.upr <- plogis(quantile(fixef(bsim)[,1], probs=0.975))
-
-y <- yb[,1]/apply(yb, 1, sum)
-
-par(mar=c(5,8,1,1))
-plot(y, 1:length(y), xlim=c(0,1), ylim=c(-2,length(y)+1), yaxt="n", xlab="Proportion second broods", ylab=NA, pch=16)
-segments(lwr, 1:length(y), upr, 1:length(y))
-axis(2, at=1:length(y), labels=studyID, las=1)
-segments(my.lwr, -0.5, my.upr, -0.5, lwd=2, col="grey")
-points(my, -0.5, pch=24, col="grey", bg="white")
-axis(2, at=-0.5, labels="mean",
-     las=1)
-text(rep(0, length(y)), 1:length(y), labels=apply(yb, 1, sum))
-```
-
 <div class="figure">
 <img src="predictive_model_files/figure-html/metanrbrood-1.png" alt="Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average overa all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study." width="672" />
 <p class="caption">(\#fig:metanrbrood)Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average overa all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.</p>
 </div>
 
-```r
-# estimate of proportion of non-breeding females 0.1 (95% UI: 0.03 - 0.23), corresponds to SE of 0.05
-p0brood <- 0.1   # proportion of non-breeding females
-p0brood.se <- 0.05 # SE of proportion of non-breeding females
-nsim <- 1000
-p0brood.r <- rbeta(nsim, shapeparameter(p0brood, se=p0brood.se)$a, shapeparameter(p0brood, se=p0brood.se)$b)
-```
-
 The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.19 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
-For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.02 to 0.22 to account for the fact that we know little about this demographic parameter. 
+For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.21 to account for the fact that we know little about this demographic parameter. 
 
 We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions defined by the intercept are used for average temperature values. 
 
 
-```r
-# derivation of formula to calculate the intercepts
-# p0brood = exp(x1)/(exp(x1) + exp(x2) + 1)
-# p1brood = exp(x2)/(exp(x1) + exp(x2) + 1)
-# 
-# p0brood*(exp(x1) + exp(x2) + 1) = exp(x1)
-# p1brood*(exp(x1) + exp(x2) + 1) = exp(x2)
-# 
-# p0brood*exp(x1) + p0brood*exp(x2) + p0brood = exp(x1)
-# p0brood*exp(x2) + p0brood = exp(x1) - p0brood*exp(x1) = exp(x1)*(1-p0brood)
-# 
-# exp(x1) = (p0brood*exp(x2) + p0brood)/(1-p0brood)
-# 
-# p1brood*((p0brood*exp(x2) + p0brood)/(1-p0brood) + exp(x2) + 1) = exp(x2)
-# 
-# p1brood*(p0brood*exp(x2) + p0brood)/(1-p0brood) + p1brood*exp(x2) + p1brood = exp(x2)
-# 
-# (p1brood/(1-p0brood))*p0brood*exp(x2) + (p1brood/(1-p0brood))*p0brood + p1brood*exp(x2) + p1brood = exp(x2)
-# 
-# (p1brood*p0brood/(1-p0brood))  + p1brood = exp(x2) -(p1brood*p0brood/(1-p0brood))*exp(x2) - p1brood*exp(x2)
-# 
-# (p1brood*p0brood/(1-p0brood))  + p1brood = exp(x2)*(1-(p1brood*p0brood/(1-p0brood)) - p1brood)
-# 
-# exp(x2) = ((p1brood*p0brood/(1-p0brood))  + p1brood)/(1-(p1brood*p0brood/(1-p0brood)) - p1brood)
-# exp(x1) = (p0brood*exp(x2) + p0brood)/(1-p0brood)
-
-# specify proportion of pairs without and with only 1 brood 
-# for average June and July temperature
-my.se <- (my.upr-my.lwr)/4  # SE of prop second brood among breeders
-my.r <- rbeta(nsim, shapeparameter(my, se=my.se)$a, shapeparameter(my, se=my.se)$b)
-
-p1brood.r <- (1-my.r)*(1-p0brood.r)  # proportion of single brooded pairs
-
-
-# derive the two intercepts of the multinomial model
-x2 <- log(((p1brood.r*p0brood.r/(1-p0brood.r))  + p1brood.r)/(1-(p1brood.r*p0brood.r/(1-p0brood.r)) - p1brood.r))
-x1  <- log((p0brood.r*exp(x2) + p0brood.r)/(1-p0brood.r))
-x1.se <- sd(x1) 
-x2.se <- sd(x2)
-```
 
 Citizen science data (ornitho.ch) revealed that during the last 20 years, the Snowfinch breeding season started mid May when June temperatures were high and it started mid June, when June temperatures were low (Niffenegger in prep.). Also, we saw that the end of the breeding season varied between the beginning of August to the end of August depending on July temperature. The warmer in July, the earlier was the end of the breeding season. Thus, both temperature variables (June and July temperature) may affect the number of broods by one brood (for which around one month is needed) along their ranges of values. We derive effect sizes for June and July temperature that correspond to a change by one brood from the lowest to the highest temperature values. 
 
-
-
-```r
-# derive the effect sizes of June and July temperature
-# We use 4 standard deviations as the range from low to high 
-# the effect size to get 1 brood more or less in a logistic regression is around plus or minus 4 (per 4 SD of temperature values)
-
-
-b1nbrood <- -1     # effect of June temperature
-b1nbrood.se <- 0.3  # uncertainty (SE) for the effect of June temperature
-
-b2nbrood <- 1   # effect of July temperature
-b2nbrood.se <- 0.3 # uncertainty for the effect of July temperature
-
-nrbroods <- function(n, env1, env2, b1=NA, b2=NA, b0=c(-2.07,-1.97)){
-  # environmental variable (year-specific)
-  eta1 <- b0[1] + b1*env1 + b2*env2
-  eta2 <- b0[2] + b1*env1 + b2*env2
-  probs <- exp(c(eta1, eta2, 0))/sum(exp(cbind(eta1, eta2, 0)))
-  nb <- sample(c(0,1,2), size=n, replace=TRUE, prob=probs)
-  return(list(nb=nb, probs=probs))
-}
-
-
-# Effect of June-temperature (env1)
-env1 <- seq(-3, 3, length=100)
-env2 <- 0
-
-probssim <- array(dim=c(nsim, length(env1), 3))
-for(i in 1:nsim){
-  for(k in 1:length(env1)){
-    x1r <- x1[i]
-    x2r <- x2[i]
-    b1r <- rnorm(1, b1nbrood, b1nbrood.se)
-    b2r <- rnorm(1, b2nbrood, b2nbrood.se)
-    probssim[i,k,] <- nrbroods(1, env1[k],env2, b1=b1r, b2=b2r,b0=c(x1r, x2r))$probs
-  }
-}
-
-probscum <- probssim
-probscum[,,2] <- probssim[,,1] + probssim[,,2]
-probscum[,,3] <- 1
-
-probsm <- apply(probscum, c(2,3), mean)
-probslwr <- apply(probscum, c(2,3), quantile, probs=0.025)
-probsupr <- apply(probscum, c(2,3), quantile, probs=0.975)
-
-par(mfrow=c(1,2), mar=c(4,4,4,0.1))
-plot(env1, probsm[,1], type="n", ylim=c(0,1), las=1, ylab="Proportion of females", xlab="June temperature")
-polygon(c(env1, rev(env1)), c(rep(0, length(env1)), rev(probsm[,1])), border=NA,
-        col="orange")
-polygon(c(env1, rev(env1)), c(probsm[,1], rev(probsm[,2])), border=NA,
-        col="brown")
-polygon(c(env1, rev(env1)), c(probsm[,2], rep(1, length(env1))), border=NA,
-        col="blue")
-# 
- lines(env1, probslwr[,1], lty=3, col="white")
- lines(env1, probsupr[,1], lty=3, col="white")
-# 
- lines(env1, probslwr[,2], lty=3, col="white")
- lines(env1, probsupr[,2], lty=3, col="white")
-
-legend(-3, 1.25, fill=c("orange", "brown", "blue"), legend=c("no brood", "1 brood", "2 broods"), horiz=TRUE, xpd=NA, bty="n")
-
-
-# Effect of July-temperature (env2)
-env1 <- 0
-env2 <- seq(-3, 3, length=100)
-
-probssim <- array(dim=c(nsim, length(env2), 3))
-for(i in 1:nsim){
-  for(k in 1:length(env2)){
-    x1r <- x1[i]
-    x2r <- x2[i]
-    b1r <- rnorm(1, b1nbrood, b1nbrood.se)
-    b2r <- rnorm(1, b2nbrood, b2nbrood.se)
-    probssim[i,k,] <- nrbroods(1, env1,env2[k], b1=b1r, b2=b2r,b0=c(x1r, x2r))$probs
-  }
-}
-
-probscum <- probssim
-probscum[,,2] <- probssim[,,1] + probssim[,,2]
-probscum[,,3] <- 1
-
-probsm <- apply(probscum, c(2,3), mean)
-probslwr <- apply(probscum, c(2,3), quantile, probs=0.025)
-probsupr <- apply(probscum, c(2,3), quantile, probs=0.975)
-
-plot(env2, probsm[,1], type="n", ylim=c(0,1), las=1, ylab=NA, xlab="July temperature")
-polygon(c(env2, rev(env2)), c(rep(0, length(env2)), rev(probsm[,1])), border=NA,
-        col="orange")
-polygon(c(env2, rev(env2)), c(probsm[,1], rev(probsm[,2])), border=NA,
-        col="brown")
-polygon(c(env2, rev(env2)), c(probsm[,2], rep(1, length(env2))), border=NA,
-        col="blue")
-# 
- lines(env2, probslwr[,1], lty=3, col="white")
- lines(env2, probsupr[,1], lty=3, col="white")
-# 
- lines(env2, probslwr[,2], lty=3, col="white")
- lines(env2, probsupr[,2], lty=3, col="white")
-```
 
 <div class="figure">
 <img src="predictive_model_files/figure-html/unnamed-chunk-3-1.png" alt="Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are indicatd with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in the temperature effects." width="672" />
@@ -307,68 +91,11 @@ polygon(c(env2, rev(env2)), c(probsm[,2], rep(1, length(env2))), border=NA,
 ### Number of fledglings
 
 
-```r
-index <- litdat$parameter_name== "nfledglings"
-mnrfl <- litdat$par_value[index]
-mnrfl.sd <- (litdat$max[index]-litdat$min[index])/4
-studyID <- paste(litdat$FirstAuthor, litdat$Jahr)[index]
-```
 
 There is only one study from the Pyrenees that report the number of fledglings [@grange_biologie_2008]. They report an average of 2.4. 
 
 
-
-```r
-load("data/broods.rda")
-dbroods <- dat
-#dbroods$number.of.fledglings
-index <- is.na(dbroods$number.of.fledglings)
-dbroods$number.of.fledglings[index] <- dbroods$number.of.nestlings_late[index]
-index <- is.na(dbroods$number.of.fledglings)
-dbroods$number.of.fledglings[index] <- dbroods$number.of.nestlings_early[index]
-index <- dbroods$number.of.fledglings==0; index[is.na(index)] <- FALSE
-dbroods <- dbroods[!is.na(dbroods$number.of.fledglings),]
-
-# TODO:
-# - change function so that stan_glmer objects can be handled, and inlcude information from literature
-# - include age of mother and father
-# - make number of nestlings dependent on the timing of the brood relative to snowmelt
-
-# date in relation to snowmelt
-dbroods$doi_hatching <- dayofyear(d=dbroods$day.hatching.first.egg, 
-                                  m=dbroods$month.hatching.first.egg,
-                                  y=dbroods$year)
-plot(number.of.fledglings~doi_hatching, dbroods)
-mod <- lm(number.of.fledglings~doi_hatching, data=dbroods)
-abline(mod)
-bsimfledge <- sim(mod, n.sim=nsim)
-newdat <- data.frame(doi_hatching=120:220)
-newdat$fit <- predict(mod, newdata=newdat)
-newdat$lwr <- predict(mod, newdata=newdat, interval="confidence")[,2]
-newdat$upr <- predict(mod, newdata=newdat, interval="confidence")[,3]
-lines(newdat$doi_hatching, newdat$lwr, lty=3)
-lines(newdat$doi_hatching, newdat$upr, lty=3)
-```
-
 <img src="predictive_model_files/figure-html/nrfeldglings-1.png" width="672" />
-
-```r
-nrfledglings <- function(bsim, doi, nsim=1){
-  nd <- data.frame(doi=doi)
-  Xmat <- model.matrix(~doi, data=nd)
-  fitmat <- matrix(ncol=nsim, nrow=nrow(nd))
-  newy <- matrix(ncol=nsim, nrow=nrow(nd))
-  for(i in 1:nsim){
-    index <- sample(1:nrow(bsim@coef), nsim, replace=FALSE)
-    fitmat[,i] <- Xmat%*%bsim@coef[index[i],]
-    newy[,i] <- round(rnorm(nrow(nd), mean=fitmat[,i], sd=bsim@sigma[index[i]]))
-    newy[,i][newy[,i]<0] <-0
-  }
-  return(newy)
-}
-#yrep <- nrfledglings(bsim=bsimfledge, doi=dbroods$doi_hatching[complete.cases(dbroods$doi_hatching)], nsim=1)
-#plot(dbroods$doi_hatching[complete.cases(dbroods$doi_hatching)], yrep[,1])
-```
 
 
 ### Survival
@@ -380,13 +107,6 @@ There is, as far as we know, only one published study on apparent survival in Sn
 #### Own data on survival
 
 In the project at the Swiss Ornithological Institute, we are marking individuals between since May 2015 and we perform systematic searches for marked individuals. Until August 2023 we collected over 8000 resightings and over 900 recaptures (Fig. \@ref(fig:dataprepsurv)). Here, we present first, preliminary, analyses of those data and analyses results. The results are far from being perfect. The analyses serve to get an impression on how well we can estimate apparent survival, to identify gaps in the data and lack of knowledge, so that we can better plan our future research activities. 
-
-
-```r
-load("data/datax.rda")
-
-knitr::include_graphics('figures/CH_Snowfinch.jpg')
-```
 
 <div class="figure">
 <img src="figures/CH_Snowfinch.jpg" alt="Marking- and capture/resighting data of Snowfinches in the project of the Swiss Ornithological Institute. Individuals are presented on the y-axis, the time is given on the x-axis. Dots are captures (blue as nestling, orange as fledged bird), open circles are resightings and brown crosses are findings of dead birds. Horizontal lines connect recaptures, resightings or findings of the same individual." width="3000" />
@@ -435,54 +155,6 @@ We are happy to hear of further thoughts and ideas on how to improve the surviva
 We fitted the model using Markov chain Monte Carlo simulations as implemented in Jags [@Plummer2003]. The [Jags code](jags/survmod_bird_ring.txt) is provided within this Github project. 
 
 
-
-```r
-initfun <- function(){
-  list(a0=array(runif(2*2*3, 0,1), dim=c(2,2,3)),
-       b0=array(runif(2*2*3, 0,1), dim=c(2,2,3)),
-       d0=array(runif(2*2*3, 0,1), dim=c(2,2,3)))
-}
-
-# mod <- jags(datax, inits=initfun, 
-#             parameters.to.save=c("a0", "b0", "d0", "m", "pfem"),
-#             model.file="jags/survmod_bird_and_ring.txt", n.iter=5000, n.chains=3)
-# mod1 <- mod$BUGSoutput
-load("modelfits/mod_231011.rda")
-
-#traceplot(mod1)
-
-plot(1:4, seq(0,1, length=4), type="n", las=1,
-     ylab="3-months apparent survival", xlab=NA, xaxt="n",
-     xlim=c(0.5, 4.5))
-axis(1, at=1:4, labels=c("J-M to A-J", "A-J to J-S", "J-S to O-D", "O-D to J-M"),
-     cex.axis=0.7)
-axis(1, at=1:4, labels=c("late\nwinter", "breeding", 
-                         "late\nsummer", "early\nwinter"), mgp=c(3,3,0))
-# adult females
-segments(c(1:4), plogis(apply(mod1$sims.list$b0[,1,2,], 2, quantile, probs=0.025)),
-         c(1:4), plogis(apply(mod1$sims.list$b0[,1,2,], 2, quantile, probs=0.975)), col="orange", lwd=2)
-points(c(1:4), plogis(apply(mod1$sims.list$b0[,1,2,], 2, mean)), pch=21, bg="white", col="orange")         
-
-# adult males
-segments(c(1:4)+0.2, plogis(apply(mod1$sims.list$b0[,2,2,], 2, quantile, probs=0.025)),
-         c(1:4)+0.2, plogis(apply(mod1$sims.list$b0[,2,2,], 2, quantile, probs=0.975)), col="blue", lwd=2)
-points(c(1:4)+0.2, plogis(apply(mod1$sims.list$b0[,2,2,], 2, mean)), pch=21, bg="white", col="blue")         
-
-# juvenile females
-segments(c(2:3)-0.3, plogis(apply(mod1$sims.list$b0[,1,1,2:3], 2, quantile, probs=0.025)),
-         c(2:3)-0.3, plogis(apply(mod1$sims.list$b0[,1,1,2:3], 2, quantile, probs=0.975)), col="yellow4", lwd=2)
-points(c(2:3)-0.3, plogis(apply(mod1$sims.list$b0[,1,1,2:3], 2, mean)), pch=22, bg="white", col="yellow4")         
-
-# juvenile males
-segments(c(2:3)-0.15, plogis(apply(mod1$sims.list$b0[,2,1,2:3], 2, quantile, probs=0.025)),
-         c(2:3)-0.15, plogis(apply(mod1$sims.list$b0[,2,1,2:3], 2, quantile, probs=0.975)), col="lightblue", lwd=2)
-points(c(2:3)-0.15, plogis(apply(mod1$sims.list$b0[,2,1,2:3], 2, mean)), pch=22, bg="white", col="lightblue")         
-
-legend(3.1, 0.6, lwd=2, col=c("yellow4", "lightblue", "orange", "blue"),
-       pch=c(22, 22, 21, 21), bg="white", legend=c("juvenile females", "juvenile males", "adult female", "adult male"),
-       bty="n", cex=0.8)
-```
-
 <div class="figure">
 <img src="predictive_model_files/figure-html/survest-1.png" alt="Three-months apparent survival estimates for juvenile (first half year) and adult Snowfinches in the Swiss Alps. Vertical bars are 95% intervals of the posterior distributions." width="672" />
 <p class="caption">(\#fig:survest)Three-months apparent survival estimates for juvenile (first half year) and adult Snowfinches in the Swiss Alps. Vertical bars are 95% intervals of the posterior distributions.</p>
@@ -491,18 +163,6 @@ legend(3.1, 0.6, lwd=2, col=c("yellow4", "lightblue", "orange", "blue"),
 The preliminary results indicate that adult apparent survival is lowest in late winter and may be lower in females compared to males in late summer. Apparent survival of the freshly fledged birds in late summer may be underestimated because we assume that during the second half of their first year, their apparent survival equals adult apparent survival, which may not be true. However, after the post-juvenile moult in late summer, first year and older birds are no longer distinguisable. Therefore, of birds captured for the first time in winter, we only know that they are at least half a year old. To be able to estimate separate first year apparent survival for the whole first year, we would need to deal with unidentified ages. 
 
 
-```r
-# annual survival
-annSad <- apply(plogis(mod1$sims.list$b0[,,2,]), c(1:2), prod)
-Sadwinter <- apply(plogis(mod1$sims.list$b0[,,2,c(1,4)]), c(1:2), prod)
-Sadsummer <- apply(plogis(mod1$sims.list$b0[,,2,c(2,3)]), c(1:2), prod)
-
-# first year survival (first year survival during breeding may not be estimable, use adult survival instead):
-annSfirst <- plogis(mod1$sims.list$b0[,,1,3])*plogis(mod1$sims.list$b0)[,,2,4]*plogis(mod1$sims.list$b0)[,,2,1]*plogis(mod1$sims.list$b0)[,,2,2]
-
-Sfirstwinter <- Sadwinter 
-Sfirstsummer <- plogis(mod1$sims.list$b0[,,1,3])
-```
 
 From our preliminary model, we get an annual apparent survival estimate for adult females of 0.45 (95% CrI: 0.39 - 0.51), for adult males 0.54 (0.51 - 0.57), and of first year females 0.14 (0.06 - 0.29), and for first year males 0.09 (0.04 - 0.16).
 
@@ -521,133 +181,6 @@ Table: Half-year apparent survival estimates (preliminary results). Note, winter
 From the survival analyses that are available up to now, we collated a survival function that produces a survival probability for summer and winter for each age and sex class dependent on a standardised environmental variable (Fig. \@ref(fig:survivalfunctions)). Intercepts are taken from the analyses of our own data (presented above) and effect of the environmental variables are taken from the long-term data from Austria [@zauner_apparent_2022]. For every run of the population model, we draw a random intercept and slope for each age and sex class and we keep that values for the whole population trajectory. In this way, the uncertainty of survival propagates into the uncertainty of the population trajectory. 
 
 
-
-```r
-# increase estimated apparent survival of first year by 10% to account for dispersal/transients
-dispfactor <- 1.1
-
-# survival from Mai to November
-Ssummervalues <- cbind(Sfirstsummer*dispfactor, Sadsummer) # fy F, fy M, ad F, ad M
-Ssummervalues[Ssummervalues>1] <- 1
-
-Ssummer <- function(age, sex, env=0, b=c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sprob=sprobsummer){
-  agefac <- factor(age, levels=c("fy", "ad"))
-  sexfac <- factor(sex, levels=c("F", "M"))
-  index <- (as.numeric(agefac)-1)*2 + as.numeric(sexfac)
-  sprobv <- plogis(qlogis(sprob[index]) + b[index]*env)
-  alive <- rbinom(length(sex), size=1, prob=sprobv)
-  return(list(sprob=sprobv, alive=alive))
-} 
-
-Swintervalues <- cbind(Sfirstwinter*dispfactor, Sadwinter) # fy F, fy M, ad F, ad M
-Swintervalues[Swintervalues>1] <- 1
-
-Swinter <- function(age, sex, env=0, b=c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sprob=sprobwinter){
-  agefac <- factor(age, levels=c("fy", "ad"))
-  sexfac <- factor(sex, levels=c("F", "M"))
-  index <- (as.numeric(agefac)-1)*2 + as.numeric(sexfac)
-  sprobv <- plogis(qlogis(sprob[index]) + b[index]*env)
-  alive <- rbinom(length(sex), size=1, prob=sprobv)
-  return(list(sprob=sprobv, alive=alive))
-} 
-
-
-envx <- seq(-3, 3, length=100)
-newdat <- expand.grid(sex=c("F", "M"), age=c("fy", "ad"), env=envx)
-fitmatsu <- matrix(ncol=nrow(Ssummervalues), nrow=nrow(newdat))
-fitmatwi <- matrix(ncol=nrow(Ssummervalues), nrow=nrow(newdat))
-# According to Aichhorn temp-effect: adult F -0.95, M -0.28
-
-for(i in 1:nrow(Ssummervalues)){
-  benvsu <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
-  benvwi <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
-  fitmatsu[,i] <- Ssummer(age=newdat$age, sex=newdat$sex, env=newdat$env, b=benvsu, sprob=Ssummervalues[i,])$sprob
-  fitmatwi[,i] <- Swinter(age=newdat$age, sex=newdat$sex, env=newdat$env, b=benvwi, sprob=Swintervalues[i,])$sprob
-}
-
-newdat$Ssummer.fit <- apply(fitmatsu, 1, median)
-newdat$Ssummer.lwr <- apply(fitmatsu, 1, quantile, probs=0.025)
-newdat$Ssummer.upr <- apply(fitmatsu, 1, quantile, probs=0.975)
-
-newdat$Swinter.fit <- apply(fitmatwi, 1, median)
-newdat$Swinter.lwr <- apply(fitmatwi, 1, quantile, probs=0.025)
-newdat$Swinter.upr <- apply(fitmatwi, 1, quantile, probs=0.975)
-
-newdat$S.fit <- apply(fitmatsu*fitmatwi, 1, median)
-newdat$S.lwr <- apply(fitmatsu*fitmatwi, 1, quantile, probs=0.025)
-newdat$S.upr <- apply(fitmatsu*fitmatwi, 1, quantile, probs=0.975)
-
-par(mfrow=c(1,3), mar=c(4,1,3,1), oma=c(0,4,0,0))
-plot(newdat$env, newdat$Ssummer.fit, type="n", xlab="Environmental variable", las=1, ylab=NA, main="Summer survival", ylim=c(0,1))
-index <- newdat$sex=="F" & newdat$age=="fy"
-polygon(c(newdat$env[index], rev(newdat$env[index])),
-        c(newdat$Ssummer.lwr[index], rev(newdat$Ssummer.upr[index])), border=NA, col=rgb(0.5,0,0,0.5))
-lines(newdat$env[index], newdat$Ssummer.fit[index], col=rgb(0.5,0,0), lwd=2)
-
-index <- newdat$sex=="M" & newdat$age=="fy"
-polygon(c(newdat$env[index], rev(newdat$env[index])),
-        c(newdat$Ssummer.lwr[index], rev(newdat$Ssummer.upr[index])), border=NA, col=rgb(0,0,0.5,0.5))
-lines(newdat$env[index], newdat$Ssummer.fit[index], col=rgb(0,0,0.5), lwd=2)
-
-index <- newdat$sex=="F" & newdat$age=="ad"
-polygon(c(newdat$env[index], rev(newdat$env[index])),
-        c(newdat$Ssummer.lwr[index], rev(newdat$Ssummer.upr[index])), border=NA, col=rgb(1,0,0,0.5))
-lines(newdat$env[index], newdat$Ssummer.fit[index], col=rgb(1,0,0), lwd=2)
-
-index <- newdat$sex=="M" & newdat$age=="ad"
-polygon(c(newdat$env[index], rev(newdat$env[index])),
-        c(newdat$Ssummer.lwr[index], rev(newdat$Ssummer.upr[index])), border=NA, col=rgb(0,0,1,0.5))
-lines(newdat$env[index], newdat$Ssummer.fit[index], col=rgb(0,0,1), lwd=2)
-
-# winter survival
-plot(newdat$env, newdat$S.fit, type="n", xlab="Environmental variable", las=1, ylab=NA, main="Winter survival", ylim=c(0,1))
-index <- newdat$sex=="F" & newdat$age=="fy"
-polygon(c(newdat$env[index], rev(newdat$env[index])),
-        c(newdat$Swinter.lwr[index], rev(newdat$Swinter.upr[index])), border=NA, col=rgb(0.5,0,0,0.5))
-lines(newdat$env[index], newdat$Swinter.fit[index], col=rgb(0.5,0,0), lwd=2)
-
-index <- newdat$sex=="M" & newdat$age=="fy"
-polygon(c(newdat$env[index], rev(newdat$env[index])),
-        c(newdat$Swinter.lwr[index], rev(newdat$Swinter.upr[index])), border=NA, col=rgb(0,0,0.5,0.5))
-lines(newdat$env[index], newdat$Swinter.fit[index], col=rgb(0,0,0.5), lwd=2)
-
-index <- newdat$sex=="F" & newdat$age=="ad"
-polygon(c(newdat$env[index], rev(newdat$env[index])),
-        c(newdat$Swinter.lwr[index], rev(newdat$Swinter.upr[index])), border=NA, col=rgb(1,0,0,0.5))
-lines(newdat$env[index], newdat$Swinter.fit[index], col=rgb(1,0,0), lwd=2)
-
-index <- newdat$sex=="M" & newdat$age=="ad"
-polygon(c(newdat$env[index], rev(newdat$env[index])),
-        c(newdat$Swinter.lwr[index], rev(newdat$Swinter.upr[index])), border=NA, col=rgb(0,0,1,0.5))
-lines(newdat$env[index], newdat$Swinter.fit[index], col=rgb(0,0,1), lwd=2)
-
-# annual
-plot(newdat$env, newdat$S.fit, type="n", xlab="Environmental variable", las=1, ylab=NA, main="Annual survival", ylim=c(0,1))
-index <- newdat$sex=="F" & newdat$age=="fy"
-polygon(c(newdat$env[index], rev(newdat$env[index])),
-        c(newdat$S.lwr[index], rev(newdat$S.upr[index])), border=NA, col=rgb(0.5,0,0,0.5))
-lines(newdat$env[index], newdat$S.fit[index], col=rgb(0.5,0,0), lwd=2)
-
-index <- newdat$sex=="M" & newdat$age=="fy"
-polygon(c(newdat$env[index], rev(newdat$env[index])),
-        c(newdat$S.lwr[index], rev(newdat$S.upr[index])), border=NA, col=rgb(0,0,0.5,0.5))
-lines(newdat$env[index], newdat$S.fit[index], col=rgb(0,0,0.5), lwd=2)
-
-index <- newdat$sex=="F" & newdat$age=="ad"
-polygon(c(newdat$env[index], rev(newdat$env[index])),
-        c(newdat$S.lwr[index], rev(newdat$S.upr[index])), border=NA, col=rgb(1,0,0,0.5))
-lines(newdat$env[index], newdat$S.fit[index], col=rgb(1,0,0), lwd=2)
-
-index <- newdat$sex=="M" & newdat$age=="ad"
-polygon(c(newdat$env[index], rev(newdat$env[index])),
-        c(newdat$S.lwr[index], rev(newdat$S.upr[index])), border=NA, col=rgb(0,0,1,0.5))
-lines(newdat$env[index], newdat$S.fit[index], col=rgb(0,0,1), lwd=2)
-
-legend(-0.7,1, lwd=2, col=c(rgb(0.5,0,0), rgb(0,0,0.5), rgb(1,0,0), rgb(0,0,1)), legend=c("First year female", "First year male", "Adult female", "Adult male"), bty="n")
-
-mtext("Survival probability", side=2, outer=TRUE, line=2)
-```
-
 <div class="figure">
 <img src="predictive_model_files/figure-html/survivalfunctions-1.png" alt="Survival function used in the predictive population model." width="672" />
 <p class="caption">(\#fig:survivalfunctions)Survival function used in the predictive population model.</p>
@@ -661,39 +194,6 @@ mtext("Survival probability", side=2, outer=TRUE, line=2)
 We start with a population just before the breeding season with 1000 adult females, 1000 adult males and 100 first year birds of each sex. 
 
 
-```r
-N0adF <- 1000 # number of adult females at start
-N0adM <- 1000 # number of adult males at start
-N0fyF <- 100 # number of first year females at start
-N0fyM <- 100 # number of first year males at start
-
-nyears <- nrow(dwbreeding) # number of years the population trajectory runs
-
-# individual specific characteristics
-xm <- 0
-xsd <- 1
-
-# create the starting ring list with attributes per individual
-
-dindinit <- data.frame(ringnr=1:(N0adF+N0adM+N0fyF+N0fyM),
-                   sex=c(rep("F", N0adF), rep("M", N0adM), rep("F", N0fyF), rep("M", N0fyM)),
-                   age=c(rep("ad", times=N0adF+N0adM), rep("fy", time=N0fyF+N0fyM)))
-
-dindinit$x <- rnorm(nrow(dindinit), xm, xsd)
-
-
-# create environmental variables
-dyear <- data.frame(year=1:nyears)
-
-dyear$x1 <- dwbreeding$yearly.temp.z
-dyear$x2 <-  dwbreeding$late.temp.z
-dyear$summertemp <- (dyear$x2 + dyear$x2)/2
-dyear$summertemp.z <- as.numeric(scale(dyear$summertemp))
-
-# number of Monte Carlo simulations
-nsim <- 100
-
-```
 
 
 ## Run population trajectory
@@ -710,155 +210,15 @@ To simulate the population trajectory, we follow the structure presented in Figu
 
 
 
-```r
-runpopmod <- function(nyears, dind, dyear){
-  
-# to monitor
-popsize <- numeric(nyears)
-meanx <- numeric(nyears) # individual characteristic
-sdx <- numeric(nyears)   # sd of individual characteristic
-
-# set first population size to size of initial population
-popsize[1] <- nrow(dind)
-
-# draw parameters that do not change over years
-
-#nrbroods
-nrbr.b0 <- numeric(2)
-nrbr.b0[1] <- sample(x1, 1) 
-nrbr.b0[2] <- sample(x2, 1)
-nrbr.b0 <- sort(nrbr.b0)
-nrbr.b1 <- rnorm(1, b1nbrood, sd=b1nbrood.se)
-nrbr.b2 <- rnorm(1, b2nbrood, sd=b2nbrood.se)
-  
-## survival
-i <- sample(1:nrow(Ssummervalues), 1)
-sprobwinter <- Swintervalues[i, ]
-sprobsummer <- Ssummervalues[i, ]
-benvsu <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
-benvwi <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
- 
-
-for(t in 2:nyears){
-  
-  # breeding pairs
-  dfemales <- dind[dind$sex=="F",]
-  dmales <- dind[dind$sex=="M",]
-  if(nrow(dfemales)>0&nrow(dmales)>0){
-    npsex <- table(dind$sex)
-    dfemales$male <- NA
-    dfemales$male[1:min(npsex)] <- sample(dmales$ringnr, min(npsex), replace=FALSE)
-    dfemales$male.age <- dmales$age[match(dfemales$male, dmales$ringnr)]
-    #cat("sim", i, "t", t, "breeding pairs assigned\n")
-  
-    # number of broods per breeding pairs
-    dfemales$nrbroods <- nrbroods(n=nrow(dfemales), 
-                                  env1=dyear$x1[t-1],
-                                  env2=dyear$x2[t-1],
-                                  b0=nrbr.b0,
-                                  b1=nrbr.b1, 
-                                  b2=nrbr.b2)$nb
-    nomate <- is.na(dfemales$male)
-    dfemales$nrbroods[nomate] <- 0
-    # muss 3 proportions enthalten per breeding pair according to results of Carole
-  #cat("nr broods finished\n")
-  
-    # number of fledglings per breeding pair
-      dfemales$doi_hatching_firstbrood <- 162
-      dfemales$nfledfirstbrood <- nrfledglings(bsim=bsimfledge, doi=dfemales$doi_hatching_firstbrood, nsim=1)
-    
-      dfemales$nfledsecondbrood <- nrfledglings(bsim=bsimfledge, doi=dfemales$doi_hatching_firstbrood+28, nsim=1)
-      dfemales$nfledfirstbrood[nomate] <- 0
-      dfemales$nfledsecondbrood[nomate] <- 0
-    
-      dfemales$nfledlings <- dfemales$nfledfirstbrood*as.numeric(dfemales$nrbroods>0) + dfemales$nfledsecondbrood*as.numeric(dfemales$nrbroods==2)
-    #cat("nr fledglings drawn\n")
-  
-   # create data with juveniles including individual characteristics
-    if(sum(dfemales$nfledlings)>0){
-     dindjuv <- data.frame(ringnr=(max(dind$ringnr)+1):(max(dind$ringnr)+sum(dfemales$nfledlings)),
-                        mother=rep(dfemales$ringnr, times=dfemales$nfledlings),
-                        father=rep(dfemales$male, times=dfemales$nfledlings))
-     dindjuv$sex <- sample(c("F", "M"), nrow(dindjuv), replace=TRUE, prob=c(0.5,0.5)) # primary sex ratio
-     dindjuv$xmother <- dind$x[match(dindjuv$mother, dind$ringnr)]
-     dindjuv$xfather <- dind$x[match(dindjuv$father, dind$ringnr)]
-     # inheriting characteristics
-     dindjuv$x <- sqrt(0.6/2)*dindjuv$xmother + sqrt(0.6/2)*dindjuv$xfather + rnorm(nrow(dindjuv), 0, sd=sqrt(0.4)) # 60% heritability
-     #cat("dindjuv created with nr juvs=", nrow(dindjuv), "\n")
-
-    
-    
-    # Population at the end of the breeding season
-     dtemp <- data.frame(ringnr=c(dind$ringnr, dindjuv$ringnr),
-                      sex=c(dind$sex, dindjuv$sex),
-                      age=c(rep("ad", nrow(dind)), rep("fy", nrow(dindjuv))),
-                      x=c(dind$x, dindjuv$x))
-    } # close if (zero number of juveniles)
-    if(sum(dfemales$nfledlings)==0) dtemp <- dind
-      
-     # Survival from breeding season to winter
-     dtemp$alive <- Ssummer(dtemp$age, dtemp$sex, b=benvsu, sprob=sprobsummer)$alive
-     dtemp <- dtemp[dtemp$alive==1,]
-     
-     # Survival from winter to breeding
-     if(nrow(dtemp)>0){
-    dtemp$alive <- Swinter(dtemp$age, dtemp$sex, b=benvwi, sprob=sprobwinter)$alive
-    dtemp <- dtemp[dtemp$alive==1,]
-    } # close if (at least one juvenile)
-      
-    # Population at the beginning of the breeding season  
-    dind <- dtemp
-  
-    popsize[t] <- nrow(dind)
-    meanx[t] <- mean(dind$x)
-    sdx[t] <- sd(dind$x)
-  } # close if
-  if(nrow(dfemales)==0|nrow(dmales)==0) popsize[t] <- 0
-  if(nrow(dfemales)==0|nrow(dmales)==0)  break
-} # close t
-return(list(popsize=popsize,
-            meanx=meanx,
-            sdy=sdx))
-} # close function runpopmod
-```
 
 
 
-```r
-nsim <- 1000
-set.seed(20359)
-popsizes <- matrix(ncol=nyears, nrow=nsim)
 
-for(i in 1:nsim) {
-  popsizes[i,] <- runpopmod(nyears=nyears, dind=dindinit, 
-                                           dyear=dyear)$popsize
-}
-save(popsizes, file="modelfits/popsizes.rda")
-```
-
-
-
-```r
-load("modelfits/popsizes.rda")
-
-popsizes_mean <- apply(popsizes, 2, median)
-popsizes_lwr <- apply(popsizes, 2, quantile, prob=0.05)
-popsizes_upr <- apply(popsizes, 2, quantile, prob=0.95)
-
-plot(1:nyears, seq(0,quantile(popsizes[,1:10], prob=0.97), length=nyears), type="n", xlab="Year", ylab="Population size", las=1, xlim=c(1,10))
-polygon(c(1:nyears, rev(1:nyears)), 
-        c(popsizes_lwr, rev(popsizes_upr)), border=NA,
-        col=rgb(1,0.8,0.2,0.5))
-lines(1:nyears, popsizes_mean, lwd=2, col="brown")
-```
 
 <div class="figure">
 <img src="predictive_model_files/figure-html/vispop-1.png" alt="90% range of simulated population trajectories based on current knowledge on demographic parameters. The variance in the trajectories reflects current uncertainties of demographic parameters." width="672" />
 <p class="caption">(\#fig:vispop)90% range of simulated population trajectories based on current knowledge on demographic parameters. The variance in the trajectories reflects current uncertainties of demographic parameters.</p>
 </div>
 
-```r
-#for(i in 1:nsim) lines(1:nyears, popsizes[i,], col=rgb(0,0,0,0.3))
-```
-
 # References
+
