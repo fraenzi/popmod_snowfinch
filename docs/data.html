@@ -154,10 +154,7 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Acknowledgments</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#background"><i class="fa fa-check"></i><b>1.1</b> Background</a></li>
@@ -275,8 +272,8 @@ Figure 2.2: Reported proportion of second broods in different studies (point) wi
 <span id="cb8-3"><a href="data.html#cb8-3" tabindex="-1"></a>p0brood.se <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># SE of proportion of non-breeding females</span></span>
 <span id="cb8-4"><a href="data.html#cb8-4" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
 <span id="cb8-5"><a href="data.html#cb8-5" tabindex="-1"></a>p0brood.r <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(nsim, <span class="fu">shapeparameter</span>(p0brood, <span class="at">se=</span>p0brood.se)<span class="sc">$</span>a, <span class="fu">shapeparameter</span>(p0brood, <span class="at">se=</span>p0brood.se)<span class="sc">$</span>b)</span></code></pre></div>
-<p>The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.21 to 0.97, and the mean is 0.75 (Figure <a href="data.html#fig:metanrbrood">2.2</a>).</p>
-<p>For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.02 to 0.21 to account for the fact that we know little about this demographic parameter.</p>
+<p>The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.19 to 0.97, and the mean is 0.75 (Figure <a href="data.html#fig:metanrbrood">2.2</a>).</p>
+<p>For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.02 to 0.22 to account for the fact that we know little about this demographic parameter.</p>
 <p>We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions defined by the intercept are used for average temperature values.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data.html#cb9-1" tabindex="-1"></a><span class="co"># derivation of formula to calculate the intercepts</span></span>
 <span id="cb9-2"><a href="data.html#cb9-2" tabindex="-1"></a><span class="co"># p0brood = exp(x1)/(exp(x1) + exp(x2) + 1)</span></span>
