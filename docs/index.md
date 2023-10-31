@@ -1,7 +1,7 @@
 --- 
 title: "A predictive population model for a high-elevation specialist bird species"
 author: "Fränzi Korner-Nievergelt"
-date: "2023-10-29"
+date: "2023-10-31"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [PopModSnowfinch.bib]
@@ -21,7 +21,7 @@ This documentation is a summary of current knowledge and data on demographic par
 
 <img src="figures/sf.jpg" width="3318" style="display: block; margin: auto;" />
 
-The data, code and analyses presented here has been collected and created, respectively, in collaboration with Arnaud Barras, Matthew De Couto, Sebastian Dirren, Fabian Fopp, Marilene Fuhrmann, Anne-Cathérine Gutzwiller, Sabine Hille, Simon Hohl, Charel Klein, Carole Niffenegger, Elisenda Peris Morente, Claire Pernollet, Jaime Resano Mayor, Christian Schano, Alexander Schneider, Alessia Uboldi and Daniela Villaume. 
+The data, code and analyses presented here has been collected and created, respectively, in collaboration with Arnaud Barras, Matthew De Couto, Sebastian Dirren, Fabian Fopp, Marilene Fuhrmann, Anne-Cathérine Gutzwiller, Sabine Hille, Simon Hohl, Charel Klein, Carole Niffenegger, Elisenda Peris Morente, Claire Pernollet, Jaime Resano Mayor, Christian Schano, Alexander Schneider, Alessia Uboldi, Daniela Villaume and Irmi Zwahlen. 
 
 
 
