@@ -3,12 +3,12 @@
 
 ## Background
 
-Global warming is changing the environment for wildlife all over the world but over proportionally in mountain areas [@Pepin.2015, @adler_cross-chapter_2022]. The understanding of how species population dynamics react to environmental changes is crucial for predicting trends in biodiversity and for assessing the consequences of human activities for nature. The study of demography in species with their distribution restricted to mountain areas, in many cases, is difficult because they often are rare and live in remote and inaccessible places. Such species, therefore, are highly understudied. Any empirical data, even of low sample size, and studies on how demographic parameters and species behavior are influenced by the environment contribute to improve the understanding of how mountain specialists react to changes in the environment.  
+Global warming is changing the environment for wildlife world-wide but over proportionally in mountain areas [@Pepin.2015; @adler_cross-chapter_2022]. The understanding of how species population dynamics react to environmental changes is crucial for predicting trends in biodiversity and for assessing the consequences of human activities for nature. The study of demography in species with their distribution restricted to mountain areas, in many cases, is difficult because they often are rare and live in remote and inaccessible places. Such species, therefore, are highly understudied. Any empirical data, even of low sample size, and studies on how demographic parameters and species behavior are influenced by the environment contribute to improve the understanding of how mountain specialists react to changes in the environment.  
 The aim of this online material is to collate and provide demographic data together with a population model of a high-elevation specialist bird species, the White-winged Snowfinch *Montifringilla nivalis nivalis*, hereafter Snowfinch (Figure \@ref(fig:sffoto)). 
 
-```{r sffoto, echo=FALSE, fig.cap="The White-winged Snowfinch *Montifringilla nivalis* is a high-elevation specialist spending the winter above the treeline."}
+```{r sffoto, echo=FALSE, fig.cap="We use alpha-numeric plastic rings that can be read by a scope."}
 
-knitr::include_graphics('figures/sf.jpg')
+knitr::include_graphics('figures/g21.jpg')
 
 ```
 

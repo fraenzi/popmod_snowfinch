@@ -3,12 +3,12 @@
 
 ## Background
 
-Global warming is changing the environment for wildlife all over the world but over proportionally in mountain areas [@Pepin.2015, @adler_cross-chapter_2022]. The understanding of how species population dynamics react to environmental changes is crucial for predicting trends in biodiversity and for assessing the consequences of human activities for nature. The study of demography in species with their distribution restricted to mountain areas, in many cases, is difficult because they often are rare and live in remote and inaccessible places. Such species, therefore, are highly understudied. Any empirical data, even of low sample size, and studies on how demographic parameters and species behavior are influenced by the environment contribute to improve the understanding of how mountain specialists react to changes in the environment.  
+Global warming is changing the environment for wildlife world-wide but over proportionally in mountain areas [@Pepin.2015; @adler_cross-chapter_2022]. The understanding of how species population dynamics react to environmental changes is crucial for predicting trends in biodiversity and for assessing the consequences of human activities for nature. The study of demography in species with their distribution restricted to mountain areas, in many cases, is difficult because they often are rare and live in remote and inaccessible places. Such species, therefore, are highly understudied. Any empirical data, even of low sample size, and studies on how demographic parameters and species behavior are influenced by the environment contribute to improve the understanding of how mountain specialists react to changes in the environment.  
 The aim of this online material is to collate and provide demographic data together with a population model of a high-elevation specialist bird species, the White-winged Snowfinch *Montifringilla nivalis nivalis*, hereafter Snowfinch (Figure \@ref(fig:sffoto)). 
 
 <div class="figure">
-<img src="figures/sf.jpg" alt="The White-winged Snowfinch *Montifringilla nivalis* is a high-elevation specialist spending the winter above the treeline." width="2592" />
-<p class="caption">(\#fig:sffoto)The White-winged Snowfinch *Montifringilla nivalis* is a high-elevation specialist spending the winter above the treeline.</p>
+<img src="figures/g21.jpg" alt="We use alpha-numeric plastic rings that can be read by a scope." width="960" />
+<p class="caption">(\#fig:sffoto)We use alpha-numeric plastic rings that can be read by a scope.</p>
 </div>
 
 The presentation of the material here has several aims: 1) The model summarizes the current knowledge on the population dynamics of the Snowfinch, 2) The model can be used to assess sensitivity of the population dynamics of Snowfinches to changes in different demographic parameters. 3) The model can be used to identify knowledge gaps and lack of data, 4) The model is prepared to allow for selective mating and inheritance of individual (morphological or behavioral) traits with the aim that in future it may serve to predict how traits change in the population. However, trait heritability values would be required to do so which are not yet available. 5) From the model, future population trajectories can be simulated to predict population trends under different scenario including global warming scenario, or to assess effects of specific conservation managements. 
@@ -73,7 +73,7 @@ We use a hierarchical meta-analysis to combine the information from the differen
 The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
-For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.02 to 0.22 to account for the fact that we know little about this demographic parameter. 
+For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.23 to account for the fact that we know little about this demographic parameter. 
 
 We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions defined by the intercept are used for average temperature values. 
 

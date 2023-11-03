@@ -1,7 +1,7 @@
 --- 
 title: "A predictive population model for a high-elevation specialist bird species"
 author: "Fränzi Korner-Nievergelt"
-date: "2023-10-31"
+date: "2023-11-03"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [PopModSnowfinch.bib]
