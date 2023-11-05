@@ -178,7 +178,7 @@ x2.se <- sd(x2)
 Citizen science data (ornitho.ch) from the last 20 yeara revealed that the Snowfinch breeding season started already mid May when June temperatures were high and it started mid June, when June temperatures were low (Niffenegger in prep.). Also, we saw a variation in the ending of the breeding season depending on July temperature. The warmer in July, the earlier breeding ended. Thus, both June and July temperature may finally affect the number of broods in total by one brood (for which around one month is needed) along their ranges of values. We derive effect sizes for June and July temperature that correspond to a change by one brood from the lowest to the highest temperature values. 
 
 
-```{r, fig.cap="Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are indicatd with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in the temperature effects.", fig.asp=0.5, echo=FALSE}
+```{r funnrbrood, fig.cap="Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are indicatd with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in the temperature effects.", fig.asp=0.5, echo=FALSE}
 # derive the effect sizes of June and July temperature
 # We use 4 standard deviations as the range from low to high 
 # the effect size to get 1 brood more or less in a logistic regression is around plus or minus 4 (per 4 SD of temperature values)
@@ -363,11 +363,11 @@ For simulating the population trajectory, we draw for every brood the number of 
 
 #### Literature view on survival estimates for Snowfinches
 
-There is, as far as we know, only one published study on apparent survival in Snowfinches from the Appennine [@Strinella.2020]. The mark-recapture study took place between 2003 and 2017, and a couple of different mark-recapture models accounting for transients [@Pradel.1997] were used to estimate annual apparent survival. Depending on the model used, they found annual apparent survival to be between 0.51 and 0.64 for adult females, between 0.44 and 0.54 for adult males and between 0.09 and 0.13 for first year birds. In addition, they found a strong negative correlation between apparent annual survival of adult females and average temperature during the breeding season. In the Austrian Alps, Ambros Aichhorn regularly ringed Snowfinches between 1964 and 2004 in winter. Also in these data, a strong negative correlation between temperature during the breeding season and female apparent survival is visible (own analyses in prep.). The average apparent annual survival was 0.63 (95% 0.56 -  0.70) in males and 0.50 (0.36 - 0.64) in females [@zauner_apparent_2022].
+There is, as far as we know, only one published study on apparent survival in Snowfinches. It is from the Appennines [@Strinella.2020]. The mark-recapture study took place between 2003 and 2017, and a couple of different mark-recapture models accounting for transients [@Pradel.1997] were used to estimate annual apparent survival. Depending on the model used, they found annual apparent survival to be between 0.51 and 0.64 for adult females, between 0.44 and 0.54 for adult males and between 0.09 and 0.13 for first year birds. In addition, they found a strong negative correlation between apparent annual survival of adult females and average temperature during the breeding season. In the Austrian Alps, Ambros Aichhorn regularly ringed Snowfinches between 1964 and 2004 in winter. Also, in these data, a strong negative correlation between temperature during the breeding season and female apparent survival is visible (own analyses in prep.). The average apparent annual survival was 0.63 (95% 0.56 -  0.70) in males and 0.50 (0.36 - 0.64) in females [@zauner_apparent_2022].
 
 #### Own data on survival
 
-In the project at the Swiss Ornithological Institute, we are marking individuals between since May 2015 and we perform systematic searches for marked individuals. Until August 2023 we collected over 8000 resightings and over 900 recaptures (Fig. \@ref(fig:dataprepsurv)). Here, we present first, preliminary, analyses of those data and analyses results. The results are far from being perfect. The analyses serve to get an impression on how well we can estimate apparent survival, to identify gaps in the data and lack of knowledge, so that we can better plan our future research activities. 
+In the project at the Swiss Ornithological Institute, we are marking individuals since May 2015 and we perform systematic searches for marked individuals. Until August 2023 we collected over 8000 resightings and over 900 recaptures (Fig. \@ref(fig:dataprepsurv)). Here, we present first, preliminary, analyses of those data and analyses results. The results are far from being perfect, but they serve to get an impression on how well we can estimate apparent survival, to identify gaps in the data and lack of knowledge, so that we can better plan our future research activities. 
 
 ```{r dataprepsurv, fig.cap="Marking- and capture/resighting data of Snowfinches in the project of the Swiss Ornithological Institute. Individuals are presented on the y-axis, the time is given on the x-axis. Dots are captures (blue as nestling, orange as fledged bird), open circles are resightings and brown crosses are findings of dead birds. Horizontal lines connect recaptures, resightings or findings of the same individual.", echo=FALSE}
 load("data/datax.rda")
@@ -404,13 +404,13 @@ The preliminary results presented here, need to be handled with care because imp
 
 - Many individuals are first captured in winter which makes it likely that our data contains a high amount of so-called transients, i.e. individuals that are marked and then move away from our study site. It could be accounted for such transients in the model.  
 
-- No among-year variance in apparent survival is yet included in the model.  
+- Among-year variance in apparent survival is not yet included in the model.  
 
-- No among-individual variance in apparent survival nor in recapture/resighting probability other than age and sex is included in the model yet.  
+- Among-individual variance in either apparent survival or in recapture/resighting probability other than age and sex is not yet included in the model.  
 
 - First year birds are only treated as first year birds until December. Later, it is assumed that apparent survival of these birds is equal to adults (see below).  
 
-- Resightings made outside our study area could be used to model movements and, consequently, we could get closer to true instead of apparent survival. 
+- Resightings made outside our study area (currently 25 cases) could be used to model movements and, consequently, we could get closer to true instead of apparent survival. 
 
 
 We are happy to hear of further thoughts and ideas on how to improve the survival estimation. 
@@ -467,7 +467,7 @@ legend(3.1, 0.6, lwd=2, col=c("yellow4", "lightblue", "orange", "blue"),
 
 ```
 
-The preliminary results indicate that adult apparent survival is lowest in late winter and may be lower in females compared to males in late summer. Apparent survival of the freshly fledged birds in late summer may be underestimated because we assume that during the second half of their first year, their apparent survival equals adult apparent survival, which may not be true. However, after the post-juvenile moult in late summer, first year and older birds are no longer distinguisable. Therefore, of birds captured for the first time in winter, we only know that they are at least half a year old. To be able to estimate separate first year apparent survival for the whole first year, we would need to deal with unidentified ages. 
+Our preliminary results indicate that adult apparent survival is lowest in late winter. Survival may be lower in females compared to males in late summer. Apparent survival of the freshly fledged birds in late summer may be underestimated because we assume that during the second half of their first year, their apparent survival equals adult apparent survival, which may not be true. However, after the post-juvenile moult in late summer, first year and older birds are no longer distinguishable. Therefore, we only know of birds captured for the first time in winter, that they are at least half a year old. To be able to separately estimate first year apparent survival for the whole first year, we would need to deal with unidentified ages. 
 
 ```{r, echo=FALSE}
 # annual survival
@@ -496,7 +496,7 @@ Table: Half-year apparent survival estimates (preliminary results). Note, winter
 
 #### Survival function of the predictive population model
 
-From the survival analyses that are available up to now, we collated a survival function that produces a survival probability for summer and winter for each age and sex class dependent on a standardised environmental variable (Fig. \@ref(fig:survivalfunctions)). Intercepts are taken from the analyses of our own data (presented above) and effect of the environmental variables are taken from the long-term data from Austria [@zauner_apparent_2022]. For every run of the population model, we draw a random intercept and slope for each age and sex class and we keep that values for the whole population trajectory. In this way, the uncertainty of survival propagates into the uncertainty of the population trajectory. 
+From the survival analyses that are available up to now, we collated a survival function that produces a survival probability for summer and winter for each age and sex class dependent on a standardised environmental variable (Fig. \@ref(fig:survivalfunctions)). Intercepts are taken from the analyses of our own data (presented above) and effect of the environmental variables are taken from the long-term data from Austria [@zauner_apparent_2022]. For every run of the population model, we draw a random intercept and slope for each age and sex class and we keep these values for the whole population trajectory. In this way, the uncertainty of survival propagates into the uncertainty of the population trajectory. 
 
 
 ```{r survivalfunctions, fig.cap="Survival function used in the predictive population model.", echo=FALSE, fig.asp=0.45}
@@ -534,11 +534,11 @@ envx <- seq(-3, 3, length=100)
 newdat <- expand.grid(sex=c("F", "M"), age=c("fy", "ad"), env=envx)
 fitmatsu <- matrix(ncol=nrow(Ssummervalues), nrow=nrow(newdat))
 fitmatwi <- matrix(ncol=nrow(Ssummervalues), nrow=nrow(newdat))
-# According to Aichhorn temp-effect: adult F -0.95, M -0.28
+# According to Aichhorn temp-effect: adult F -0.95, M -0.28 with SE 0.42, 0.21
 
 for(i in 1:nrow(Ssummervalues)){
-  benvsu <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
-  benvwi <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
+  benvsu <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.42/2, 0.21/2))
+  benvwi <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.42/2, 0.21/2))
   fitmatsu[,i] <- Ssummer(age=newdat$age, sex=newdat$sex, env=newdat$env, b=benvsu, sprob=Ssummervalues[i,])$sprob
   fitmatwi[,i] <- Swinter(age=newdat$age, sex=newdat$sex, env=newdat$env, b=benvwi, sprob=Swintervalues[i,])$sprob
 }
@@ -631,13 +631,22 @@ mtext("Survival probability", side=2, outer=TRUE, line=2)
 
 ## Starting population
 
-We start with a population just before the breeding season with 1000 adult females, 1000 adult males and 100 first year birds of each sex. 
+We start with a population of 7000 individuals just before the breeding season (pre-breeding cencus) consisting of 1000 adult females, 1000 adult males and each 2500 first year males and females. The age composition corresponds to a stable age structure of a population with a fecundity of 2.5, first year survival of 0.2 and adult survival of 0.5. 
+
 
 ```{r preparepop, collapse=TRUE, echo=FALSE}
+# stable age structure in a population with adult survival =0.5, juv survival =0.2, f=6/2
+leslie <- matrix(c(2.5*0.2,2.5*0.5,
+                   0.2, 0.5), nrow=2, ncol=2, byrow=TRUE)
+#max(Re(eigen(leslie)$values)) # growth rate
+z <- which(Re(eigen(leslie)$values)==max(Re(eigen(leslie)$values))) 
+revec <- Re(eigen(leslie)$vectors[,z])
+agestruc <- revec/sum(revec) # age structure
+
 N0adF <- 1000 # number of adult females at start
 N0adM <- 1000 # number of adult males at start
-N0fyF <- 100 # number of first year females at start
-N0fyM <- 100 # number of first year males at start
+N0fyF <- round(N0adF/agestruc[2]*agestruc[1]) # number of first year females at start
+N0fyM <- round(N0adM/agestruc[2]*agestruc[1])  # number of first year males at start
 
 nyears <- nrow(dwbreeding) # number of years the population trajectory runs
 
@@ -675,11 +684,13 @@ To simulate the population trajectory, we follow the structure presented in Figu
 
 1. Build breeding pairs: With the females and  males present in the population, the breeding pairs are formed. The number of brereding pairs corresponds to the minimum of the number of males and females.  
 
-2. The number of broods per breeding pair is simulated based on the temperature early and late in the breeding season.   
+2. The number of broods per breeding pair is simulated based on the temperature early and late in the breeding season according to Figure \@ref(fig:funnrbrood). At this step, a certain proportion of pairs are assigned to be non-breeders (number of broods is zero).    
 
-3. Number of fledglings per brood is simulated based on the date of the brood.   
+3. Number of fledglings per brood is simulated based on the date of the brood (Figure \@ref(fig:nrfeldglings)). To keep the model simple for the moment, we assume that the first broods hatch at day 162 and the second broods at day 190.
 
-4. Summer and winter survival is simulated for each individual and the simulations started at step 1. with the individuals that survived until the beginning of the following breeding season.  
+4. Summer and winter survival is simulated for each individual assuming a survival probability defined by the functions visualised in Figure \@ref(fig:survivalfunctions). 
+
+5. The simulation proceeds wit step 1. with the individuals that survived until the beginning of the following breeding season.  
 
 
 ```{r populationfun, echo=FALSE}
@@ -690,10 +701,12 @@ runpopmod <- function(nyears, dind, dyear){
 popsize <- numeric(nyears)
 meanx <- numeric(nyears) # individual characteristic
 sdx <- numeric(nyears)   # sd of individual characteristic
+asr <- numeric(nyears) # adult sex ratio
 
 # set first population size to size of initial population
-popsize[1] <- nrow(dind)
-
+popsize[1] <- sum(dind$sex=="F")
+asr[1] <- sum(dind$sex=="F")/sum(dind$sex=="M")
+  
 # draw parameters that do not change over years
 
 #nrbroods
@@ -782,16 +795,19 @@ for(t in 2:nyears){
     # Population at the beginning of the breeding season  
     dind <- dtemp
   
-    popsize[t] <- nrow(dind)
+    popsize[t] <- sum(dind$sex=="F")
     meanx[t] <- mean(dind$x)
     sdx[t] <- sd(dind$x)
+    asr[t] <- sum(dind$sex=="F")/sum(dind$sex=="M")
+
   } # close if
   if(nrow(dfemales)==0|nrow(dmales)==0) popsize[t] <- 0
   if(nrow(dfemales)==0|nrow(dmales)==0)  break
 } # close t
 return(list(popsize=popsize,
             meanx=meanx,
-            sdy=sdx))
+            sdy=sdx,
+            asr=asr))
 } # close function runpopmod
 
 ```
@@ -810,14 +826,16 @@ save(popsizes, file="modelfits/popsizes.rda")
 ```
 
 
-```{r vispop, fig.cap="90% range of simulated population trajectories based on current knowledge on demographic parameters. The variance in the trajectories reflects current uncertainties of demographic parameters.", echo=FALSE}
+## Predicted population trajectories
+
+```{r vispopcurrentknow, fig.cap="90% range of simulated population trajectories based on current knowledge on demographic parameters. The variance in the trajectories reflects current uncertainties of demographic parameters.", echo=FALSE}
 load("modelfits/popsizes.rda")
 
 popsizes_mean <- apply(popsizes, 2, median)
 popsizes_lwr <- apply(popsizes, 2, quantile, prob=0.05)
 popsizes_upr <- apply(popsizes, 2, quantile, prob=0.95)
 
-plot(1:nyears, seq(0,quantile(popsizes[,1:10], prob=0.97), length=nyears), type="n", xlab="Year", ylab="Population size", las=1, xlim=c(1,10))
+plot(1:nyears, seq(0,quantile(popsizes[,1:10], prob=0.97), length=nyears), type="n", xlab="Year", ylab="Population size (nr females)", las=1, xlim=c(1,10))
 polygon(c(1:nyears, rev(1:nyears)), 
         c(popsizes_lwr, rev(popsizes_upr)), border=NA,
         col=rgb(1,0.8,0.2,0.5))

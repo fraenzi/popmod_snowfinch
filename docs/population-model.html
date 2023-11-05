@@ -113,6 +113,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.1" data-path="population-model.html"><a href="population-model.html#starting-population"><i class="fa fa-check"></i><b>4.1</b> Starting population</a></li>
 <li class="chapter" data-level="4.2" data-path="population-model.html"><a href="population-model.html#run-population-trajectory"><i class="fa fa-check"></i><b>4.2</b> Run population trajectory</a></li>
+<li class="chapter" data-level="4.3" data-path="population-model.html"><a href="population-model.html#predicted-population-trajectories"><i class="fa fa-check"></i><b>4.3</b> Predicted population trajectories</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>5</b> References</a></li>
 </ul>
@@ -136,19 +137,23 @@ div.csl-indent {
 <h1><span class="header-section-number">4</span> Population model<a href="population-model.html#population-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="starting-population" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Starting population<a href="population-model.html#starting-population" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We start with a population just before the breeding season with 1000 adult females, 1000 adult males and 100 first year birds of each sex.</p>
+<p>We start with a population of 7000 individuals just before the breeding season (pre-breeding cencus) consisting of 1000 adult females, 1000 adult males and each 2500 first year males and females. The age composition corresponds to a stable age structure of a population with a fecundity of 2.5, first year survival of 0.2 and adult survival of 0.5.</p>
 </div>
 <div id="run-population-trajectory" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Run population trajectory<a href="population-model.html#run-population-trajectory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To simulate the population trajectory, we follow the structure presented in Figure <a href="introduction.html#fig:modelstr">2.2</a>. The steps are the following:</p>
 <ol style="list-style-type: decimal">
 <li><p>Build breeding pairs: With the females and males present in the population, the breeding pairs are formed. The number of brereding pairs corresponds to the minimum of the number of males and females.</p></li>
-<li><p>The number of broods per breeding pair is simulated based on the temperature early and late in the breeding season.</p></li>
-<li><p>Number of fledglings per brood is simulated based on the date of the brood.</p></li>
-<li><p>Summer and winter survival is simulated for each individual and the simulations started at step 1. with the individuals that survived until the beginning of the following breeding season.</p></li>
+<li><p>The number of broods per breeding pair is simulated based on the temperature early and late in the breeding season according to Figure <a href="data.html#fig:funnrbrood">3.2</a>. At this step, a certain proportion of pairs are assigned to be non-breeders (number of broods is zero).</p></li>
+<li><p>Number of fledglings per brood is simulated based on the date of the brood (Figure <a href="data.html#fig:nrfeldglings">3.3</a>). To keep the model simple for the moment, we assume that the first broods hatch at day 162 and the second broods at day 190.</p></li>
+<li><p>Summer and winter survival is simulated for each individual assuming a survival probability defined by the functions visualised in Figure <a href="data.html#fig:survivalfunctions">3.6</a>.</p></li>
+<li><p>The simulation proceeds wit step 1. with the individuals that survived until the beginning of the following breeding season.</p></li>
 </ol>
-<div class="figure"><span style="display:block;" id="fig:vispop"></span>
-<img src="predictive_model_files/figure-html/vispop-1.png" alt="90% range of simulated population trajectories based on current knowledge on demographic parameters. The variance in the trajectories reflects current uncertainties of demographic parameters." width="672" />
+</div>
+<div id="predicted-population-trajectories" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Predicted population trajectories<a href="population-model.html#predicted-population-trajectories" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="figure"><span style="display:block;" id="fig:vispopcurrentknow"></span>
+<img src="predictive_model_files/figure-html/vispopcurrentknow-1.png" alt="90% range of simulated population trajectories based on current knowledge on demographic parameters. The variance in the trajectories reflects current uncertainties of demographic parameters." width="672" />
 <p class="caption">
 Figure 4.1: 90% range of simulated population trajectories based on current knowledge on demographic parameters. The variance in the trajectories reflects current uncertainties of demographic parameters.
 </p>

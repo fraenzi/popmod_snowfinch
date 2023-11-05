@@ -2,12 +2,12 @@ fig:unnamed-chunk-1
 fig:sffoto
 fig:modelstr
 fig:metanrbrood
-fig:unnamed-chunk-3
+fig:funnrbrood
 fig:nrfeldglings
 fig:dataprepsurv
 fig:survest
 fig:survivalfunctions
-fig:vispop
+fig:vispopcurrentknow
 preface
 introduction
 background
@@ -24,4 +24,5 @@ survival-function-of-the-predictive-population-model
 population-model
 starting-population
 run-population-trajectory
+predicted-population-trajectories
 references

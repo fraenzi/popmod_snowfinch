@@ -70,7 +70,7 @@ We use a hierarchical meta-analysis to combine the information from the differen
 <p class="caption">(\#fig:metanrbrood)Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average over all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.</p>
 </div>
 
-The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.21 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
+The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
 For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.22 to account for the fact that we know little about this demographic parameter. 
@@ -83,8 +83,8 @@ Citizen science data (ornitho.ch) from the last 20 yeara revealed that the Snowf
 
 
 <div class="figure">
-<img src="predictive_model_files/figure-html/unnamed-chunk-3-1.png" alt="Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are indicatd with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in the temperature effects." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-3)Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are indicatd with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in the temperature effects.</p>
+<img src="predictive_model_files/figure-html/funnrbrood-1.png" alt="Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are indicatd with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in the temperature effects." width="672" />
+<p class="caption">(\#fig:funnrbrood)Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are indicatd with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in the temperature effects.</p>
 </div>
 
 
@@ -110,11 +110,11 @@ For simulating the population trajectory, we draw for every brood the number of 
 
 #### Literature view on survival estimates for Snowfinches
 
-There is, as far as we know, only one published study on apparent survival in Snowfinches from the Appennine [@Strinella.2020]. The mark-recapture study took place between 2003 and 2017, and a couple of different mark-recapture models accounting for transients [@Pradel.1997] were used to estimate annual apparent survival. Depending on the model used, they found annual apparent survival to be between 0.51 and 0.64 for adult females, between 0.44 and 0.54 for adult males and between 0.09 and 0.13 for first year birds. In addition, they found a strong negative correlation between apparent annual survival of adult females and average temperature during the breeding season. In the Austrian Alps, Ambros Aichhorn regularly ringed Snowfinches between 1964 and 2004 in winter. Also in these data, a strong negative correlation between temperature during the breeding season and female apparent survival is visible (own analyses in prep.). The average apparent annual survival was 0.63 (95% 0.56 -  0.70) in males and 0.50 (0.36 - 0.64) in females [@zauner_apparent_2022].
+There is, as far as we know, only one published study on apparent survival in Snowfinches. It is from the Appennines [@Strinella.2020]. The mark-recapture study took place between 2003 and 2017, and a couple of different mark-recapture models accounting for transients [@Pradel.1997] were used to estimate annual apparent survival. Depending on the model used, they found annual apparent survival to be between 0.51 and 0.64 for adult females, between 0.44 and 0.54 for adult males and between 0.09 and 0.13 for first year birds. In addition, they found a strong negative correlation between apparent annual survival of adult females and average temperature during the breeding season. In the Austrian Alps, Ambros Aichhorn regularly ringed Snowfinches between 1964 and 2004 in winter. Also, in these data, a strong negative correlation between temperature during the breeding season and female apparent survival is visible (own analyses in prep.). The average apparent annual survival was 0.63 (95% 0.56 -  0.70) in males and 0.50 (0.36 - 0.64) in females [@zauner_apparent_2022].
 
 #### Own data on survival
 
-In the project at the Swiss Ornithological Institute, we are marking individuals between since May 2015 and we perform systematic searches for marked individuals. Until August 2023 we collected over 8000 resightings and over 900 recaptures (Fig. \@ref(fig:dataprepsurv)). Here, we present first, preliminary, analyses of those data and analyses results. The results are far from being perfect. The analyses serve to get an impression on how well we can estimate apparent survival, to identify gaps in the data and lack of knowledge, so that we can better plan our future research activities. 
+In the project at the Swiss Ornithological Institute, we are marking individuals since May 2015 and we perform systematic searches for marked individuals. Until August 2023 we collected over 8000 resightings and over 900 recaptures (Fig. \@ref(fig:dataprepsurv)). Here, we present first, preliminary, analyses of those data and analyses results. The results are far from being perfect, but they serve to get an impression on how well we can estimate apparent survival, to identify gaps in the data and lack of knowledge, so that we can better plan our future research activities. 
 
 <div class="figure">
 <img src="figures/CH_Snowfinch.jpg" alt="Marking- and capture/resighting data of Snowfinches in the project of the Swiss Ornithological Institute. Individuals are presented on the y-axis, the time is given on the x-axis. Dots are captures (blue as nestling, orange as fledged bird), open circles are resightings and brown crosses are findings of dead birds. Horizontal lines connect recaptures, resightings or findings of the same individual." width="3000" />
@@ -149,13 +149,13 @@ The preliminary results presented here, need to be handled with care because imp
 
 - Many individuals are first captured in winter which makes it likely that our data contains a high amount of so-called transients, i.e. individuals that are marked and then move away from our study site. It could be accounted for such transients in the model.  
 
-- No among-year variance in apparent survival is yet included in the model.  
+- Among-year variance in apparent survival is not yet included in the model.  
 
-- No among-individual variance in apparent survival nor in recapture/resighting probability other than age and sex is included in the model yet.  
+- Among-individual variance in either apparent survival or in recapture/resighting probability other than age and sex is not yet included in the model.  
 
 - First year birds are only treated as first year birds until December. Later, it is assumed that apparent survival of these birds is equal to adults (see below).  
 
-- Resightings made outside our study area could be used to model movements and, consequently, we could get closer to true instead of apparent survival. 
+- Resightings made outside our study area (currently 25 cases) could be used to model movements and, consequently, we could get closer to true instead of apparent survival. 
 
 
 We are happy to hear of further thoughts and ideas on how to improve the survival estimation. 
@@ -168,7 +168,7 @@ We fitted the model using Markov chain Monte Carlo simulations as implemented in
 <p class="caption">(\#fig:survest)Three-months apparent survival estimates for juvenile (first half year) and adult Snowfinches in the Swiss Alps. Vertical bars are 95% intervals of the posterior distributions.</p>
 </div>
 
-The preliminary results indicate that adult apparent survival is lowest in late winter and may be lower in females compared to males in late summer. Apparent survival of the freshly fledged birds in late summer may be underestimated because we assume that during the second half of their first year, their apparent survival equals adult apparent survival, which may not be true. However, after the post-juvenile moult in late summer, first year and older birds are no longer distinguisable. Therefore, of birds captured for the first time in winter, we only know that they are at least half a year old. To be able to estimate separate first year apparent survival for the whole first year, we would need to deal with unidentified ages. 
+Our preliminary results indicate that adult apparent survival is lowest in late winter. Survival may be lower in females compared to males in late summer. Apparent survival of the freshly fledged birds in late summer may be underestimated because we assume that during the second half of their first year, their apparent survival equals adult apparent survival, which may not be true. However, after the post-juvenile moult in late summer, first year and older birds are no longer distinguishable. Therefore, we only know of birds captured for the first time in winter, that they are at least half a year old. To be able to separately estimate first year apparent survival for the whole first year, we would need to deal with unidentified ages. 
 
 
 
@@ -186,7 +186,7 @@ Table: Half-year apparent survival estimates (preliminary results). Note, winter
 
 #### Survival function of the predictive population model
 
-From the survival analyses that are available up to now, we collated a survival function that produces a survival probability for summer and winter for each age and sex class dependent on a standardised environmental variable (Fig. \@ref(fig:survivalfunctions)). Intercepts are taken from the analyses of our own data (presented above) and effect of the environmental variables are taken from the long-term data from Austria [@zauner_apparent_2022]. For every run of the population model, we draw a random intercept and slope for each age and sex class and we keep that values for the whole population trajectory. In this way, the uncertainty of survival propagates into the uncertainty of the population trajectory. 
+From the survival analyses that are available up to now, we collated a survival function that produces a survival probability for summer and winter for each age and sex class dependent on a standardised environmental variable (Fig. \@ref(fig:survivalfunctions)). Intercepts are taken from the analyses of our own data (presented above) and effect of the environmental variables are taken from the long-term data from Austria [@zauner_apparent_2022]. For every run of the population model, we draw a random intercept and slope for each age and sex class and we keep these values for the whole population trajectory. In this way, the uncertainty of survival propagates into the uncertainty of the population trajectory. 
 
 
 <div class="figure">
@@ -199,7 +199,8 @@ From the survival analyses that are available up to now, we collated a survival 
 
 ## Starting population
 
-We start with a population just before the breeding season with 1000 adult females, 1000 adult males and 100 first year birds of each sex. 
+We start with a population of 7000 individuals just before the breeding season (pre-breeding cencus) consisting of 1000 adult females, 1000 adult males and each 2500 first year males and females. The age composition corresponds to a stable age structure of a population with a fecundity of 2.5, first year survival of 0.2 and adult survival of 0.5. 
+
 
 
 
@@ -210,22 +211,25 @@ To simulate the population trajectory, we follow the structure presented in Figu
 
 1. Build breeding pairs: With the females and  males present in the population, the breeding pairs are formed. The number of brereding pairs corresponds to the minimum of the number of males and females.  
 
-2. The number of broods per breeding pair is simulated based on the temperature early and late in the breeding season.   
+2. The number of broods per breeding pair is simulated based on the temperature early and late in the breeding season according to Figure \@ref(fig:funnrbrood). At this step, a certain proportion of pairs are assigned to be non-breeders (number of broods is zero).    
 
-3. Number of fledglings per brood is simulated based on the date of the brood.   
+3. Number of fledglings per brood is simulated based on the date of the brood (Figure \@ref(fig:nrfeldglings)). To keep the model simple for the moment, we assume that the first broods hatch at day 162 and the second broods at day 190.
 
-4. Summer and winter survival is simulated for each individual and the simulations started at step 1. with the individuals that survived until the beginning of the following breeding season.  
+4. Summer and winter survival is simulated for each individual assuming a survival probability defined by the functions visualised in Figure \@ref(fig:survivalfunctions). 
 
-
-
-
+5. The simulation proceeds wit step 1. with the individuals that survived until the beginning of the following breeding season.  
 
 
 
+
+
+
+
+## Predicted population trajectories
 
 <div class="figure">
-<img src="predictive_model_files/figure-html/vispop-1.png" alt="90% range of simulated population trajectories based on current knowledge on demographic parameters. The variance in the trajectories reflects current uncertainties of demographic parameters." width="672" />
-<p class="caption">(\#fig:vispop)90% range of simulated population trajectories based on current knowledge on demographic parameters. The variance in the trajectories reflects current uncertainties of demographic parameters.</p>
+<img src="predictive_model_files/figure-html/vispopcurrentknow-1.png" alt="90% range of simulated population trajectories based on current knowledge on demographic parameters. The variance in the trajectories reflects current uncertainties of demographic parameters." width="672" />
+<p class="caption">(\#fig:vispopcurrentknow)90% range of simulated population trajectories based on current knowledge on demographic parameters. The variance in the trajectories reflects current uncertainties of demographic parameters.</p>
 </div>
 
 # References
