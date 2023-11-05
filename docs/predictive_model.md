@@ -70,10 +70,10 @@ We use a hierarchical meta-analysis to combine the information from the differen
 <p class="caption">(\#fig:metanrbrood)Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average over all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.</p>
 </div>
 
-The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
+The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.74 (Figure \@ref(fig:metanrbrood)).
 
 
-For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.21 to account for the fact that we know little about this demographic parameter. 
+For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.02 to 0.21 to account for the fact that we know little about this demographic parameter. 
 
 We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions (of non-breeders, females with one and two broods) defined by the intercepts are used for average temperature values. 
 
@@ -183,6 +183,7 @@ Table: Half-year apparent survival estimates (preliminary results). Note, winter
 |adult| female |  0.63 (0.5 - 0.79) |0.71 (0.57 - 0.88) |
 |adult | male | 0.75 (0.68 - 0.83)  | 0.72 (0.65 - 0.79) |
 
+The probability that a plastic ring is lost within three months is 0.027 (0.02 - 0.037), which means that one year after having got a plastic ring, 0.1% of the individuals have lost their ring. 
 
 #### Survival function of the predictive population model
 
@@ -199,7 +200,7 @@ From the survival analyses that are available up to now, we collated a survival 
 
 ## Starting population
 
-We start with a population of 7000 individuals just before the breeding season (pre-breeding cencus) consisting of 1000 adult females, 1000 adult males and each 2500 first year males and females. The age composition corresponds to a stable age structure of a population with a fecundity of 2.5, first year survival of 0.2 and adult survival of 0.5. 
+We start with a population of 7000 individuals just before the breeding season (pre-breeding census) consisting of 1000 adult females, 1000 adult males and each 2500 first year males and females. The age composition corresponds to a stable age structure of a population with a fecundity of 2.5, first year survival of 0.2 and adult survival of 0.5. 
 
 
 
@@ -252,7 +253,25 @@ Before the population trajectory can be used as a prediction of the future of Sn
 </div>
 
 
+## Sensitivity of the population model to changes in different parameters
 
+To assess how sensitive the population model is to changes in single parameter values, we used a deterministic matrix model to calculate the population growth rate as the dominant eigenvalue of the Leslie matrix. We used the average values for the proportion of non-breeders, the proportion of second broods among the breeders, the number of fledglings for the first and second brood as well as juveniles and adult female survival, and we varied one of these parameter at a time.
+
+Even though the units with which the different demographic parameters are measured are not directly comparable, we may conclude that small changes in survival, particularly juvenile survival have a strong effect on population growth rate, whereas a change from two to five average number of nestlings only has a small effect on the population growth rate (Figure \@ref(fig:sensan)). The proportion of non-breeders has a larger effect on the population growth compared to the proportion of second broods. A change from 0 to 50% non-breeders has a similar effect as a change from 100% to 0% second broods. 
+
+From this result, we conclude that it is important to have a solid basis for understanding how survival is related to environmental variables to be able to predict population growth of Snowfinches in future.  
+
+
+<div class="figure">
+<img src="predictive_model_files/figure-html/sensan-1.png" alt="Sensitivity of the population growth rate to changes in single demographic parameters inferred from a deterministic matrix model. Only one parameter is changed at a time whereas all others were kept at the values used for the simulation. Note that the scale of the x-axes is chosen arbitrarily therefore, slpes of the lines are not directly comparable among the four panels." width="672" />
+<p class="caption">(\#fig:sensan)Sensitivity of the population growth rate to changes in single demographic parameters inferred from a deterministic matrix model. Only one parameter is changed at a time whereas all others were kept at the values used for the simulation. Note that the scale of the x-axes is chosen arbitrarily therefore, slpes of the lines are not directly comparable among the four panels.</p>
+</div>
+  
+  
+  
+## For which demographic parameter would additional data be most valuable?
+
+todo
 
 
 # References

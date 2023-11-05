@@ -114,6 +114,8 @@ div.csl-indent {
 <li class="chapter" data-level="4.1" data-path="population-model.html"><a href="population-model.html#starting-population"><i class="fa fa-check"></i><b>4.1</b> Starting population</a></li>
 <li class="chapter" data-level="4.2" data-path="population-model.html"><a href="population-model.html#run-population-trajectory"><i class="fa fa-check"></i><b>4.2</b> Run population trajectory</a></li>
 <li class="chapter" data-level="4.3" data-path="population-model.html"><a href="population-model.html#predicted-population-trajectories"><i class="fa fa-check"></i><b>4.3</b> Predicted population trajectories</a></li>
+<li class="chapter" data-level="4.4" data-path="population-model.html"><a href="population-model.html#sensitivity-of-the-population-model-to-changes-in-different-parameters"><i class="fa fa-check"></i><b>4.4</b> Sensitivity of the population model to changes in different parameters</a></li>
+<li class="chapter" data-level="4.5" data-path="population-model.html"><a href="population-model.html#for-which-demographic-parameter-would-additional-data-be-most-valuable"><i class="fa fa-check"></i><b>4.5</b> For which demographic parameter would additional data be most valuable?</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>5</b> References</a></li>
 </ul>
@@ -137,7 +139,7 @@ div.csl-indent {
 <h1><span class="header-section-number">4</span> Population model<a href="population-model.html#population-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="starting-population" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Starting population<a href="population-model.html#starting-population" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We start with a population of 7000 individuals just before the breeding season (pre-breeding cencus) consisting of 1000 adult females, 1000 adult males and each 2500 first year males and females. The age composition corresponds to a stable age structure of a population with a fecundity of 2.5, first year survival of 0.2 and adult survival of 0.5.</p>
+<p>We start with a population of 7000 individuals just before the breeding season (pre-breeding census) consisting of 1000 adult females, 1000 adult males and each 2500 first year males and females. The age composition corresponds to a stable age structure of a population with a fecundity of 2.5, first year survival of 0.2 and adult survival of 0.5.</p>
 </div>
 <div id="run-population-trajectory" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Run population trajectory<a href="population-model.html#run-population-trajectory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -166,6 +168,22 @@ div.csl-indent {
 Figure 4.1: 90% range of simulated population trajectories based on current knowledge on demographic parameters.
 </p>
 </div>
+</div>
+<div id="sensitivity-of-the-population-model-to-changes-in-different-parameters" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Sensitivity of the population model to changes in different parameters<a href="population-model.html#sensitivity-of-the-population-model-to-changes-in-different-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To assess how sensitive the population model is to changes in single parameter values, we used a deterministic matrix model to calculate the population growth rate as the dominant eigenvalue of the Leslie matrix. We used the average values for the proportion of non-breeders, the proportion of second broods among the breeders, the number of fledglings for the first and second brood as well as juveniles and adult female survival, and we varied one of these parameter at a time.</p>
+<p>Even though the units with which the different demographic parameters are measured are not directly comparable, we may conclude that small changes in survival, particularly juvenile survival have a strong effect on population growth rate, whereas a change from two to five average number of nestlings only has a small effect on the population growth rate (Figure <a href="population-model.html#fig:sensan">4.2</a>). The proportion of non-breeders has a larger effect on the population growth compared to the proportion of second broods. A change from 0 to 50% non-breeders has a similar effect as a change from 100% to 0% second broods.</p>
+<p>From this result, we conclude that it is important to have a solid basis for understanding how survival is related to environmental variables to be able to predict population growth of Snowfinches in future.</p>
+<div class="figure"><span style="display:block;" id="fig:sensan"></span>
+<img src="predictive_model_files/figure-html/sensan-1.png" alt="Sensitivity of the population growth rate to changes in single demographic parameters inferred from a deterministic matrix model. Only one parameter is changed at a time whereas all others were kept at the values used for the simulation. Note that the scale of the x-axes is chosen arbitrarily therefore, slpes of the lines are not directly comparable among the four panels." width="672" />
+<p class="caption">
+Figure 4.2: Sensitivity of the population growth rate to changes in single demographic parameters inferred from a deterministic matrix model. Only one parameter is changed at a time whereas all others were kept at the values used for the simulation. Note that the scale of the x-axes is chosen arbitrarily therefore, slpes of the lines are not directly comparable among the four panels.
+</p>
+</div>
+</div>
+<div id="for-which-demographic-parameter-would-additional-data-be-most-valuable" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> For which demographic parameter would additional data be most valuable?<a href="population-model.html#for-which-demographic-parameter-would-additional-data-be-most-valuable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>todo</p>
 </div>
 </div>
             </section>

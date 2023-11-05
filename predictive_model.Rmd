@@ -135,6 +135,8 @@ For the population model, we use a proportion of non-breeding females of `r roun
 We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions (of non-breeders, females with one and two broods) defined by the intercepts are used for average temperature values. 
 
 ```{r nrbroods_intercepts, echo=FALSE}
+#  ps: an easier way would be to keep the proportion of non-breeders and the proportion of second broods among the breeders separate as two binomial models (i.e. to not combine to a multinomial model). But for now, we do a multinomial model (which turned out to be a little bit complicated, apologize for that)
+
 # derivation of formula to calculate the intercepts
 # p0brood = exp(x1)/(exp(x1) + exp(x2) + 1)
 # p1brood = exp(x2)/(exp(x1) + exp(x2) + 1)
@@ -493,6 +495,7 @@ Table: Half-year apparent survival estimates (preliminary results). Note, winter
 |adult| female |  `r round(median(Sadsummer[,1]),2)` (`r round(quantile(Sadsummer[,1], prob=0.025),2)` - `r round(quantile(Sadsummer[,1], prob=0.975),2)`) |`r round(median(Sadwinter[,1]),2)` (`r round(quantile(Sadwinter[,1], prob=0.025),2)` - `r round(quantile(Sadwinter[,1], prob=0.975),2)`) |
 |adult | male | `r round(median(Sadsummer[,2]),2)` (`r round(quantile(Sadsummer[,2], prob=0.025),2)` - `r round(quantile(Sadsummer[,2], prob=0.975),2)`)  | `r round(median(Sadwinter[,2]),2)` (`r round(quantile(Sadwinter[,2], prob=0.025),2)` - `r round(quantile(Sadwinter[,2], prob=0.975),2)`) |
 
+The probability that a plastic ring is lost within three months is `r round(mod1$mean$m, 3)` (`r round(quantile(mod1$sims.list$m, probs=0.025),3)` - `r round(quantile(mod1$sims.list$m, probs=0.975),3)`), which means that one year after having got a plastic ring, `r round(1-(1-mod1$mean$m)^4,2)`% of the individuals have lost their ring. 
 
 #### Survival function of the predictive population model
 
@@ -631,7 +634,7 @@ mtext("Survival probability", side=2, outer=TRUE, line=2)
 
 ## Starting population
 
-We start with a population of 7000 individuals just before the breeding season (pre-breeding cencus) consisting of 1000 adult females, 1000 adult males and each 2500 first year males and females. The age composition corresponds to a stable age structure of a population with a fecundity of 2.5, first year survival of 0.2 and adult survival of 0.5. 
+We start with a population of 7000 individuals just before the breeding season (pre-breeding census) consisting of 1000 adult females, 1000 adult males and each 2500 first year males and females. The age composition corresponds to a stable age structure of a population with a fecundity of 2.5, first year survival of 0.2 and adult survival of 0.5. 
 
 
 ```{r preparepop, collapse=TRUE, echo=FALSE}
@@ -863,11 +866,93 @@ polygon(c(1:nyears, rev(1:nyears)),
 lines(1:nyears, popsizes_mean, lwd=2, col="brown")
 #for(i in 1:nsim) lines(1:nyears, popsizes[i,], col=rgb(0,0,0,0.3))
 
-
 ```
 
 
+## Sensitivity of the population model to changes in different parameters
 
+To assess how sensitive the population model is to changes in single parameter values, we used a deterministic matrix model to calculate the population growth rate as the dominant eigenvalue of the Leslie matrix. We used the average values for the proportion of non-breeders, the proportion of second broods among the breeders, the number of fledglings for the first and second brood as well as juveniles and adult female survival, and we varied one of these parameter at a time.
+
+Even though the units with which the different demographic parameters are measured are not directly comparable, we may conclude that small changes in survival, particularly juvenile survival have a strong effect on population growth rate, whereas a change from two to five average number of nestlings only has a small effect on the population growth rate (Figure \@ref(fig:sensan)). The proportion of non-breeders has a larger effect on the population growth compared to the proportion of second broods. A change from 0 to 50% non-breeders has a similar effect as a change from 100% to 0% second broods. 
+
+From this result, we conclude that it is important to have a solid basis for understanding how survival is related to environmental variables to be able to predict population growth of Snowfinches in future.  
+
+
+```{r sensan, echo=FALSE, fig.cap="Sensitivity of the population growth rate to changes in single demographic parameters inferred from a deterministic matrix model. Only one parameter is changed at a time whereas all others were kept at the values used for the simulation. Note that the scale of the x-axes is chosen arbitrarily therefore, slpes of the lines are not directly comparable among the four panels."}
+# p0brood: proportion of non-breeders among females
+# my proportion of second broods among breeding females
+nrfledglings1stbr <- fixef(mod)[1] + 162*fixef(mod)[2]
+nrfledglings2ndbr <- fixef(mod)[1] + 190*fixef(mod)[2]
+SjuvF <- mean(annSfirst[,1])
+SjuvM <- mean(annSfirst[,2])
+SadF <- mean(annSad[,1])
+SadM <- mean(annSad[,2])
+
+lambdafun <- function(propnb=p0brood, 
+                      propsecbrood= my, 
+                      nrfl1=nrfledglings1stbr,
+                      nrfl2=nrfledglings2ndbr,
+                      SjF=SjuvF,
+                      SF=SadF){
+  f <- (1-propnb)*(nrfl1 + propsecbrood*nrfl2)/2 # nr females produced
+  leslie <- matrix(c(f*SjF, f*SF,
+                   SjF, SF), ncol=2, nrow=2, byrow=TRUE)
+  lambda <- max(Re(eigen(leslie)$values))
+  return(lambda)
+}
+
+propnonbreeders <- seq(0, 0.5, length=100)
+propnonbreeders.lambda <- numeric(100)
+for(i in 1:100) propnonbreeders.lambda[i] <- lambdafun(propnb=propnonbreeders[i])
+
+propsecondbroods <- seq(0, 1, length=100)
+propsecondbroods.lambda <- numeric(100)
+for(i in 1:100) propsecondbroods.lambda[i] <- lambdafun(propsecbrood=propsecondbroods[i])
+
+nrfl1st <- seq(2,5, length=100)
+nrfl1st.lambda <- numeric(100)
+for(i in 1:100) nrfl1st.lambda[i] <- lambdafun(nrfl1=nrfl1st[i])
+
+nrfl2nd <- seq(2,5, length=100)
+nrfl2nd.lambda <- numeric(100)
+for(i in 1:100) nrfl2nd.lambda[i] <- lambdafun(nrfl2=nrfl2nd[i])
+
+juvS <- seq(0.05,0.95, length=100)
+juvS.lambda <- numeric(100)
+for(i in 1:100) juvS.lambda[i] <- lambdafun(SjF=juvS[i])
+
+adS <- seq(0.05,0.95, length=100)
+adS.lambda <- numeric(100)
+for(i in 1:100) adS.lambda[i] <- lambdafun(SF=adS[i])
+
+
+par(mfrow=c(2,2), mar=c(4.5,3,1,1), oma=c(0,3,0,0))
+yminmax <- c(0.5,1.5)
+plot(propnonbreeders, propnonbreeders.lambda, ylim=yminmax, type="l", lwd=2, xlab="Proportion of non-breeders", las=1)
+abline(h=mean(trend_currentknowledge), col="grey")
+
+plot(propsecondbroods, propsecondbroods.lambda, ylim=yminmax, type="l", lwd=2, xlab="Proportion of second broods", las=1)
+abline(h=mean(trend_currentknowledge), col="grey")
+
+plot(nrfl1st, nrfl1st.lambda, ylim=yminmax, type="l", lwd=2,
+     xlab="Number of fledglings")
+abline(h=mean(trend_currentknowledge), col="grey", las=1)
+lines(nrfl2nd, nrfl2nd.lambda, lwd=2, lty=3)
+legend(2, 1.4, lwd=2, lty=c(1,3), legend=c("1st brood", "2nd brood"), bty="n", cex=0.8)
+
+plot(juvS, juvS.lambda, ylim=yminmax, type="l", lwd=2, lty=3, las=1, xlab="Female survival")
+abline(h=mean(trend_currentknowledge), col="grey")
+lines(adS, adS.lambda, lwd=2)
+legend(0.4, 0.8, lwd=2, lty=c(3,1), legend=c("first year", "adult"), bty="n", cex=0.8)
+mtext("Population growth rate (lambda)", side=2, outer=TRUE, line=1)
+
+```
+  
+  
+  
+## For which demographic parameter would additional data be most valuable?
+
+todo
 
 
 # References
