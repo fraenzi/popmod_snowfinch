@@ -20,10 +20,10 @@
   <meta name="twitter:description" content="We here present what we know about population dynamics of Snowfinches." />
   <meta name="twitter:image" content="/figures/sf.jpg" />
 
-<meta name="author" content="Fränzi Korner-Nievergelt" />
+<meta name="author" content="Fränzi Korner-Nievergelt, Sabine Hille" />
 
 
-<meta name="date" content="2023-11-03" />
+<meta name="date" content="2023-11-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,29 +136,29 @@ div.csl-indent {
 <h1><span class="header-section-number">2</span> Introduction<a href="introduction.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="background" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Background<a href="introduction.html#background" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Global warming is changing the environment for wildlife world-wide but over proportionally in mountain areas <span class="citation">(<a href="#ref-Pepin.2015">Pepin et al. 2015</a>; <a href="#ref-adler_cross-chapter_2022">Adler et al. 2022</a>)</span>. The understanding of how species population dynamics react to environmental changes is crucial for predicting trends in biodiversity and for assessing the consequences of human activities for nature. The study of demography in species with their distribution restricted to mountain areas, in many cases, is difficult because they often are rare and live in remote and inaccessible places. Such species, therefore, are highly understudied. Any empirical data, even of low sample size, and studies on how demographic parameters and species behavior are influenced by the environment contribute to improve the understanding of how mountain specialists react to changes in the environment.<br />
+<p>Global warming is changing the environment for wildlife world-wide but over proportionally in mountain areas <span class="citation">(<a href="#ref-Pepin.2015">Pepin et al. 2015</a>; <a href="#ref-adler_cross-chapter_2022">Adler et al. 2022</a>)</span>. Exact in Alpine environments we still find specialists and endemics. To predict trends in Alpine biodiversity and for assessing the consequences of human activities for nature, the understanding of how species’ population dynamics react to environmental changes is crucial. But in many cases the study of demography in species with their distribution restricted to mountain areas appears difficult because they often are rare and live in remote and inaccessible places. Therefore, such species are understudied. Any empirical data, even of low sample size, and studies on how demographic parameters and species behavior are influenced by the environment contribute to improve the understanding of how mountain specialists react to changes in the environment.<br />
 The aim of this online material is to collate and provide demographic data together with a population model of a high-elevation specialist bird species, the White-winged Snowfinch <em>Montifringilla nivalis nivalis</em>, hereafter Snowfinch (Figure <a href="introduction.html#fig:sffoto">2.1</a>).</p>
 <div class="figure"><span style="display:block;" id="fig:sffoto"></span>
-<img src="figures/g21.jpg" alt="We use alpha-numeric plastic rings that can be read by a scope." width="960" />
+<img src="figures/c46.jpg" alt="We use alpha-numeric plastic rings that can be read by a scope to follow individuals over their life and to study their behaviour." width="707" />
 <p class="caption">
-Figure 2.1: We use alpha-numeric plastic rings that can be read by a scope.
+Figure 2.1: We use alpha-numeric plastic rings that can be read by a scope to follow individuals over their life and to study their behaviour.
 </p>
 </div>
-<p>The presentation of the material here has several aims: 1) The model summarizes the current knowledge on the population dynamics of the Snowfinch, 2) The model can be used to assess sensitivity of the population dynamics of Snowfinches to changes in different demographic parameters. 3) The model can be used to identify knowledge gaps and lack of data, 4) The model is prepared to allow for selective mating and inheritance of individual (morphological or behavioral) traits with the aim that in future it may serve to predict how traits change in the population. However, trait heritability values would be required to do so which are not yet available. 5) From the model, future population trajectories can be simulated to predict population trends under different scenario including global warming scenario, or to assess effects of specific conservation managements.</p>
-<p>The data provided to download is from our own studies. We appreciate if you contact the authors of this material, in case you would like to use the data for your own studies.</p>
-<p>We do not need to be contacted, if you download the code of the population model. Other people may have developed much nicer and more efficient model codes. We are happy if you send us suggestions for improving the code.</p>
+<p>The presentation of the material serves several purposes: 1) The model summarises the current knowledge on population dynamics of the Snowfinch, 2) The model can be used to assess sensitivity of the population dynamics to changes in demographic parameters. 3) The model further serves to identify knowledge gaps and lack of data, 4) The model is prepared to allow for selective mating and inheritance of individual (morphological or behavioral) traits with the aim that in future it may serve to predict how traits change in the population. To estimate microevolutionary change in specific traits, however, trait heritability values would be required to do so which are just not yet available. 5) The model allows simulation of future population trajectories to predict population trends under different scenario settings such as global warming scenario, or specific conservation managements.</p>
+<p>The data provided to download results from our own studies. We appreciate if you contact the authors of this material first, in case you would like to use the data for your own studies.</p>
+<p>We do not need to be contacted, if you download the code of the population model. Other people may have developed much nicer and more efficient model codes. But we are happy if you send us suggestions for improving our code.</p>
 </div>
 <div id="model-structure" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Model structure<a href="introduction.html#model-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The model consists of a mid-winter (January) and a pre-breeding (Mai) census of first year and adult individuals of both sexes (Figure <a href="introduction.html#fig:modelstr">2.2</a>). The two population census within one year allows for separately modeling environmental influences on the survival from Mai to January (“summer survival”) and from January to Mai (“winter survival”).
-The model also includes a pair building process. Currently, only random mating with new pairs in each year is implemented. The parameter <span class="math inline">\(p\)</span> is a vector containing three probabilities, to skip breeding, and to do one or two broods. The three probabilities sum to one. The parameter <span class="math inline">\(f\)</span> is the number of fledglings produced by a pair. We assume a sex ratio of 1:1 among the fledglings.</p>
+<p>The model consists of a pre-winter (November) and a pre-breeding (May) census of first year and adult individuals of both sexes (Figure <a href="introduction.html#fig:modelstr">2.2</a>). The two population census within one year allows for separately modeling environmental influences on the survival from May to November (“summer survival”) and from November to May (“winter survival”).
+The model also includes a pair building process. Currently, only random mating with new pairs in each year is implemented. The parameter <span class="math inline">\(p\)</span> is a vector containing three probabilities, to skip breeding, and to do one or two broods. The three probabilities sum to one. The parameter <span class="math inline">\(f\)</span> is the number of fledglings produced by a pair. We assume a sex ratio of 1:1 among fledglings.</p>
 <div class="figure"><span style="display:block;" id="fig:modelstr"></span>
 <img src="figures/Overview_model.jpg" alt="Structure of the population model. The model contains a pair building process, e.g. random pairing. It further includes demographic parameters that may depend on environmental variables: p = probability vector for doing 0, 1 or 2 broods; f = fecundity, i.e., the number of fledglings produced by one female in one breeding season; summer and winter survival for adults and first year birds of both sexes." width="640" />
 <p class="caption">
 Figure 2.2: Structure of the population model. The model contains a pair building process, e.g. random pairing. It further includes demographic parameters that may depend on environmental variables: p = probability vector for doing 0, 1 or 2 broods; f = fecundity, i.e., the number of fledglings produced by one female in one breeding season; summer and winter survival for adults and first year birds of both sexes.
 </p>
 </div>
-<p>Below we present the data available to parameterise the model. We also collate results from earlier studies on the relationships of demographic parameters and environmental or individual specific variables.</p>
+<p>To parameterise the model below we present the data available so far. We also collate results from earlier studies on the relationships of demographic parameters and environmental or individual specific variables.</p>
 </div>
 </div>
 <h3> References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>

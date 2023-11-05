@@ -20,10 +20,10 @@
   <meta name="twitter:description" content="We here present what we know about population dynamics of Snowfinches." />
   <meta name="twitter:image" content="/figures/sf.jpg" />
 
-<meta name="author" content="Fränzi Korner-Nievergelt" />
+<meta name="author" content="Fränzi Korner-Nievergelt, Sabine Hille" />
 
 
-<meta name="date" content="2023-11-03" />
+<meta name="date" content="2023-11-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,7 +145,7 @@ div.csl-indent {
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
 <img src="predictive_model_files/figure-html/unnamed-chunk-1-1.png" alt="Scatter plot of (standardised) temperature early and late during the breeding season, time and duration of snowmelt. All variables are standardised so that their mean is zero and their standard deviation one." width="672" />
 <p class="caption">
-Figure 3.1: Scatter plot of (standardised) temperature early and late during the breeding season, time and duration of snowmelt. All variables are standardised so that their mean is zero and their standard deviation one.
+Figure 1.1: Scatter plot of (standardised) temperature early and late during the breeding season, time and duration of snowmelt. All variables are standardised so that their mean is zero and their standard deviation one.
 </p>
 </div>
 </div>
@@ -160,17 +160,17 @@ The proportion of non-breeding females is not known at all.</p>
 <div class="figure"><span style="display:block;" id="fig:metanrbrood"></span>
 <img src="predictive_model_files/figure-html/metanrbrood-1.png" alt="Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average overa all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study." width="672" />
 <p class="caption">
-Figure 3.2: Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average overa all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.
+Figure 3.1: Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average overa all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.
 </p>
 </div>
-<p>The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to 0.97, and the mean is 0.75 (Figure <a href="data.html#fig:metanrbrood">3.2</a>).</p>
-<p>For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.23 to account for the fact that we know little about this demographic parameter.</p>
+<p>The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.22 to 0.97, and the mean is 0.75 (Figure <a href="data.html#fig:metanrbrood">3.1</a>).</p>
+<p>For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.22 to account for the fact that we know little about this demographic parameter.</p>
 <p>We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions defined by the intercept are used for average temperature values.</p>
 <p>Citizen science data (ornitho.ch) revealed that during the last 20 years, the Snowfinch breeding season started mid May when June temperatures were high and it started mid June, when June temperatures were low (Niffenegger in prep.). Also, we saw that the end of the breeding season varied between the beginning of August to the end of August depending on July temperature. The warmer in July, the earlier was the end of the breeding season. Thus, both temperature variables (June and July temperature) may affect the number of broods by one brood (for which around one month is needed) along their ranges of values. We derive effect sizes for June and July temperature that correspond to a change by one brood from the lowest to the highest temperature values.</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
 <img src="predictive_model_files/figure-html/unnamed-chunk-3-1.png" alt="Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are indicatd with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in the temperature effects." width="672" />
 <p class="caption">
-Figure 3.3: Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are indicatd with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in the temperature effects.
+Figure 3.2: Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are indicatd with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in the temperature effects.
 </p>
 </div>
 </div>
@@ -187,11 +187,11 @@ Figure 3.3: Proportion of females with 0, 1 or 2 broods. The 95% uncertainty int
 </div>
 <div id="own-data-on-survival" class="section level4 hasAnchor" number="3.2.3.2">
 <h4><span class="header-section-number">3.2.3.2</span> Own data on survival<a href="data.html#own-data-on-survival" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>In the project at the Swiss Ornithological Institute, we are marking individuals between since May 2015 and we perform systematic searches for marked individuals. Until August 2023 we collected over 8000 resightings and over 900 recaptures (Fig. <a href="data.html#fig:dataprepsurv">3.4</a>). Here, we present first, preliminary, analyses of those data and analyses results. The results are far from being perfect. The analyses serve to get an impression on how well we can estimate apparent survival, to identify gaps in the data and lack of knowledge, so that we can better plan our future research activities.</p>
+<p>In the project at the Swiss Ornithological Institute, we are marking individuals between since May 2015 and we perform systematic searches for marked individuals. Until August 2023 we collected over 8000 resightings and over 900 recaptures (Fig. <a href="data.html#fig:dataprepsurv">3.3</a>). Here, we present first, preliminary, analyses of those data and analyses results. The results are far from being perfect. The analyses serve to get an impression on how well we can estimate apparent survival, to identify gaps in the data and lack of knowledge, so that we can better plan our future research activities.</p>
 <div class="figure"><span style="display:block;" id="fig:dataprepsurv"></span>
 <img src="figures/CH_Snowfinch.jpg" alt="Marking- and capture/resighting data of Snowfinches in the project of the Swiss Ornithological Institute. Individuals are presented on the y-axis, the time is given on the x-axis. Dots are captures (blue as nestling, orange as fledged bird), open circles are resightings and brown crosses are findings of dead birds. Horizontal lines connect recaptures, resightings or findings of the same individual." width="3000" />
 <p class="caption">
-Figure 3.4: Marking- and capture/resighting data of Snowfinches in the project of the Swiss Ornithological Institute. Individuals are presented on the y-axis, the time is given on the x-axis. Dots are captures (blue as nestling, orange as fledged bird), open circles are resightings and brown crosses are findings of dead birds. Horizontal lines connect recaptures, resightings or findings of the same individual.
+Figure 3.3: Marking- and capture/resighting data of Snowfinches in the project of the Swiss Ornithological Institute. Individuals are presented on the y-axis, the time is given on the x-axis. Dots are captures (blue as nestling, orange as fledged bird), open circles are resightings and brown crosses are findings of dead birds. Horizontal lines connect recaptures, resightings or findings of the same individual.
 </p>
 </div>
 <p>We used alpha-numeric plastic rings to enable resightings of birds. Likely due to the cold in winter, the plastic rings break and get lost after some months. Birds without plastic rings only can get recaptured but no longer resighted. To account for that loss of plastic rings, we usesd a multi-state/multi-event model <span class="citation">Roger Pradel (<a href="#ref-pradel_multievent_2005">2005</a>)</span> adapted so that it accounts for loss of plastic rings <span class="citation">(<a href="#ref-laake_hidden_2014">Laake et al. 2014</a>)</span>. We divided the study period into 3-months intervals and collated the capture-recapture/resightings into an observation history matrix with a row per individual and plastic ring respectively. When an individual that has lost its plastic ring got a new plastic ring on a recapture, we defined that recapture to be a new release, i.e. we added a new observation history to the data matrix. Following <span class="citation">Laake et al. (<a href="#ref-laake_hidden_2014">2014</a>)</span>, we defined that the birds can be in 3 different states: 1=alive with metallic and plastic ring, 2=alive with metallic ring only, 3= dead. Transitions between states <span class="math inline">\(T\)</span> were defined by apparent survival probability <span class="math inline">\(\phi\)</span> and the probability to lose a plastic ring <span class="math inline">\(m\)</span>.</p>
@@ -225,7 +225,7 @@ Figure 3.4: Marking- and capture/resighting data of Snowfinches in the project o
 <div class="figure"><span style="display:block;" id="fig:survest"></span>
 <img src="predictive_model_files/figure-html/survest-1.png" alt="Three-months apparent survival estimates for juvenile (first half year) and adult Snowfinches in the Swiss Alps. Vertical bars are 95% intervals of the posterior distributions." width="672" />
 <p class="caption">
-Figure 3.5: Three-months apparent survival estimates for juvenile (first half year) and adult Snowfinches in the Swiss Alps. Vertical bars are 95% intervals of the posterior distributions.
+Figure 3.4: Three-months apparent survival estimates for juvenile (first half year) and adult Snowfinches in the Swiss Alps. Vertical bars are 95% intervals of the posterior distributions.
 </p>
 </div>
 <p>The preliminary results indicate that adult apparent survival is lowest in late winter and may be lower in females compared to males in late summer. Apparent survival of the freshly fledged birds in late summer may be underestimated because we assume that during the second half of their first year, their apparent survival equals adult apparent survival, which may not be true. However, after the post-juvenile moult in late summer, first year and older birds are no longer distinguisable. Therefore, of birds captured for the first time in winter, we only know that they are at least half a year old. To be able to estimate separate first year apparent survival for the whole first year, we would need to deal with unidentified ages.</p>
@@ -276,11 +276,11 @@ Figure 3.5: Three-months apparent survival estimates for juvenile (first half ye
 </div>
 <div id="survival-function-of-the-predictive-population-model" class="section level4 hasAnchor" number="3.2.3.3">
 <h4><span class="header-section-number">3.2.3.3</span> Survival function of the predictive population model<a href="data.html#survival-function-of-the-predictive-population-model" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>From the survival analyses that are available up to now, we collated a survival function that produces a survival probability for summer and winter for each age and sex class dependent on a standardised environmental variable (Fig. <a href="data.html#fig:survivalfunctions">3.6</a>). Intercepts are taken from the analyses of our own data (presented above) and effect of the environmental variables are taken from the long-term data from Austria <span class="citation">(<a href="#ref-zauner_apparent_2022">Zauner 2022</a>)</span>. For every run of the population model, we draw a random intercept and slope for each age and sex class and we keep that values for the whole population trajectory. In this way, the uncertainty of survival propagates into the uncertainty of the population trajectory.</p>
+<p>From the survival analyses that are available up to now, we collated a survival function that produces a survival probability for summer and winter for each age and sex class dependent on a standardised environmental variable (Fig. <a href="data.html#fig:survivalfunctions">3.5</a>). Intercepts are taken from the analyses of our own data (presented above) and effect of the environmental variables are taken from the long-term data from Austria <span class="citation">(<a href="#ref-zauner_apparent_2022">Zauner 2022</a>)</span>. For every run of the population model, we draw a random intercept and slope for each age and sex class and we keep that values for the whole population trajectory. In this way, the uncertainty of survival propagates into the uncertainty of the population trajectory.</p>
 <div class="figure"><span style="display:block;" id="fig:survivalfunctions"></span>
 <img src="predictive_model_files/figure-html/survivalfunctions-1.png" alt="Survival function used in the predictive population model." width="672" />
 <p class="caption">
-Figure 3.6: Survival function used in the predictive population model.
+Figure 3.5: Survival function used in the predictive population model.
 </p>
 </div>
 </div>

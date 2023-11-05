@@ -1,6 +1,6 @@
+fig:unnamed-chunk-1
 fig:sffoto
 fig:modelstr
-fig:unnamed-chunk-1
 fig:metanrbrood
 fig:unnamed-chunk-3
 fig:dataprepsurv
