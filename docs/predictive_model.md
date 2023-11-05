@@ -39,18 +39,18 @@ To parameterise the model below we present the data available so far. We also co
 
 ## Environmental data
 
-Environmental variables that have, up to now, been shown to affect population dynamics in Snowfinches are:  
-- average temperature during the breeding season negatively affect apparent survival of female Snowfinches [@Strinella.2020, own data]  
-- date of snowmelt was correlated with the timing of the broods [@Schano.2021] and has an effect on nestling growth rate [@Ijjas.2022]  
-- temperature early in the breeding season correlated positively with the length of the breeding season (and thus, number of broods possible) and average temperature late in the breeding season correlated negatively with the length of the breeding season (Niffenegger in prep.). 
+Empirical evidence of correlations between Snowfinch population dynamics and environmental variables is provided in the following studies:  
+- Average ambient temperature during the breeding season was negatively correlated with apparent survival of female Snowfinches in the Apennines between 2003 and 2017 [@Strinella.2020].  
+- Average ambient temperature during the breeding season was strongly negatively correlated with female apparent survival and moderately so in males in the Austrian Alps between 1964 and 2004 (Aichhorn in prep.).
+- The timing of the broods was correlated with precipitation in early spring but did not follow the long-term advance of the snow melt in citizen science data from Switzerland from 1998 to 2019 [@Schano.2021].  
+- Nestling growth rate was higher during snow melt compared to after snow melt in 87 nestlings of 24 broods in the Swiss Alps (data from 2016 to 2020) [@Ijjas.2022].  
+- Temperature early in the breeding season correlated positively with the length of the breeding season (and thus, number of broods possible) and average temperature late in the breeding season correlated negatively with the length of the breeding season as inferred from citizen science of Switzerland between 1999 and 2021 (Niffenegger in prep.). 
 
-Average temperature values early and late during the breeding season, timing and duration of snowmelt were obtained from meteoschweiz for the years 1999 to 2021 [reference?].
+
+In the current version of the population model, we relate the number of broods per female and year, and survival (first year and adult female and male survival) to temperature during the breeding season. We use average temperature values for the Swiss Alps early and late in the breeding season as predicted by the climate scenario RCP26 [@ch2018_project_team_ch2018_2018]. We use these data to have a somewhat realistic among-year variance in temperature values for simulating the population trajectories.  
 
 
-<div class="figure">
-<img src="predictive_model_files/figure-html/unnamed-chunk-1-1.png" alt="Scatter plot of (standardised) temperature early and late during the breeding season, time and duration of snowmelt. All variables are standardised so that their mean is zero and their standard deviation one." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-1)Scatter plot of (standardised) temperature early and late during the breeding season, time and duration of snowmelt. All variables are standardised so that their mean is zero and their standard deviation one.</p>
-</div>
+
 
 
 ## Demographic data
@@ -58,28 +58,28 @@ Average temperature values early and late during the breeding season, timing and
 ### Number of broods
 
 
-The number of broods a female raises in one year is only known for a few study sites. In the Apennine, 26 out of 26 females did a second brood [@strinella_biologia_2011]. In the Pyrenees, @grange_biologie_2008 observed that 50% of the breeding pairs did a second brood. Little is known for the Alps. @Aichhorn.1966 found in the Austrian Alps that 9 of 11 breeding pairs did a second brood. In our study in the Swiss Alps, we could detect only 7 females doing a second brood out of 48 females that were reported to breed. However, we may have missed a large part of the second broods because females may leave the study area for the second brood. 
+The number of broods a female raises in one year is only known for a few study sites. In the Apennines, 26 out of 26 females did a second brood [@strinella_biologia_2011]. In the Pyrenees, @grange_biologie_2008 observed that 50% of the breeding pairs did a second brood. Little is known for the Alps. @Aichhorn.1966 found in the Austrian Alps that 9 of 11 breeding pairs did a second brood. In our study in the Swiss Alps, we could detect only 7 females doing a second brood out of 49 females that were reported to breed. However, we may have missed a large part of the second broods because females may leave the study area for the second brood. 
 The proportion of non-breeding females is not known at all.
 
-To more precisely assess the proportion of females that skip breeding, do one or two broods, it would be necessary to track females over the course of the whole breeding season. This has not been done yet. 
+To more precisely assess the proportion of females that either skip breeding, do one or two broods, it would be necessary to track females over the course of the whole breeding season. This has not been achieved yet. 
 
 We use a hierarchical meta-analysis to combine the information from the different studies including our own. To do so, we use a binomial mixed model for the number of females that were reported to do a second brood. The study was used as a random factor to account for among-study variance. 
 
 <div class="figure">
-<img src="predictive_model_files/figure-html/metanrbrood-1.png" alt="Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average overa all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study." width="672" />
-<p class="caption">(\#fig:metanrbrood)Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average overa all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.</p>
+<img src="predictive_model_files/figure-html/metanrbrood-1.png" alt="Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average over all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study." width="672" />
+<p class="caption">(\#fig:metanrbrood)Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average over all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.</p>
 </div>
 
-The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.22 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
+The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.21 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
 For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.22 to account for the fact that we know little about this demographic parameter. 
 
-We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions defined by the intercept are used for average temperature values. 
+We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions (of non-breeders, females with one and two broods) defined by the intercepts are used for average temperature values. 
 
 
 
-Citizen science data (ornitho.ch) revealed that during the last 20 years, the Snowfinch breeding season started mid May when June temperatures were high and it started mid June, when June temperatures were low (Niffenegger in prep.). Also, we saw that the end of the breeding season varied between the beginning of August to the end of August depending on July temperature. The warmer in July, the earlier was the end of the breeding season. Thus, both temperature variables (June and July temperature) may affect the number of broods by one brood (for which around one month is needed) along their ranges of values. We derive effect sizes for June and July temperature that correspond to a change by one brood from the lowest to the highest temperature values. 
+Citizen science data (ornitho.ch) from the last 20 yeara revealed that the Snowfinch breeding season started already mid May when June temperatures were high and it started mid June, when June temperatures were low (Niffenegger in prep.). Also, we saw a variation in the ending of the breeding season depending on July temperature. The warmer in July, the earlier breeding ended. Thus, both June and July temperature may finally affect the number of broods in total by one brood (for which around one month is needed) along their ranges of values. We derive effect sizes for June and July temperature that correspond to a change by one brood from the lowest to the highest temperature values. 
 
 
 <div class="figure">
@@ -92,10 +92,18 @@ Citizen science data (ornitho.ch) revealed that during the last 20 years, the Sn
 
 
 
-There is only one study from the Pyrenees that report the number of fledglings [@grange_biologie_2008]. They report an average of 2.4. 
+There is only one study from the Pyrenees that report the number of fledglings [@grange_biologie_2008]. They report an average of 2.4 fledglings per brood. 
 
 
-<img src="predictive_model_files/figure-html/nrfeldglings-1.png" width="672" />
+
+In our own data from Switzerland (2015-2023), we know the number of fledglings from 83 broods. The average number of fledglings is almost 4 for broods early in the breeding season and it decreases to around 3 fledglings per brood for late broods (Fig. \@ref(fig:nrfeldglings)).
+
+<div class="figure">
+<img src="predictive_model_files/figure-html/nrfeldglings-1.png" alt="Number of fledglings in relation to the date when the first egg of the brood hatched. The regression line is from a linear mixed model with hatching date as predictor and year as random factor. The 95% CI is given as dotted lines." width="672" />
+<p class="caption">(\#fig:nrfeldglings)Number of fledglings in relation to the date when the first egg of the brood hatched. The regression line is from a linear mixed model with hatching date as predictor and year as random factor. The 95% CI is given as dotted lines.</p>
+</div>
+
+For simulating the population trajectory, we draw for every brood the number of fledglings from a normal distribution around the mean number of fledglings that is defined by the hatching date and a standard deviation of 1.15. The standard deviation corresponds to the residual standard deviation of the regression in Figure \@ref(fig:nrfeldglings). We, for now, ignore the among-year variance because it was small in our data (SD among years: 0.28). We might allow for among-year variance once we have better data on how environmental variables influence the number of fledglings. Finally, the drawn values of the number of fledglings were rounded to the next integer in the simulations.
 
 
 ### Survival

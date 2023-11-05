@@ -3,6 +3,7 @@ fig:sffoto
 fig:modelstr
 fig:metanrbrood
 fig:unnamed-chunk-3
+fig:nrfeldglings
 fig:dataprepsurv
 fig:survest
 fig:survivalfunctions
