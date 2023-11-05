@@ -43,12 +43,14 @@ library(R2jags)
 
 ## Environmental data
 
-Environmental variables that have, up to now, been shown to affect population dynamics in Snowfinches are:  
-- average temperature during the breeding season negatively affect apparent survival of female Snowfinches [@Strinella.2020, own data]  
-- date of snowmelt was correlated with the timing of the broods [@Schano.2021] and has an effect on nestling growth rate [@Ijjas.2022]  
-- temperature early in the breeding season correlated positively with the length of the breeding season (and thus, number of broods possible) and average temperature late in the breeding season correlated negatively with the length of the breeding season (Niffenegger in prep.). 
+Empirical evidence of correlations between Snowfinch population dynamics and environmental variables is provided in the following studies:  
+- Average ambient temperature during the breeding season was negatively correlated with apparent survival of female Snowfinches in the Apennines between 2003 and 2017 [@Strinella.2020].  
+- Average ambient temperature during the breeding season was strongly negatively correlated with female apparent survival and moderately so in males in the Austrian Alps between 1964 and 2004 (Aichhorn in prep.).
+- The timing of the broods was correlated with precipitation in early spring but did not follow the long-term advance of the snow melt in citizen science data from Switzerland from 1998 to 2019 [@Schano.2021].  
+- Nestling growth rate was higher during snow melt compared to after snow melt in 87 nestlings of 24 broods in the Swiss Alps (data from 2016 to 2020) [@Ijjas.2022].  
+- Temperature early in the breeding season correlated positively with the length of the breeding season (and thus, number of broods possible) and average temperature late in the breeding season correlated negatively with the length of the breeding season as inferred from citizen science of Switzerland between 1999 and 2021 (Niffenegger in prep.). 
 
-Average temperature values early and late during the breeding season, timing and duration of snowmelt were obtained from meteoschweiz for the years 1999 to 2021 [reference?].
+
 
 
 ```{r, fig.cap="Scatter plot of (standardised) temperature early and late during the breeding season, time and duration of snowmelt. All variables are standardised so that their mean is zero and their standard deviation one.", echo=FALSE}
