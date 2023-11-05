@@ -73,7 +73,7 @@ We use a hierarchical meta-analysis to combine the information from the differen
 The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
-For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.22 to account for the fact that we know little about this demographic parameter. 
+For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.21 to account for the fact that we know little about this demographic parameter. 
 
 We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions (of non-breeders, females with one and two broods) defined by the intercepts are used for average temperature values. 
 
@@ -215,7 +215,7 @@ To simulate the population trajectory, we follow the structure presented in Figu
 
 3. Number of fledglings per brood is simulated based on the date of the brood (Figure \@ref(fig:nrfeldglings)). To keep the model simple for the moment, we assume that the first broods hatch at day 162 and the second broods at day 190.
 
-4. Summer and winter survival is simulated for each individual assuming a survival probability defined by the functions visualised in Figure \@ref(fig:survivalfunctions). 
+4. Summer and winter survival is simulated for each individual assuming a survival probability defined by the functions visualised in Figure \@ref(fig:survivalfunctions). We use the average temperature during breeding season (average over early and late) as predictor for survival.  
 
 5. The simulation proceeds wit step 1. with the individuals that survived until the beginning of the following breeding season.  
 
@@ -225,12 +225,35 @@ To simulate the population trajectory, we follow the structure presented in Figu
 
 
 
+
 ## Predicted population trajectories
 
+
+
+
+
+With the above collated information on the number of broods per female and year, the number of fledglings per brood and survival we predict that a population of 3500 females decreases in average to around 1000 within 10 years (Figure \@ref(fig:vispopcurrentknow)). The population trend is 0.85 (95% CI: 0.66 - 1.1).  
+
+
+Before the population trajectory can be used as a prediction of the future of Snowfinch populations several points need to be improved in the population model, for example:  
+
+- As average survival we used the estimates for apparent survival instead of true survival. Apparent survival normally is lower than true survival because it is the product of fidelity to the study area and survival. Therefore, our model may use too low survival probabilities. To get estimates for true survival we could either account for emigration in the survival model (see above) or we could gradually increase the survival estimates in the population model until the resulting trend corresponds to the observed population trend in Switzerland (https://www.vogelwarte.ch/de/voegel-der-schweiz/schneesperling/).  
+
+- The (standardised) temperature values we now used to simulate among-year variance in the number of broods and survival would be needed to be measured relative to the temperature when the demographic parameters were measured. The current model assumes that the average temperature in the 10 virtual "future" years is the same as it was when the demographic parameters were measured.   
+
+- We assumed that in average (i.e. for average temperature values) the proportion of non-breeders is 10%, and that this proportion increases or decreases depending on the length of the breeding season that is defined by temperature early and late in the breeding season. The value of 10% is nothing else than a gut-feeling, no data is yet available. We are currently using data loggers to collect exactly that data. Alternatively, we could use our model to reconstruct the population trend since 1990 and vary the proportion of non-breeders until the trend correspond to the observed one (https://www.vogelwarte.ch/de/voegel-der-schweiz/schneesperling/). This alternative is possible as soon as we have empirical estimates of true survival.  
+
+- For sure, there are further points to be considered.   
+
+
 <div class="figure">
-<img src="predictive_model_files/figure-html/vispopcurrentknow-1.png" alt="90% range of simulated population trajectories based on current knowledge on demographic parameters. The variance in the trajectories reflects current uncertainties of demographic parameters." width="672" />
-<p class="caption">(\#fig:vispopcurrentknow)90% range of simulated population trajectories based on current knowledge on demographic parameters. The variance in the trajectories reflects current uncertainties of demographic parameters.</p>
+<img src="predictive_model_files/figure-html/vispopcurrentknow-1.png" alt="90% range of simulated population trajectories based on current knowledge on demographic parameters." width="672" />
+<p class="caption">(\#fig:vispopcurrentknow)90% range of simulated population trajectories based on current knowledge on demographic parameters.</p>
 </div>
+
+
+
+
 
 # References
 
