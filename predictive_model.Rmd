@@ -1084,8 +1084,7 @@ trend_Sknown <- apply(popsizesSknown, 1, trendfun)
 
 ```
 
-Knowing exactly the average number of broods per pair (i.e. the proportions of non-breeders, single and double brooded pairs) and the number of fledglings per brood has similar effects on the precision of the predicted population trends (Figure \@ref(fig:vispopdiffknowl)). It reduces the uncertainty of the predicted population size in 10 years from a range of `r round(popsizes_lwr[10])`- `r round(popsizes_upr[10])` to ranges of `r round(popsizesnrbrknown_lwr[10])`- `r round(popsizesnrbrknown_upr[10])` if the average number of broods is exactly known and `r round(popsizesnfknown_lwr[10])`- `r round(popsizesnfknown_upr[10])` if the average number of fledglings is exactly known. We get a remarkable increase in precision of the predicted population size if we know survival exactly `r round(popsizesSknown_lwr[10])`- `r round(popsizesSknown_upr[10])`.
-
+Knowing exactly the average number of broods per pair (i.e. the proportions of non-breeders, single and double brooded pairs) and the number of fledglings per brood has similar effects on the precision of the predicted population trends (Figure \@ref(fig:vispopdiffknowl)). It reduces the uncertainty of the predicted population size in 10 years from a range of `r round(popsizes_lwr[10])` - `r round(popsizes_upr[10])` females to ranges of `r round(popsizesnrbrknown_lwr[10])` - `r round(popsizesnrbrknown_upr[10])` females if the average number of broods is exactly known and `r round(popsizesnfknown_lwr[10])` - `r round(popsizesnfknown_upr[10])` females if the average number of fledglings is exactly known. We get a remarkable increase in precision of the predicted population size if we know survival exactly. Then the predicted number of females in 10 years is between `r round(popsizesSknown_lwr[10])`- `r round(popsizesSknown_upr[10])`.
 
 
 ```{r vispopdiffknowl, fig.cap="90% range of simulated population trajectories based on current knowledge on demographic parameters.", echo=FALSE}
@@ -1111,7 +1110,7 @@ polygon(c(1:nyears, rev(1:nyears)),
 lines(1:nyears, popsizesnrbrknown_mean, lwd=2, col=rgb(1,1,0.2))
 lines(1:nyears, popsizesnfknown_mean, lwd=2, col=rgb(0.5,1,0.5))
 lines(1:nyears, popsizesSknown_mean, lwd=2, col=rgb(0.7,0.1,0.7))
-legend(1, 8400, lwd=2, col=c("brown", "yellow", "lightgreen", "darkviolet"), legend=c("current knowledge", "number of broods known", "number of fledglings known", "survival known"), bty="n", cex=0.8)
+legend(1, quantile(popsizes[,1:10], prob=0.97), lwd=2, col=c("brown", "yellow", "lightgreen", "darkviolet"), legend=c("current knowledge", "number of broods known", "number of fledglings known", "survival known"), bty="n", cex=0.8)
 ```
 
 # Conclusions

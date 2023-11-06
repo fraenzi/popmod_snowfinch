@@ -70,7 +70,7 @@ We use a hierarchical meta-analysis to combine the information from the differen
 <p class="caption">(\#fig:metanrbrood)Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average over all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.</p>
 </div>
 
-The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.21 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
+The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.74 (Figure \@ref(fig:metanrbrood)).
 
 
 For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.22 to account for the fact that we know little about this demographic parameter. 
@@ -286,8 +286,7 @@ To assess what information increases precision of the predicted population traje
 
 
 
-Knowing exactly the average number of broods per pair (i.e. the proportions of non-breeders, single and double brooded pairs) and the number of fledglings per brood has similar effects on the precision of the predicted population trends (Figure \@ref(fig:vispopdiffknowl)). It reduces the uncertainty of the predicted population size in 10 years from a range of 140- 6430 to ranges of 123- 5625 if the average number of broods is exactly known and 108- 5476 if the average number of fledglings is exactly known. We get a remarkable increase in precision of the predicted population size if we know survival exactly 812- 2566.
-
+Knowing exactly the average number of broods per pair (i.e. the proportions of non-breeders, single and double brooded pairs) and the number of fledglings per brood has similar effects on the precision of the predicted population trends (Figure \@ref(fig:vispopdiffknowl)). It reduces the uncertainty of the predicted population size in 10 years from a range of 140 - 6430 females to ranges of 123 - 5625 females if the average number of broods is exactly known and 108 - 5476 females if the average number of fledglings is exactly known. We get a remarkable increase in precision of the predicted population size if we know survival exactly. Then the predicted number of females in 10 years is between 812- 2566.
 
 
 <div class="figure">
