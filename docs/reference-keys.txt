@@ -9,6 +9,7 @@ fig:survest
 fig:survivalfunctions
 fig:vispopcurrentknow
 fig:sensan
+fig:vispopdiffknowl
 preface
 introduction
 background
@@ -28,4 +29,5 @@ run-population-trajectory
 predicted-population-trajectories
 sensitivity-of-the-population-model-to-changes-in-different-parameters
 for-which-demographic-parameter-would-additional-data-be-most-valuable
+conclusions
 references

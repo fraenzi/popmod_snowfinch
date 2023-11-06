@@ -698,7 +698,10 @@ To simulate the population trajectory, we follow the structure presented in Figu
 
 ```{r populationfun, echo=FALSE}
 
-runpopmod <- function(nyears, dind, dyear){
+runpopmod <- function(nyears, dind, dyear,
+                      nrbr.b0, nrbr.b1, nrbr.b2,
+                      sprobwinter, sprobsummer, benvwi, benvsu,
+                      bsimnfl=bsimfledge){
   
 # to monitor
 popsize <- numeric(nyears)
@@ -710,23 +713,6 @@ asr <- numeric(nyears) # adult sex ratio
 popsize[1] <- sum(dind$sex=="F")
 asr[1] <- sum(dind$sex=="F")/sum(dind$sex=="M")
   
-# draw parameters that do not change over years
-
-#nrbroods
-nrbr.b0 <- numeric(2)
-nrbr.b0[1] <- sample(x1, 1) 
-nrbr.b0[2] <- sample(x2, 1)
-nrbr.b0 <- sort(nrbr.b0)
-nrbr.b1 <- rnorm(1, b1nbrood, sd=b1nbrood.se)
-nrbr.b2 <- rnorm(1, b2nbrood, sd=b2nbrood.se)
-  
-## survival
-i <- sample(1:nrow(Ssummervalues), 1)
-sprobwinter <- Swintervalues[i, ]
-sprobsummer <- Ssummervalues[i, ]
-benvsu <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
-benvwi <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
- 
 
 for(t in 2:nyears){
   
@@ -754,9 +740,9 @@ for(t in 2:nyears){
   
     # number of fledglings per breeding pair
       dfemales$doi_hatching_firstbrood <- 162
-      dfemales$nfledfirstbrood <- nrfledglings(bsim=bsimfledge, doi=dfemales$doi_hatching_firstbrood, nsim=1)
+      dfemales$nfledfirstbrood <- nrfledglings(bsim=bsimnfl, doi=dfemales$doi_hatching_firstbrood, nsim=1)
     
-      dfemales$nfledsecondbrood <- nrfledglings(bsim=bsimfledge, doi=dfemales$doi_hatching_firstbrood+28, nsim=1)
+      dfemales$nfledsecondbrood <- nrfledglings(bsim=bsimnfl, doi=dfemales$doi_hatching_firstbrood+28, nsim=1)
       dfemales$nfledfirstbrood[nomate] <- 0
       dfemales$nfledsecondbrood[nomate] <- 0
     
@@ -775,7 +761,7 @@ for(t in 2:nyears){
      dindjuv$x <- sqrt(0.6/2)*dindjuv$xmother + sqrt(0.6/2)*dindjuv$xfather + rnorm(nrow(dindjuv), 0, sd=sqrt(0.4)) # 60% heritability
      #cat("dindjuv created with nr juvs=", nrow(dindjuv), "\n")
 
-    
+
     
     # Population at the end of the breeding season
      dtemp <- data.frame(ringnr=c(dind$ringnr, dindjuv$ringnr),
@@ -816,14 +802,34 @@ return(list(popsize=popsize,
 ```
 
 
+
 ```{r runsim, message=FALSE, eval=FALSE, echo=FALSE}
 nsim <- 1000
 set.seed(20359)
 popsizes <- matrix(ncol=nyears, nrow=nsim)
 
 for(i in 1:nsim) {
-  popsizes[i,] <- runpopmod(nyears=nyears, dind=dindinit, 
-                                           dyear=dyear)$popsize
+# draw parameters that do not change over years
+
+#nrbroods
+nrbr.b0i <- numeric(2)
+nrbr.b0i[1] <- sample(x1, 1) 
+nrbr.b0i[2] <- sample(x2, 1)
+nrbr.b0i <- sort(nrbr.b0i)
+nrbr.b1i <- rnorm(1, b1nbrood, sd=b1nbrood.se)
+nrbr.b2i <- rnorm(1, b2nbrood, sd=b2nbrood.se)
+  
+## survival
+kk <- sample(1:nrow(Ssummervalues), 1)
+sprobwinteri <- Swintervalues[kk, ]
+sprobsummeri <- Ssummervalues[kk, ]
+benvsui <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
+benvwii <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
+ 
+popsizes[i,] <- runpopmod(nyears=nyears, dind=dindinit,
+                          dyear=dyear, nrbr.b0=nrbr.b0i, 
+                          nrbr.b1=nrbr.b1i, nrbr.b2=nrbr.b2i,
+                          sprobwinter=sprobwinteri, sprobsummer=sprobsummeri, benvsu=benvsui, benvwi=benvwii)$popsize
 }
 save(popsizes, file="modelfits/popsizes.rda")
 ```
@@ -871,14 +877,13 @@ lines(1:nyears, popsizes_mean, lwd=2, col="brown")
 
 ## Sensitivity of the population model to changes in different parameters
 
-To assess how sensitive the population model is to changes in single parameter values, we used a deterministic matrix model to calculate the population growth rate as the dominant eigenvalue of the Leslie matrix. We used the average values for the proportion of non-breeders, the proportion of second broods among the breeders, the number of fledglings for the first and second brood as well as juveniles and adult female survival, and we varied one of these parameter at a time.
+To assess how sensitive the population trend $\lambda$ is to changes of specific parameter values, we used a deterministic matrix model to calculate the population growth rate as the dominant eigenvalue of the Lefkovitch matrix [@Caswell.2001; @Pastor.2008]. We varied one of demographic parameter at a time, while we kept all other parameters at their average values used for the simulation above. We only considered the females for this sensitivity analysis, and we calculated fecundity, i.e. the average number of females produced by a female, as $(1-P(non-breeder))*(f_{1st brood} + P(2nd brood)*f_{2nd brood})/2$, where $P(non-breeder)$ is the proportion of non-breeders, $f_{1st brood}$ and $f_{2nd brood}$ the number of fledglings in the first and second brood and $P(2nd brood)$ the proportion of females doing a second brood among the breeding females. We assume a sex ratio of 1:1 among the fledglings as we also do in the stochastic population model (simulation above). 
 
 Even though the units with which the different demographic parameters are measured are not directly comparable, we may conclude that small changes in survival, particularly juvenile survival have a strong effect on population growth rate, whereas a change from two to five average number of nestlings only has a small effect on the population growth rate (Figure \@ref(fig:sensan)). The proportion of non-breeders has a larger effect on the population growth compared to the proportion of second broods. A change from 0 to 50% non-breeders has a similar effect as a change from 100% to 0% second broods. 
 
-From this result, we conclude that it is important to have a solid basis for understanding how survival is related to environmental variables to be able to predict population growth of Snowfinches in future.  
+From these results, we conclude that for a prediction of future population trends, it is most important to have a solid understanding of how survival is related to environmental variables. Further, it is more important to know the proportion of non-breeders and the proportion of second broods compared to the average number of fledglings. 
 
-
-```{r sensan, echo=FALSE, fig.cap="Sensitivity of the population growth rate to changes in single demographic parameters inferred from a deterministic matrix model. Only one parameter is changed at a time whereas all others were kept at the values used for the simulation. Note that the scale of the x-axes is chosen arbitrarily therefore, slpes of the lines are not directly comparable among the four panels."}
+```{r sensan, echo=FALSE, fig.cap="Sensitivity of the population growth rate to changes in single demographic parameters inferred from a deterministic matrix model. Only one parameter is changed at a time whereas all others were kept at the values used for the simulation. Note that the scales of the x-axes are chosen arbitrarily therefore, slopes of the lines are not directly comparable among the four panels. The grey horizontal line indicates the population trend for average parameter values."}
 # p0brood: proportion of non-breeders among females
 # my proportion of second broods among breeding females
 nrfledglings1stbr <- fixef(mod)[1] + 162*fixef(mod)[2]
@@ -952,8 +957,166 @@ mtext("Population growth rate (lambda)", side=2, outer=TRUE, line=1)
   
 ## For which demographic parameter would additional data be most valuable?
 
-todo
+To assess what information increases precision of the predicted population trajectories most, we re-run the simulations pretending that we exactly know a specific parameter value. We pretend to know a parameter exactly for each parameter at a time for 1) the proportions of non-breeders, single and double brooded pairs, 2) the number of fledglings per brood, and 3) survival .
 
+
+```{r runsimnrbroodknown, message=FALSE, eval=FALSE, echo=FALSE}
+nsim <- 1000
+set.seed(1047)
+popsizesnrbrknown <- matrix(ncol=nyears, nrow=nsim)
+
+for(i in 1:nsim) {
+# draw parameters that do not change over years
+
+#nrbroods
+nrbr.b0i <- numeric(2)
+nrbr.b0i[1] <- mean(x1)
+nrbr.b0i[2] <- mean(x2)
+nrbr.b0i <- sort(nrbr.b0i)
+nrbr.b1i <- b1nbrood
+nrbr.b2i <- b2nbrood
+  
+## survival
+kk <- sample(1:nrow(Ssummervalues), 1)
+sprobwinteri <- Swintervalues[kk, ]
+sprobsummeri <- Ssummervalues[kk, ]
+benvsui <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
+benvwii <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
+ 
+popsizesnrbrknown[i,] <- runpopmod(nyears=nyears, dind=dindinit,
+                          dyear=dyear, nrbr.b0=nrbr.b0i, 
+                          nrbr.b1=nrbr.b1i, nrbr.b2=nrbr.b2i,
+                          sprobwinter=sprobwinteri, sprobsummer=sprobsummeri, benvsu=benvsui, benvwi=benvwii)$popsize
+}
+save(popsizesnrbrknown, file="modelfits/popsizesnrbrknown.rda")
+```
+
+
+```{r runsimnfknown, message=FALSE, eval=FALSE, echo=FALSE}
+nsim <- 1000
+set.seed(2346)
+popsizesnfknown <- matrix(ncol=nyears, nrow=nsim)
+
+bsimfledgeconstant <- bsimfledge
+bsimfledgeconstant@fixef[,1] <- mean(bsimfledge@fixef[,1])
+bsimfledgeconstant@fixef[,2] <- mean(bsimfledge@fixef[,2])
+
+for(i in 1:nsim) {
+# draw parameters that do not change over years
+
+#nrbroods
+nrbr.b0i <- numeric(2)
+nrbr.b0i[1] <- sample(x1, 1) 
+nrbr.b0i[2] <- sample(x2, 1)
+nrbr.b0i <- sort(nrbr.b0i)
+nrbr.b1i <- rnorm(1, b1nbrood, sd=b1nbrood.se)
+nrbr.b2i <- rnorm(1, b2nbrood, sd=b2nbrood.se)
+  
+## survival
+kk <- sample(1:nrow(Ssummervalues), 1)
+sprobwinteri <- Swintervalues[kk, ]
+sprobsummeri <- Ssummervalues[kk, ]
+benvsui <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
+benvwii <- rnorm(4, c(-0.5/2,-0.5/2, -0.95/2, -0.28/2), sd=c(0.3/2, 0.3/2, 0.21/2, 0.42/2))
+ 
+
+popsizesnfknown[i,] <- runpopmod(nyears=nyears, dind=dindinit,
+                          dyear=dyear, nrbr.b0=nrbr.b0i, 
+                          nrbr.b1=nrbr.b1i, nrbr.b2=nrbr.b2i,
+                          sprobwinter=sprobwinteri, sprobsummer=sprobsummeri, benvsu=benvsui, benvwi=benvwii, bsimnfl=bsimfledgeconstant)$popsize
+}
+save(popsizesnfknown, file="modelfits/popsizesnfknown.rda")
+```
+
+
+
+```{r runsimSknown, message=FALSE, eval=FALSE, echo=FALSE}
+nsim <- 1000
+set.seed(256)
+popsizesSknown <- matrix(ncol=nyears, nrow=nsim)
+
+for(i in 1:nsim) {
+# draw parameters that do not change over years
+
+#nrbroods
+nrbr.b0i <- numeric(2)
+nrbr.b0i[1] <- sample(x1, 1) 
+nrbr.b0i[2] <- sample(x2, 1)
+nrbr.b0i <- sort(nrbr.b0i)
+nrbr.b1i <- rnorm(1, b1nbrood, sd=b1nbrood.se)
+nrbr.b2i <- rnorm(1, b2nbrood, sd=b2nbrood.se)
+  
+## survival
+sprobwinteri <- apply(Swintervalues, 2, mean)
+sprobsummeri <- apply(Ssummervalues, 2, mean)
+benvsui <- c(-0.5/2,-0.5/2, -0.95/2, -0.28/2)
+benvwii <- c(-0.5/2,-0.5/2, -0.95/2, -0.28/2)
+ 
+popsizesSknown[i,] <- runpopmod(nyears=nyears, dind=dindinit,
+                          dyear=dyear, nrbr.b0=nrbr.b0i, 
+                          nrbr.b1=nrbr.b1i, nrbr.b2=nrbr.b2i,
+                          sprobwinter=sprobwinteri, sprobsummer=sprobsummeri, benvsu=benvsui, benvwi=benvwii)$popsize
+}
+save(popsizesSknown, file="modelfits/popsizesSknown.rda")
+```
+
+
+```{r, echo=FALSE}
+load("modelfits/popsizesnrbrknown.rda")
+load("modelfits/popsizesnfknown.rda")
+load("modelfits/popsizesSknown.rda")
+
+popsizesnrbrknown_mean <- apply(popsizesnrbrknown, 2, median)
+popsizesnrbrknown_lwr <- apply(popsizesnrbrknown, 2, quantile, prob=0.05)
+popsizesnrbrknown_upr <- apply(popsizesnrbrknown, 2, quantile, prob=0.95)
+trend_nrbrknown <- apply(popsizesnrbrknown, 1, trendfun)
+
+popsizesnfknown_mean <- apply(popsizesnfknown, 2, median)
+popsizesnfknown_lwr <- apply(popsizesnfknown, 2, quantile, prob=0.05)
+popsizesnfknown_upr <- apply(popsizesnfknown, 2, quantile, prob=0.95)
+trend_nfknown <- apply(popsizesnfknown, 1, trendfun)
+
+
+popsizesSknown_mean <- apply(popsizesSknown, 2, median)
+popsizesSknown_lwr <- apply(popsizesSknown, 2, quantile, prob=0.05)
+popsizesSknown_upr <- apply(popsizesSknown, 2, quantile, prob=0.95)
+trend_Sknown <- apply(popsizesSknown, 1, trendfun)
+
+```
+
+Knowing exactly the average number of broods per pair (i.e. the proportions of non-breeders, single and double brooded pairs) and the number of fledglings per brood has similar effects on the precision of the predicted population trends (Figure \@ref(fig:vispopdiffknowl)). It reduces the uncertainty of the predicted population size in 10 years from a range of `r round(popsizes_lwr[10])`- `r round(popsizes_upr[10])` to ranges of `r round(popsizesnrbrknown_lwr[10])`- `r round(popsizesnrbrknown_upr[10])` if the average number of broods is exactly known and `r round(popsizesnfknown_lwr[10])`- `r round(popsizesnfknown_upr[10])` if the average number of fledglings is exactly known. We get a remarkable increase in precision of the predicted population size if we know survival exactly `r round(popsizesSknown_lwr[10])`- `r round(popsizesSknown_upr[10])`.
+
+
+
+```{r vispopdiffknowl, fig.cap="90% range of simulated population trajectories based on current knowledge on demographic parameters.", echo=FALSE}
+plot(1:nyears, seq(0,quantile(popsizes[,1:10], prob=0.97), length=nyears), type="n", xlab="Year", ylab="Population size (nr females)", las=1, xlim=c(1,10))
+polygon(c(1:nyears, rev(1:nyears)), 
+        c(popsizes_lwr, rev(popsizes_upr)), border=NA,
+        col=rgb(1,0.8,0.2,0.5))
+lines(1:nyears, popsizes_mean, lwd=2, col="brown")
+#for(i in 1:nsim) lines(1:nyears, popsizes[i,], col=rgb(0,0,0,0.3))
+
+polygon(c(1:nyears, rev(1:nyears)), 
+        c(popsizesnrbrknown_lwr, rev(popsizesnrbrknown_upr)), border=NA,
+        col=rgb(1,1,0.2,0.5))
+
+polygon(c(1:nyears, rev(1:nyears)), 
+        c(popsizesnfknown_lwr, rev(popsizesnfknown_upr)), border=NA,
+        col=rgb(0.5,1,0.5,0.2))
+
+polygon(c(1:nyears, rev(1:nyears)), 
+        c(popsizesSknown_lwr, rev(popsizesSknown_upr)), border=NA,
+        col=rgb(0.7,0.1,0.7,0.2))
+
+lines(1:nyears, popsizesnrbrknown_mean, lwd=2, col=rgb(1,1,0.2))
+lines(1:nyears, popsizesnfknown_mean, lwd=2, col=rgb(0.5,1,0.5))
+lines(1:nyears, popsizesSknown_mean, lwd=2, col=rgb(0.7,0.1,0.7))
+legend(1, 8400, lwd=2, col=c("brown", "yellow", "lightgreen", "darkviolet"), legend=c("current knowledge", "number of broods known", "number of fledglings known", "survival known"), bty="n", cex=0.8)
+```
+
+# Conclusions
+
+We conclude that knowing more about the average number of broods or the number of fledglings may somewhat increase precision of population predictions. However, increasing our knowledge on survival and how survival is related to environmental variable will be crucial for making robust predictions for the future of the Snowfinch populations.
 
 # References
 

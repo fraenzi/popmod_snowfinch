@@ -70,10 +70,10 @@ We use a hierarchical meta-analysis to combine the information from the differen
 <p class="caption">(\#fig:metanrbrood)Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average over all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.</p>
 </div>
 
-The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.74 (Figure \@ref(fig:metanrbrood)).
+The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.21 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
-For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.02 to 0.21 to account for the fact that we know little about this demographic parameter. 
+For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.22 to account for the fact that we know little about this demographic parameter. 
 
 We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions (of non-breeders, females with one and two broods) defined by the intercepts are used for average temperature values. 
 
@@ -227,6 +227,7 @@ To simulate the population trajectory, we follow the structure presented in Figu
 
 
 
+
 ## Predicted population trajectories
 
 
@@ -255,24 +256,48 @@ Before the population trajectory can be used as a prediction of the future of Sn
 
 ## Sensitivity of the population model to changes in different parameters
 
-To assess how sensitive the population model is to changes in single parameter values, we used a deterministic matrix model to calculate the population growth rate as the dominant eigenvalue of the Leslie matrix. We used the average values for the proportion of non-breeders, the proportion of second broods among the breeders, the number of fledglings for the first and second brood as well as juveniles and adult female survival, and we varied one of these parameter at a time.
+To assess how sensitive the population trend $\lambda$ is to changes of specific parameter values, we used a deterministic matrix model to calculate the population growth rate as the dominant eigenvalue of the Lefkovitch matrix [@Caswell.2001; @Pastor.2008]. We varied one of demographic parameter at a time, while we kept all other parameters at their average values used for the simulation above. We only considered the females for this sensitivity analysis, and we calculated fecundity, i.e. the average number of females produced by a female, as $(1-P(non-breeder))*(f_{1st brood} + P(2nd brood)*f_{2nd brood})/2$, where $P(non-breeder)$ is the proportion of non-breeders, $f_{1st brood}$ and $f_{2nd brood}$ the number of fledglings in the first and second brood and $P(2nd brood)$ the proportion of females doing a second brood among the breeding females. We assume a sex ratio of 1:1 among the fledglings as we also do in the stochastic population model (simulation above). 
 
 Even though the units with which the different demographic parameters are measured are not directly comparable, we may conclude that small changes in survival, particularly juvenile survival have a strong effect on population growth rate, whereas a change from two to five average number of nestlings only has a small effect on the population growth rate (Figure \@ref(fig:sensan)). The proportion of non-breeders has a larger effect on the population growth compared to the proportion of second broods. A change from 0 to 50% non-breeders has a similar effect as a change from 100% to 0% second broods. 
 
-From this result, we conclude that it is important to have a solid basis for understanding how survival is related to environmental variables to be able to predict population growth of Snowfinches in future.  
-
+From these results, we conclude that for a prediction of future population trends, it is most important to have a solid understanding of how survival is related to environmental variables. Further, it is more important to know the proportion of non-breeders and the proportion of second broods compared to the average number of fledglings. 
 
 <div class="figure">
-<img src="predictive_model_files/figure-html/sensan-1.png" alt="Sensitivity of the population growth rate to changes in single demographic parameters inferred from a deterministic matrix model. Only one parameter is changed at a time whereas all others were kept at the values used for the simulation. Note that the scale of the x-axes is chosen arbitrarily therefore, slpes of the lines are not directly comparable among the four panels." width="672" />
-<p class="caption">(\#fig:sensan)Sensitivity of the population growth rate to changes in single demographic parameters inferred from a deterministic matrix model. Only one parameter is changed at a time whereas all others were kept at the values used for the simulation. Note that the scale of the x-axes is chosen arbitrarily therefore, slpes of the lines are not directly comparable among the four panels.</p>
+<img src="predictive_model_files/figure-html/sensan-1.png" alt="Sensitivity of the population growth rate to changes in single demographic parameters inferred from a deterministic matrix model. Only one parameter is changed at a time whereas all others were kept at the values used for the simulation. Note that the scales of the x-axes are chosen arbitrarily therefore, slopes of the lines are not directly comparable among the four panels. The grey horizontal line indicates the population trend for average parameter values." width="672" />
+<p class="caption">(\#fig:sensan)Sensitivity of the population growth rate to changes in single demographic parameters inferred from a deterministic matrix model. Only one parameter is changed at a time whereas all others were kept at the values used for the simulation. Note that the scales of the x-axes are chosen arbitrarily therefore, slopes of the lines are not directly comparable among the four panels. The grey horizontal line indicates the population trend for average parameter values.</p>
 </div>
   
   
   
 ## For which demographic parameter would additional data be most valuable?
 
-todo
+To assess what information increases precision of the predicted population trajectories most, we re-run the simulations pretending that we exactly know a specific parameter value. We pretend to know a parameter exactly for each parameter at a time for 1) the proportions of non-breeders, single and double brooded pairs, 2) the number of fledglings per brood, and 3) survival .
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Knowing exactly the average number of broods per pair (i.e. the proportions of non-breeders, single and double brooded pairs) and the number of fledglings per brood has similar effects on the precision of the predicted population trends (Figure \@ref(fig:vispopdiffknowl)). It reduces the uncertainty of the predicted population size in 10 years from a range of 140- 6430 to ranges of 123- 5625 if the average number of broods is exactly known and 108- 5476 if the average number of fledglings is exactly known. We get a remarkable increase in precision of the predicted population size if we know survival exactly 812- 2566.
+
+
+
+<div class="figure">
+<img src="predictive_model_files/figure-html/vispopdiffknowl-1.png" alt="90% range of simulated population trajectories based on current knowledge on demographic parameters." width="672" />
+<p class="caption">(\#fig:vispopdiffknowl)90% range of simulated population trajectories based on current knowledge on demographic parameters.</p>
+</div>
+
+# Conclusions
+
+We conclude that knowing more about the average number of broods or the number of fledglings may somewhat increase precision of population predictions. However, increasing our knowledge on survival and how survival is related to environmental variable will be crucial for making robust predictions for the future of the Snowfinch populations.
 
 # References
 
