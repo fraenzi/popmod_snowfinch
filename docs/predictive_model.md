@@ -70,7 +70,7 @@ We use a hierarchical meta-analysis to combine the information from the differen
 <p class="caption">(\#fig:metanrbrood)Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average over all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.</p>
 </div>
 
-The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.74 (Figure \@ref(fig:metanrbrood)).
+The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.18 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
 For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.22 to account for the fact that we know little about this demographic parameter. 
@@ -293,6 +293,7 @@ Knowing exactly the average number of broods per pair (i.e. the proportions of n
 <img src="predictive_model_files/figure-html/vispopdiffknowl-1.png" alt="90% range of simulated population trajectories based on current knowledge on demographic parameters." width="672" />
 <p class="caption">(\#fig:vispopdiffknowl)90% range of simulated population trajectories based on current knowledge on demographic parameters.</p>
 </div>
+
 
 # Conclusions
 

@@ -1113,6 +1113,7 @@ lines(1:nyears, popsizesSknown_mean, lwd=2, col=rgb(0.7,0.1,0.7))
 legend(1, quantile(popsizes[,1:10], prob=0.97), lwd=2, col=c("brown", "yellow", "lightgreen", "darkviolet"), legend=c("current knowledge", "number of broods known", "number of fledglings known", "survival known"), bty="n", cex=0.8)
 ```
 
+
 # Conclusions
 
 We conclude that knowing more about the average number of broods or the number of fledglings may somewhat increase precision of population predictions. However, increasing our knowledge on survival and how survival is related to environmental variable will be crucial for making robust predictions for the future of the Snowfinch populations.

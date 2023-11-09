@@ -1,7 +1,7 @@
 --- 
 title: "A predictive population model for a high-elevation specialist bird species"
-author: "Fränzi Korner-Nievergelt, Sabine Hille"
-date: "2023-11-06"
+author: "Fränzi Korner-Nievergelt, Sabine Hille, Carole Niffenegger"
+date: "2023-11-09"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [PopModSnowfinch.bib]
@@ -24,7 +24,7 @@ This documentation is a summary of current knowledge and data on demographic par
 <p class="caption">(\#fig:unnamed-chunk-1)The White-winged Snowfinch *Montifringilla nivalis* is a high-elevation specialist breeding above the treeline where it also spends most of the rest of the year.</p>
 </div>
 
-The data, code and analyses presented here has been collected and created, respectively, in collaboration with Arnaud Barras, Matthew De Couto, Sebastian Dirren, Fabian Fopp, Marilene Fuhrmann, Anne-Cathérine Gutzwiller, Simon Hohl, Charel Klein, Carole Niffenegger, Elisenda Peris Morente, Claire Pernollet, Jaime Resano Mayor, Christian Schano, Alexander Schneider, Alessia Uboldi, Daniela Villaume and Irmi Zwahlen. 
+The data, code and analyses presented here has been collected and created, respectively, in collaboration with Arnaud Barras, Matthew De Couto, Sebastian Dirren, Fabian Fopp, Marilene Fuhrmann, Anne-Cathérine Gutzwiller, Simon Hohl, Charel Klein, Elisenda Peris Morente, Claire Pernollet, Jaime Resano Mayor, Christian Schano, Alexander Schneider, Alessia Uboldi, Daniela Villaume and Irmi Zwahlen. 
 
 
 
