@@ -317,7 +317,7 @@ dbroods <- dbroods[!is.na(dbroods$number.of.fledglings),]
 
 In our own data from Switzerland (2015-2023), we know the number of fledglings from `r nrow(dbroods)` broods. The average number of fledglings is almost 4 for broods early in the breeding season and it decreases to around 3 fledglings per brood for late broods (Fig. \@ref(fig:nrfeldglings)).
 
-```{r nrfeldglings, echo=FALSE, fig.cap="Number of fledglings in relation to the date when the first egg of the brood hatched. The regression line is from a linear mixed model with hatching date as predictor and year as random factor. The 95% CI is given as dotted lines."}
+```{r nrfeldglings, echo=FALSE, fig.cap="Number of fledglings in relation to the date when the first egg of the brood hatched. The regression line is from a linear mixed model with hatching date as predictor and year as random factor. The 95% CI is given as dotted lines. Dots are slightly jittered along the y-axis."}
 
 # date in relation to snowmelt
 dbroods$doi_hatching <- dayofyear(d=dbroods$day.hatching.first.egg, 
