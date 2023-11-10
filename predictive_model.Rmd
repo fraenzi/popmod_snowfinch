@@ -906,27 +906,27 @@ lambdafun <- function(propnb=p0brood,
   return(lambda)
 }
 
-propnonbreeders <- seq(0, 0.5, length=100)
+propnonbreeders <- seq(0, 0.2, length=100)
 propnonbreeders.lambda <- numeric(100)
 for(i in 1:100) propnonbreeders.lambda[i] <- lambdafun(propnb=propnonbreeders[i])
 
-propsecondbroods <- seq(0, 1, length=100)
+propsecondbroods <- seq(0.2, 1, length=100)
 propsecondbroods.lambda <- numeric(100)
 for(i in 1:100) propsecondbroods.lambda[i] <- lambdafun(propsecbrood=propsecondbroods[i])
 
-nrfl1st <- seq(2,5, length=100)
+nrfl1st <- seq(2.5,4.5, length=100)
 nrfl1st.lambda <- numeric(100)
 for(i in 1:100) nrfl1st.lambda[i] <- lambdafun(nrfl1=nrfl1st[i])
 
-nrfl2nd <- seq(2,5, length=100)
+nrfl2nd <- seq(2.5,4.5, length=100)
 nrfl2nd.lambda <- numeric(100)
 for(i in 1:100) nrfl2nd.lambda[i] <- lambdafun(nrfl2=nrfl2nd[i])
 
-juvS <- seq(0.05,0.95, length=100)
+juvS <- seq(0.15,0.35, length=100)
 juvS.lambda <- numeric(100)
 for(i in 1:100) juvS.lambda[i] <- lambdafun(SjF=juvS[i])
 
-adS <- seq(0.05,0.95, length=100)
+adS <- seq(0.4,0.65, length=100)
 adS.lambda <- numeric(100)
 for(i in 1:100) adS.lambda[i] <- lambdafun(SF=adS[i])
 
@@ -943,12 +943,12 @@ plot(nrfl1st, nrfl1st.lambda, ylim=yminmax, type="l", lwd=2,
      xlab="Number of fledglings")
 abline(h=mean(trend_currentknowledge), col="grey", las=1)
 lines(nrfl2nd, nrfl2nd.lambda, lwd=2, lty=3)
-legend(2, 1.4, lwd=2, lty=c(1,3), legend=c("1st brood", "2nd brood"), bty="n", cex=0.8)
+legend(2.5, 1.4, lwd=2, lty=c(1,3), legend=c("1st brood", "2nd brood"), bty="n", cex=0.8)
 
-plot(juvS, juvS.lambda, ylim=yminmax, type="l", lwd=2, lty=3, las=1, xlab="Female survival")
+plot(juvS, juvS.lambda, ylim=yminmax, type="l", lwd=2, lty=3, las=1, xlab="Female survival", xlim=c(0.15, 0.65))
 abline(h=mean(trend_currentknowledge), col="grey")
 lines(adS, adS.lambda, lwd=2)
-legend(0.4, 0.8, lwd=2, lty=c(3,1), legend=c("first year", "adult"), bty="n", cex=0.8)
+legend(0.3, 0.8, lwd=2, lty=c(3,1), legend=c("first year", "adult"), bty="n", cex=0.8)
 mtext("Population growth rate (lambda)", side=2, outer=TRUE, line=1)
 
 ```
@@ -1091,26 +1091,30 @@ Knowing exactly the average number of broods per pair (i.e. the proportions of n
 plot(1:nyears, seq(0,quantile(popsizes[,1:10], prob=0.97), length=nyears), type="n", xlab="Year", ylab="Population size (nr females)", las=1, xlim=c(1,10))
 polygon(c(1:nyears, rev(1:nyears)), 
         c(popsizes_lwr, rev(popsizes_upr)), border=NA,
-        col=rgb(1,0.8,0.2,0.5))
-lines(1:nyears, popsizes_mean, lwd=2, col="brown")
-#for(i in 1:nsim) lines(1:nyears, popsizes[i,], col=rgb(0,0,0,0.3))
+        col="lightblue")
 
 polygon(c(1:nyears, rev(1:nyears)), 
         c(popsizesnrbrknown_lwr, rev(popsizesnrbrknown_upr)), border=NA,
-        col=rgb(1,1,0.2,0.5))
+        col="lightblue3")
 
 polygon(c(1:nyears, rev(1:nyears)), 
         c(popsizesnfknown_lwr, rev(popsizesnfknown_upr)), border=NA,
-        col=rgb(0.5,1,0.5,0.2))
+        col="lightblue4")
 
 polygon(c(1:nyears, rev(1:nyears)), 
         c(popsizesSknown_lwr, rev(popsizesSknown_upr)), border=NA,
-        col=rgb(0.7,0.1,0.7,0.2))
+        col="blue")
 
-lines(1:nyears, popsizesnrbrknown_mean, lwd=2, col=rgb(1,1,0.2))
-lines(1:nyears, popsizesnfknown_mean, lwd=2, col=rgb(0.5,1,0.5))
-lines(1:nyears, popsizesSknown_mean, lwd=2, col=rgb(0.7,0.1,0.7))
-legend(1, quantile(popsizes[,1:10], prob=0.97), lwd=2, col=c("brown", "yellow", "lightgreen", "darkviolet"), legend=c("current knowledge", "number of broods known", "number of fledglings known", "survival known"), bty="n", cex=0.8)
+lines(1:nyears, popsizesnrbrknown_mean, lwd=2, col="lightblue3")
+lines(1:nyears, popsizesnfknown_mean, lwd=2, col="lightblue4")
+lines(1:nyears, popsizesSknown_mean, lwd=1, col="white")
+
+lines(1:nyears, popsizes_mean, lwd=2, col="lightblue")
+
+
+legend(1, quantile(popsizes[,1:10], prob=0.97), lwd=2, col=c("lightblue", "lightblue3", "lightblue4", "blue"), legend=c("current knowledge", "number of broods known", "number of fledglings known", "survival known"), bty="n", cex=0.8)
+
+
 ```
 
 
