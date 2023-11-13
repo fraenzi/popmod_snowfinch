@@ -70,7 +70,7 @@ We use a hierarchical meta-analysis to combine the information from the differen
 <p class="caption">(\#fig:metanrbrood)Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average over all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.</p>
 </div>
 
-The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
+The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.21 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
 For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.02 to 0.22 to account for the fact that we know little about this demographic parameter. 
@@ -99,8 +99,8 @@ There is only one study from the Pyrenees that report the number of fledglings [
 In our own data from Switzerland (2015-2023), we know the number of fledglings from 83 broods. The average number of fledglings is almost 4 for broods early in the breeding season and it decreases to around 3 fledglings per brood for late broods (Fig. \@ref(fig:nrfeldglings)).
 
 <div class="figure">
-<img src="predictive_model_files/figure-html/nrfeldglings-1.png" alt="Number of fledglings in relation to the date when the first egg of the brood hatched. The regression line is from a linear mixed model with hatching date as predictor and year as random factor. The 95% CI is given as dotted lines." width="672" />
-<p class="caption">(\#fig:nrfeldglings)Number of fledglings in relation to the date when the first egg of the brood hatched. The regression line is from a linear mixed model with hatching date as predictor and year as random factor. The 95% CI is given as dotted lines.</p>
+<img src="predictive_model_files/figure-html/nrfeldglings-1.png" alt="Number of fledglings in relation to the date when the first egg of the brood hatched. The regression line is from a linear mixed model with hatching date as predictor and year as random factor. The 95% CI is given as dotted lines. Dots are slightly jittered along the y-axis." width="672" />
+<p class="caption">(\#fig:nrfeldglings)Number of fledglings in relation to the date when the first egg of the brood hatched. The regression line is from a linear mixed model with hatching date as predictor and year as random factor. The 95% CI is given as dotted lines. Dots are slightly jittered along the y-axis.</p>
 </div>
 
 For simulating the population trajectory, we draw for every brood the number of fledglings from a normal distribution around the mean number of fledglings that is defined by the hatching date and a standard deviation of 1.15. The standard deviation corresponds to the residual standard deviation of the regression in Figure \@ref(fig:nrfeldglings). We, for now, ignore the among-year variance because it was small in our data (SD among years: 0.28). We might allow for among-year variance once we have better data on how environmental variables influence the number of fledglings. Finally, the drawn values of the number of fledglings were rounded to the next integer in the simulations.
