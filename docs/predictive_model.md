@@ -40,9 +40,13 @@ To parameterise the model below we present the data available so far. We also co
 ## Environmental data
 
 Empirical evidence of correlations between Snowfinch population dynamics and environmental variables is provided in the following studies:  
+
 - Average ambient temperature during the breeding season was negatively correlated with apparent survival of female Snowfinches in the Apennines between 2003 and 2017 [@Strinella.2020].  
-- Average ambient temperature during the breeding season was strongly negatively correlated with female apparent survival and moderately so in males in the Austrian Alps between 1964 and 2004 (Aichhorn in prep.).
+
+- Average ambient temperature during the breeding season was strongly negatively correlated with female apparent survival and moderately so in males in the Austrian Alps between 1964 and 2004 (Aichhorn in prep.).  
+
 - The timing of the broods was correlated with precipitation in early spring but did not follow the long-term advance of the snow melt in citizen science data from Switzerland from 1998 to 2019 [@Schano.2021].  
+
 - Nestling growth rate was higher during snow melt compared to after snow melt in 87 nestlings of 24 broods in the Swiss Alps (data from 2016 to 2020) [@Ijjas.2022].  
 - Temperature early in the breeding season correlated positively with the length of the breeding season (and thus, number of broods possible) and average temperature late in the breeding season correlated negatively with the length of the breeding season as inferred from citizen science of Switzerland between 1999 and 2021 (Niffenegger in prep.). 
 
@@ -70,10 +74,10 @@ We use a hierarchical meta-analysis to combine the information from the differen
 <p class="caption">(\#fig:metanrbrood)Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average over all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.</p>
 </div>
 
-The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.21 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
+The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.74 (Figure \@ref(fig:metanrbrood)).
 
 
-For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.02 to 0.22 to account for the fact that we know little about this demographic parameter. 
+For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.2 to account for the fact that we know little about this demographic parameter. 
 
 We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions (of non-breeders, females with one and two broods) defined by the intercepts are used for average temperature values. 
 
@@ -183,7 +187,7 @@ Table: Half-year apparent survival estimates (preliminary results). Note, winter
 |adult| female |  0.63 (0.5 - 0.79) |0.71 (0.57 - 0.88) |
 |adult | male | 0.75 (0.68 - 0.83)  | 0.72 (0.65 - 0.79) |
 
-The probability that a plastic ring is lost within three months is 0.027 (0.02 - 0.037), which means that one year after having got a plastic ring, 0.1% of the individuals have lost their ring. 
+The probability that a plastic ring is lost within three months is 0.027 (0.02 - 0.037), which means that one year after having got a plastic ring, 10.47% of the individuals have lost their ring. 
 
 #### Survival function of the predictive population model
 

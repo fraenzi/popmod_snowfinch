@@ -44,9 +44,13 @@ library(R2jags)
 ## Environmental data
 
 Empirical evidence of correlations between Snowfinch population dynamics and environmental variables is provided in the following studies:  
+
 - Average ambient temperature during the breeding season was negatively correlated with apparent survival of female Snowfinches in the Apennines between 2003 and 2017 [@Strinella.2020].  
-- Average ambient temperature during the breeding season was strongly negatively correlated with female apparent survival and moderately so in males in the Austrian Alps between 1964 and 2004 (Aichhorn in prep.).
+
+- Average ambient temperature during the breeding season was strongly negatively correlated with female apparent survival and moderately so in males in the Austrian Alps between 1964 and 2004 (Aichhorn in prep.).  
+
 - The timing of the broods was correlated with precipitation in early spring but did not follow the long-term advance of the snow melt in citizen science data from Switzerland from 1998 to 2019 [@Schano.2021].  
+
 - Nestling growth rate was higher during snow melt compared to after snow melt in 87 nestlings of 24 broods in the Swiss Alps (data from 2016 to 2020) [@Ijjas.2022].  
 - Temperature early in the breeding season correlated positively with the length of the breeding season (and thus, number of broods possible) and average temperature late in the breeding season correlated negatively with the length of the breeding season as inferred from citizen science of Switzerland between 1999 and 2021 (Niffenegger in prep.). 
 
@@ -495,7 +499,7 @@ Table: Half-year apparent survival estimates (preliminary results). Note, winter
 |adult| female |  `r round(median(Sadsummer[,1]),2)` (`r round(quantile(Sadsummer[,1], prob=0.025),2)` - `r round(quantile(Sadsummer[,1], prob=0.975),2)`) |`r round(median(Sadwinter[,1]),2)` (`r round(quantile(Sadwinter[,1], prob=0.025),2)` - `r round(quantile(Sadwinter[,1], prob=0.975),2)`) |
 |adult | male | `r round(median(Sadsummer[,2]),2)` (`r round(quantile(Sadsummer[,2], prob=0.025),2)` - `r round(quantile(Sadsummer[,2], prob=0.975),2)`)  | `r round(median(Sadwinter[,2]),2)` (`r round(quantile(Sadwinter[,2], prob=0.025),2)` - `r round(quantile(Sadwinter[,2], prob=0.975),2)`) |
 
-The probability that a plastic ring is lost within three months is `r round(mod1$mean$m, 3)` (`r round(quantile(mod1$sims.list$m, probs=0.025),3)` - `r round(quantile(mod1$sims.list$m, probs=0.975),3)`), which means that one year after having got a plastic ring, `r round(1-(1-mod1$mean$m)^4,2)`% of the individuals have lost their ring. 
+The probability that a plastic ring is lost within three months is `r round(mod1$mean$m, 3)` (`r round(quantile(mod1$sims.list$m, probs=0.025),3)` - `r round(quantile(mod1$sims.list$m, probs=0.975),3)`), which means that one year after having got a plastic ring, `r round((1-(1-mod1$mean$m)^4)*100,2)`% of the individuals have lost their ring. 
 
 #### Survival function of the predictive population model
 
