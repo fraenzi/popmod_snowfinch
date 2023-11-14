@@ -44,19 +44,20 @@ library(R2jags)
 
 ## Environmental data
 
-Empirical evidence of correlations between Snowfinch population dynamics and environmental variables is provided in the following studies:  
+Correlations between Snowfinch population dynamics and environmental variables are supported by empirical evidences from the following studies:  
 
-- Average ambient temperature during the breeding season was negatively correlated with apparent survival of female Snowfinches in the Apennines between 2003 and 2017 [@Strinella.2020].  
+- A negative correlation was found between the average ambient temperature during the breeding season and apparent survival of female Snowfinches in the Apennines between 2003 and 2017 [@Strinella.2020].  
 
-- Average ambient temperature during the breeding season was strongly negatively correlated with female apparent survival and moderately so in males in the Austrian Alps between 1964 and 2004 (Aichhorn in prep.).  
+- In the Austrian Alps between 1964 and 2004, the average ambient temperature during the breeding season showed a strong negative correlation with female apparent survival and moderate negative correlation in males  (Aichhorn in prep.).  
 
-- The timing of the broods was correlated with precipitation in early spring but did not follow the long-term advance of the snow melt in citizen science data from Switzerland from 1998 to 2019 [@Schano.2021].  
+- The timing of the broods was correlated with early spring precipitation but did not follow the long-term advance of the snow melt in citizen science data from Switzerland from 1998 to 2019 [@Schano.2021].  
 
 - Nestling growth rate was higher during snow melt compared to after snow melt in 87 nestlings of 24 broods in the Swiss Alps (data from 2016 to 2020) [@Ijjas.2022].  
-- Temperature early in the breeding season correlated positively with the length of the breeding season (and thus, number of broods possible) and average temperature late in the breeding season correlated negatively with the length of the breeding season as inferred from citizen science of Switzerland between 1999 and 2021 (Niffenegger in prep.). 
+
+- Temperature early in the breeding season correlated positively with the length of the breeding season (and consequently, the number of broods possible), while average temperature late in the breeding season correlated negatively with the length of the breeding season as inferred from citizen science data in Switzerland between 1999 and 2021 (Niffenegger in prep.). 
 
 
-In the current version of the population model, we relate the number of broods per female and year, and survival (first year and adult female and male survival) to temperature during the breeding season. We use average temperature values for the Swiss Alps early and late in the breeding season as predicted by the climate scenario RCP26 [@ch2018_project_team_ch2018_2018]. We use these data to have a somewhat realistic among-year variance in temperature values for simulating the population trajectories.  
+In the current version of the population model, we relate the number of broods per female and year, and survival (first-year and adult female and male survival) to temperature during the breeding season. We use average temperature values for the Swiss Alps early and late in the breeding season as predicted by the climate scenario RCP26 [@ch2018_project_team_ch2018_2018]. We use these data to have a somewhat realistic among-year variance in temperature values for simulating the population trajectories.  
 
 
 ```{r, fig.cap="", echo=FALSE, eval=TRUE, include=FALSE}
@@ -79,14 +80,14 @@ nsec <- apply(nbroodspyear, 2, function(x) sum(x==2))
 n <- apply(nbroodspyear, 2, function(x) sum(x>0))
 ```
 
-The number of broods a female raises in one year is only known for a few study sites. In the Apennines, 26 out of 26 females did a second brood [@strinella_biologia_2011]. In the Pyrenees, @grange_biologie_2008 observed that 50% of the breeding pairs did a second brood. Little is known for the Alps. @Aichhorn.1966 found in the Austrian Alps that 9 of 11 breeding pairs did a second brood. In our study in the Swiss Alps, we could detect only `r sum(nsec)` females doing a second brood out of `r sum(n)` females that were reported to breed. However, we may have missed a large part of the second broods because females may leave the study area for the second brood. 
+The number of broods a female raises in one year is only known for a few study sites. In the Apennines, all 26 females observed did a second brood [@strinella_biologia_2011]. In the Pyrenees, @grange_biologie_2008 noted that 50% of the breeding pairs undertook a second brood. Little is known for the Alps. @Aichhorn.1966 reported that 9 of 11 breeding pairs did a second brood in the Austrian Alps. In our study in the Swiss Alps, we found that only `r sum(nsec)` out of `r sum(n)` females reported to breed did a second brood. However, we might have missed a large part of the second broods because females may leave the study area for the second brood. 
 The proportion of non-breeding females is not known at all.
 
-To more precisely assess the proportion of females that either skip breeding, do one or two broods, it would be necessary to track females over the course of the whole breeding season. This has not been achieved yet. 
+To more precisely evaluate the proportion of females skipping breeding, doing one or two broods, tracking of females throughout the entire breeding season would be needed. This has not been accomplished yet. 
 
-We use a hierarchical meta-analysis to combine the information from the different studies including our own. To do so, we use a binomial mixed model for the number of females that were reported to do a second brood. The study was used as a random factor to account for among-study variance. 
+We employ a hierarchical meta-analysis to combine the information from the different studies, including our own. To this end, we use a binomial mixed model for the number of females reported to do a second brood, with the study as a random factor to account for among-study variance. 
 
-```{r metanrbrood, fig.cap="Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average over all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.", echo=FALSE}
+```{r metanrbrood, fig.cap="Proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) represents the average across all studies, accounting for different sample sizes. The sample sizes, i.e. number of females doing at least one brood, are given for each study.", echo=FALSE}
 litdat <- read.table("data/demography_lit.txt", header=TRUE, sep=";")
 litdat$FirstAuthor[litdat$FirstAuthor=="Grang\xe9"] <- "Grange"
 index <- litdat$parameter_name=="prop_second_brood"
@@ -118,8 +119,8 @@ par(mar=c(5,8,1,1))
 plot(y, 1:length(y), xlim=c(0,1), ylim=c(-2,length(y)+1), yaxt="n", xlab="Proportion second broods", ylab=NA, pch=16)
 segments(lwr, 1:length(y), upr, 1:length(y))
 axis(2, at=1:length(y), labels=studyID, las=1)
-segments(my.lwr, -0.5, my.upr, -0.5, lwd=2, col="grey")
-points(my, -0.5, pch=24, col="grey", bg="white")
+segments(my.lwr, -0.5, my.upr, -0.5, lwd=4, col="grey")
+points(my, -0.5, pch=24, col="grey", bg="white", cex=2)
 axis(2, at=-0.5, labels="mean",
      las=1)
 text(rep(0, length(y)), 1:length(y), labels=apply(yb, 1, sum))
@@ -132,12 +133,12 @@ p0brood.r <- rbeta(nsim, shapeparameter(p0brood, se=p0brood.se)$a, shapeparamete
 
 ```
 
-The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from `r round(my.lwr,2)` to  `r round(my.upr,2)`, and the mean is `r round(my,2)` (Figure \@ref(fig:metanrbrood)).
+The resulting average proportion of second broods exhibits a high uncertainty. Its 95% uncertainty interval ranges from `r round(my.lwr,2)` to  `r round(my.upr,2)`, and the mean is `r round(my,2)` (Figure \@ref(fig:metanrbrood)).
 
 
-For the population model, we use a proportion of non-breeding females of `r round(p0brood,2)` in average and an uncertainty interval of `r round(quantile(p0brood.r, probs=0.025),2)` to `r round(quantile(p0brood.r, probs=0.975),2)` to account for the fact that we know little about this demographic parameter. 
+For the population model, we adapted an average proportion of non-breeding females of `r round(p0brood,2)` along with an uncertainty interval of `r round(quantile(p0brood.r, probs=0.025),2)` to `r round(quantile(p0brood.r, probs=0.975),2)`. The large uncertainty interval accounts for the fact that we know little about this demographic parameter. 
 
-We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions (of non-breeders, females with one and two broods) defined by the intercepts are used for average temperature values. 
+Using Monte Carlo simulations to propagate the uncertainty, we derived two intercepts for a multinomial model based on the proportion of non-breeders and the proportion of females with second broods among the breeding females. The proportions (of non-breeders, females with one and two broods) defined by the intercepts were used for average temperature values in our model. 
 
 ```{r nrbroods_intercepts, echo=FALSE}
 #  ps: an easier way would be to keep the proportion of non-breeders and the proportion of second broods among the breeders separate as two binomial models (i.e. to not combine to a multinomial model). But for now, we do a multinomial model (which turned out to be a little bit complicated, apologize for that)
