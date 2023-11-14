@@ -3,39 +3,37 @@
 
 ## Background
 
-Global warming is changing the environment for wildlife world-wide but over proportionally in mountain areas [@Pepin.2015; @adler_cross-chapter_2022]. Exact in Alpine environments we still find specialists and endemics. To predict trends in Alpine biodiversity and for assessing the consequences of human activities for nature, the understanding of how species' population dynamics react to environmental changes is crucial. But in many cases the study of demography in species with their distribution restricted to mountain areas appears difficult because they often are rare and live in remote and inaccessible places. Therefore, such species are understudied. Any empirical data, even of low sample size, and studies on how demographic parameters and species behavior are influenced by the environment contribute to improve the understanding of how mountain specialists react to changes in the environment.  
-The aim of this online material is to collate and provide demographic data together with a population model of a high-elevation specialist bird species, the White-winged Snowfinch *Montifringilla nivalis nivalis*, hereafter Snowfinch (Figure \@ref(fig:sffoto)). 
+Global warming is changing wildlife's environments world-wide, with a disproportionate impact in mountain regions [@Pepin.2015; @adler_cross-chapter_2022]. Especially in the Alpine environments, we find species that are specialists and endemics. For predicting Alpine biodiversity trends and assessing the consequences of human activities for nature, the understanding of how species' population dynamics respond to environmental changes is crucial. However, studying demography of species that exclusively live in mountainous regions can be challenging due to their rarity and residence in remote and inaccessible locations. Therefore, these species remain understudied. Any empirical data or study on the influence of environmental factors on demographic parameters and species behaviour, even  with limited sample size, can enhance our understanding of how mountain specialists react to environmental changes.  
+The aim of this online material is to compile and provide demographic data together with a population model of a high-elevation specialist bird species, the White-winged Snowfinch *Montifringilla nivalis nivalis*, hereafter Snowfinch (Figure \@ref(fig:sffoto)). 
 
 <div class="figure">
-<img src="figures/c46.jpg" alt="We use alpha-numeric plastic rings that can be read by a scope to follow individuals over their life and to study their behaviour." width="707" />
-<p class="caption">(\#fig:sffoto)We use alpha-numeric plastic rings that can be read by a scope to follow individuals over their life and to study their behaviour.</p>
+<img src="figures/c46.jpg" alt="We use alpha-numeric plastic rings that can be scanned by a scope to track individuals throughout their lifespan and observe their behaviour." width="707" />
+<p class="caption">(\#fig:sffoto)We use alpha-numeric plastic rings that can be scanned by a scope to track individuals throughout their lifespan and observe their behaviour.</p>
 </div>
 
-The presentation of the material serves several purposes: 1) The model summarises the current knowledge on population dynamics of the Snowfinch, 2) The model can be used to assess sensitivity of the population dynamics to changes in demographic parameters. 3) The model further serves to identify knowledge gaps and lack of data, 4) The model is prepared to allow for selective mating and inheritance of individual (morphological or behavioral) traits with the aim that in future it may serve to predict how traits change in the population. To estimate microevolutionary change in specific traits, however, trait heritability values would be required to do so which are just not yet available. 5) The model allows simulation of future population trajectories to predict population trends under different scenario settings such as global warming scenario, or specific conservation managements. 
+The presentation of the material serves several purposes: 1) The model summarises the current knowledge on population dynamics of the Snowfinch, 2) The model can be used to assess the sensitivity of population dynamics to changes in demographic parameters. 3) The model aids in identifying knowledge gaps and areas lacking data, 4) The model is designed to facilitate selective mating and the inheritance of individual (morphological or behavioural) traits. In the future it may enable to predict how traits change in the population. Microevolutionary change in specific traits, however, can only be addressed if trait heritability values are available, which is currently not the case for the Snowfinch. 5) The model enables the simulation of future population trajectories, allowing predictions of population trends under various scenario such as global warming scenarios or specific conservation management strategies. 
 
-The data provided to download results from our own studies. We appreciate if you contact the authors of this material first, in case you would like to use the data for your own studies. 
+The data provided here originates from our ongoing study. We appreciate if you contact the authors, in case you would like to use the data for your own studies.
 
-We do not need to be contacted, if you download the code of the population model. Other people may have developed much nicer and more efficient model codes. But we are happy if you send us suggestions for improving our code. 
+If you only download the code of the population model, there is no need to contact us. Other people may have developed much nicer and more efficient model codes. But we are happy if you send us suggestions for improving our code.
+
 
 ## Model structure
 
-The model consists of a pre-winter (November) and a pre-breeding (May) census of first year and adult individuals of both sexes (Figure \@ref(fig:modelstr)). The two population census within one year allows for separately modeling environmental influences on the survival from May to November ("summer survival") and from November to May ("winter survival"). 
-The model also includes a pair building process. Currently, only random mating with new pairs in each year is implemented. The parameter $p$ is a vector containing three probabilities, to skip breeding, and to do one or two broods. The three probabilities sum to one. The parameter $f$ is the number of fledglings produced by a pair. We assume a sex ratio of 1:1 among fledglings.  
+The model consists of a pre-winter (November) and a pre-breeding (May) census of first-year and adult individuals of both sexes (Figure \@ref(fig:modelstr)). Keeping the populations in May and November separately allows for separate modelling of environmental influences on survival from May to November ("summer survival") and from November to May ("winter survival"). 
+The model also incorporates a pair-building process. Currently, only random mating with new pairs formed each year is implemented. The parameter $p$ is a vector containing three probabilities, to skip breeding, and to do one or two broods. The three probabilities sum up to one. The parameter $f$ is the number of fledglings produced by a pair. We assume a sex ratio of 1:1 among fledglings.  
 
 <div class="figure">
-<img src="figures/Overview_model.jpg" alt="Structure of the population model. The model contains a pair building process, e.g. random pairing. It further includes demographic parameters that may depend on environmental variables: p = probability vector for doing 0, 1 or 2 broods; f = fecundity, i.e., the number of fledglings produced by one female in one breeding season; summer and winter survival for adults and first year birds of both sexes." width="640" />
-<p class="caption">(\#fig:modelstr)Structure of the population model. The model contains a pair building process, e.g. random pairing. It further includes demographic parameters that may depend on environmental variables: p = probability vector for doing 0, 1 or 2 broods; f = fecundity, i.e., the number of fledglings produced by one female in one breeding season; summer and winter survival for adults and first year birds of both sexes.</p>
+<img src="figures/Overview_model.jpg" alt="Structure of the population model. The model incorporates a pair-building process. Additionally, it includes demographic parameters that may depend on environmental variables: p = probability vector for doing 0, 1 or 2 broods; f = fecundity, i.e., the number of fledglings produced by one female in a single breeding season; and summer and winter survival rates for adults and first year birds of both sexes." width="640" />
+<p class="caption">(\#fig:modelstr)Structure of the population model. The model incorporates a pair-building process. Additionally, it includes demographic parameters that may depend on environmental variables: p = probability vector for doing 0, 1 or 2 broods; f = fecundity, i.e., the number of fledglings produced by one female in a single breeding season; and summer and winter survival rates for adults and first year birds of both sexes.</p>
 </div>
 
-To parameterise the model below we present the data available so far. We also collate results from earlier studies on the relationships of demographic parameters and environmental or individual specific variables. 
+To parameterise the model, we present the currently available data below. Furthermore, we compile results from earlier studies on the relationships of demographic parameters and environmental or individual-specific variables.
 
 
 # Data
 
 
-```
-## Warning: Paket 'basemaps' wurde unter R Version 4.2.3 erstellt
-```
 
 ## Environmental data
 
@@ -74,10 +72,10 @@ We use a hierarchical meta-analysis to combine the information from the differen
 <p class="caption">(\#fig:metanrbrood)Reported proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) is the average over all studies, taking different sample sizes into account. The sample sizes, i.e. number of females doing at least one brood, are given for each study.</p>
 </div>
 
-The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.74 (Figure \@ref(fig:metanrbrood)).
+The resulting average proportion of second broods has a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
-For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.2 to account for the fact that we know little about this demographic parameter. 
+For the population model, we use a proportion of non-breeding females of 0.1 in average and an uncertainty interval of 0.03 to 0.22 to account for the fact that we know little about this demographic parameter. 
 
 We derive the two intercepts of a multinomial model from the proportion of non-breeders and the proportion of females with second broods among the breeding females using Monte Carlo simulations to propagate the uncertainty. The proportions (of non-breeders, females with one and two broods) defined by the intercepts are used for average temperature values. 
 
