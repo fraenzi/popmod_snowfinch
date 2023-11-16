@@ -384,7 +384,9 @@ knitr::include_graphics('figures/CH_Snowfinch.jpg')
 
 ```
 
-We used alpha-numeric plastic rings to enable resightings of birds. Likely due to the cold in winter, the plastic rings break and get lost after some months. Birds without plastic rings only can get recaptured but no longer resighted. To account for that loss of plastic rings, we usesd a multi-state/multi-event model [@Arnason.1972, @pradel_multievent_2005] adapted so that it accounts for loss of plastic rings [@laake_hidden_2014]. We divided the study period into 3-months intervals and collated the capture-recapture/resightings into an observation history matrix with a row per individual and plastic ring respectively. When an individual that has lost its plastic ring got a new plastic ring on a recapture, we defined that recapture to be a new release, i.e. we added a new observation history to the data matrix. Following @laake_hidden_2014, we defined that the birds can be in 3 different states: 1=alive with metallic and plastic ring, 2=alive with metallic ring only, 3= dead. Transitions between states $T$ were defined by apparent survival probability $\phi$ and the probability to lose a plastic ring $m$.  
+We used alpha-numeric plastic rings in addition to the official aluminium ring of the Swiss ringing scheme to enable resightings of birds. However, due to the cold winter conditions, these plastic rings often break and become lost after some months. BBirds without plastic rings can only be recaptured but no longer be resighted. To account for the loss of plastic rings, we used a multi-state model designed to incorporate loss of marks described by @laake_hidden_2014 which we adapted for the Snowfinch data. In contrast to the Black bear *Ursus americanus* data analysed by @laake_hidden_2014, all our individuals had a permanent mark, i.e., the aluminium ring, not just a sub-sample of individuals, and in our data, recapture/resighting probability depended on whether the bird has a plastic ring or not because only the code on the plastic rings but not the one on the aluminium ring can be identified with a scope. 
+
+We divided the study period into 3-months intervals and we organised the capture-recapture/resightings into a history matrix with each row representing an individual. When an individual that has lost its plastic ring was recaptured and given a new plastic ring, we defined that recapture to be a new release, thus adding a new row to the history matrix. Following the approach from @laake_hidden_2014, we defined 3 different states for the birds: 1=alive with both metallic and plastic ring, 2=alive with only the metallic ring, 3= dead. Transitions between states $T$ were defined by apparent survival probability $\phi$ and the probability to lose a plastic ring $m$.  
 
 \[T = 
   \left[ {\begin{array}{ccc}
@@ -394,7 +396,7 @@ We used alpha-numeric plastic rings to enable resightings of birds. Likely due t
   \end{array} } \right]
 \]
 
-Observation events are 1=individual is recorded wearing its plastic ring (resightings and recaptures), 2=individual is recorded without plastic ring (e.g. a recapture), 3=individual has not been seen or recaptured during the 3-months interval. We defined two different probabilities to record an individual during a 3-months interval, one for individuals having a plastic ring $p^*$ and one for individuals without a plastic ring $p$. Depending on the state of the individuals, they can be recorded according to the observation matrix: 
+Observation events categorised as follows: 1=individual is recorded wearing its plastic ring (resightings and recaptures), 2=individual is recorded without plastic ring (e.g. a recapture), 3=individual has not been seen or recaptured during the 3-months interval. We defined two different probabilities to record an individual during a 3-months interval, one for individuals with a plastic ring $p^*$ and another for individuals without a plastic ring $p$. Individuals are recorded with recapture/resighting probabilities defined in the observation matrix: 
 
 \[O = 
   \left[ {\begin{array}{ccc}
@@ -404,13 +406,13 @@ Observation events are 1=individual is recorded wearing its plastic ring (resigh
   \end{array} } \right]
 \]
 
-Apparent survival and recapture/resighting probabilities were estimated independently for each age class (first half year vs. older than half a year), sex and season. We assume that ring loss probability is constant. 
+Apparent survival and recapture/resighting probabilities were estimated independently for each age class (first half year vs. older than half a year), sex and season. We assume that ring the probability of losing a plastic ring remains constant. 
 
-The preliminary results presented here, need to be handled with care because important relevant structures are still missing from the model. For example:  
+It is important to carefully interpret the preliminary results presented here, as important relevant structures are still missing from the model. For example:  
 
-- Probability that a plastic ring is lost varies among ring series. A random factor for the ring series could be added as predictor for re-sighting probability $p^*$.  
+- The probability of losing a plastic ring may vary among different ring series.   
 
-- Many individuals are first captured in winter which makes it likely that our data contains a high amount of so-called transients, i.e. individuals that are marked and then move away from our study site. It could be accounted for such transients in the model.  
+- Many individuals are first captured during winter, thus it is probable that our data contains so-called transients, i.e. individuals that are marked but then moved away from the study site. It would be possible to account also for such transients in the model.  
 
 - Among-year variance in apparent survival is not yet included in the model.  
 
