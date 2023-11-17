@@ -31,3 +31,5 @@ sensitivity-of-the-population-model-to-changes-in-different-parameters
 for-which-demographic-parameter-would-additional-data-be-most-valuable
 conclusions
 references
+sensitivity-of-the-population-model-to-parameter-changes
+additional-data-on-which-parameter-would-improve-predicted-population-trends-most

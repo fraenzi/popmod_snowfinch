@@ -73,21 +73,21 @@ We employ a hierarchical meta-analysis to combine the information from the diffe
 <p class="caption">(\#fig:metanrbrood)Proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) represents the average across all studies, accounting for different sample sizes. The sample sizes, i.e. number of females doing at least one brood, are given for each study.</p>
 </div>
 
-The resulting average proportion of second broods exhibits a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
+The resulting average proportion of second broods exhibits a high uncertainty. Its 95% uncertainty interval ranges from 0.19 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
-For the population model, we adapted an average proportion of non-breeding females of 0.1 along with an uncertainty interval of 0.03 to 0.21. The large uncertainty interval accounts for the fact that we know little about this demographic parameter. 
+For the population model, we adapted an average proportion of non-breeding females of 0.1 along with an uncertainty interval of 0.03 to 0.23. The large uncertainty interval accounts for the fact that we know little about this demographic parameter. 
 
 Using Monte Carlo simulations to propagate the uncertainty, we derived two intercepts for a multinomial model based on the proportion of non-breeders and the proportion of females with second broods among the breeding females. The proportions (of non-breeders, females with one and two broods) defined by the intercepts were used for average temperature values in our model. 
 
 
 
-Citizen science data (ornitho.ch) from the last 20 yeara revealed that the Snowfinch breeding season started already mid May when June temperatures were high and it started mid June, when June temperatures were low (Niffenegger in prep.). Also, we saw a variation in the ending of the breeding season depending on July temperature. The warmer in July, the earlier breeding ended. Thus, both June and July temperature may finally affect the number of broods in total by one brood (for which around one month is needed) along their ranges of values. We derive effect sizes for June and July temperature that correspond to a change by one brood from the lowest to the highest temperature values. 
+Citizen science data (ornitho.ch) from the last 20 years revealed that the Snowfinch breeding season started already mid-May when June temperatures were high and it started mid-June, when June temperatures were low (Niffenegger in prep.). Additionally, we saw a variation in the ending of the breeding season depending on July temperature. Higher temperatures in July led to an earlier end of the breeding season. Thus, both June and July temperature may affect the total number of broods per year and female. Both variables affected the start and end of the breeding season, respectively, by around one month along the range of their values. A brood needs around one month to be completed. Therefore, we included June and July temperature as predictors in the function use to simulate the number of broods per female and year so that the average number of broods differed by one between the lowest and the highest temperature values. 
 
 
 <div class="figure">
-<img src="predictive_model_files/figure-html/funnrbrood-1.png" alt="Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are indicatd with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in the temperature effects." width="672" />
-<p class="caption">(\#fig:funnrbrood)Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are indicatd with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in the temperature effects.</p>
+<img src="predictive_model_files/figure-html/funnrbrood-1.png" alt="Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are depicted with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in temperature effects." width="672" />
+<p class="caption">(\#fig:funnrbrood)Proportion of females with 0, 1 or 2 broods. The 95% uncertainty intervals are depicted with white dotted lines. They visualise the lack of knowledge on the proportion of breeders and the proportion of second broods, as well as the uncertainty in temperature effects.</p>
 </div>
 
 
@@ -95,46 +95,51 @@ Citizen science data (ornitho.ch) from the last 20 yeara revealed that the Snowf
 
 
 
-There is only one study from the Pyrenees that report the number of fledglings [@grange_biologie_2008]. They report an average of 2.4 fledglings per brood. 
+There is only one study from the Pyrenees that reported the number of fledglings [@grange_biologie_2008]. They found an average of 2.4 fledglings per brood. 
 
 
 
-In our own data from Switzerland (2015-2023), we know the number of fledglings from 83 broods. The average number of fledglings is almost 4 for broods early in the breeding season and it decreases to around 3 fledglings per brood for late broods (Fig. \@ref(fig:nrfeldglings)).
+Our own data from Switzerland (2015-2023) contains 83 broods for which the number of fledglings is known. The average number of fledglings was almost 4 chicks for broods early in the breeding season and it decreases to around 3 fledglings for late broods (Fig. \@ref(fig:nrfeldglings)).
 
 <div class="figure">
-<img src="predictive_model_files/figure-html/nrfeldglings-1.png" alt="Number of fledglings in relation to the date when the first egg of the brood hatched. The regression line is from a linear mixed model with hatching date as predictor and year as random factor. The 95% CI is given as dotted lines. Dots are slightly jittered along the y-axis." width="672" />
-<p class="caption">(\#fig:nrfeldglings)Number of fledglings in relation to the date when the first egg of the brood hatched. The regression line is from a linear mixed model with hatching date as predictor and year as random factor. The 95% CI is given as dotted lines. Dots are slightly jittered along the y-axis.</p>
+<img src="predictive_model_files/figure-html/nrfeldglings-1.png" alt="Number of fledglings in relation to the date on which the first egg of the brood hatched. The regression line was generated by a linear mixed model with hatching date as predictor and year as random factor. The 95% CI is given as dotted lines. Dots are slightly jittered along the y-axis." width="672" />
+<p class="caption">(\#fig:nrfeldglings)Number of fledglings in relation to the date on which the first egg of the brood hatched. The regression line was generated by a linear mixed model with hatching date as predictor and year as random factor. The 95% CI is given as dotted lines. Dots are slightly jittered along the y-axis.</p>
 </div>
 
-For simulating the population trajectory, we draw for every brood the number of fledglings from a normal distribution around the mean number of fledglings that is defined by the hatching date and a standard deviation of 1.15. The standard deviation corresponds to the residual standard deviation of the regression in Figure \@ref(fig:nrfeldglings). We, for now, ignore the among-year variance because it was small in our data (SD among years: 0.28). We might allow for among-year variance once we have better data on how environmental variables influence the number of fledglings. Finally, the drawn values of the number of fledglings were rounded to the next integer in the simulations.
+To simulate the population trajectory, we drew the number of fledglings for each brood from a normal distribution centred around the mean number of fledglings, determined by the hatching date, with a standard deviation of 1.15. The standard deviation corresponds to the residual standard deviation of the regression shown in Figure \@ref(fig:nrfeldglings). Currently, we are not considering the among-year variance due to its small magnitude in our data  (SD among years: 0.28). However, we may incorporate among-year variance once we gather better data on how environmental variables influence the number of fledglings. Finally, the drawn values of the number of fledglings were rounded to the nearest integer in the simulations.
 
 
 ### Survival
 
 #### Literature view on survival estimates for Snowfinches
 
-There is, as far as we know, only one published study on apparent survival in Snowfinches. It is from the Appennines [@Strinella.2020]. The mark-recapture study took place between 2003 and 2017, and a couple of different mark-recapture models accounting for transients [@Pradel.1997] were used to estimate annual apparent survival. Depending on the model used, they found annual apparent survival to be between 0.51 and 0.64 for adult females, between 0.44 and 0.54 for adult males and between 0.09 and 0.13 for first year birds. In addition, they found a strong negative correlation between apparent annual survival of adult females and average temperature during the breeding season. In the Austrian Alps, Ambros Aichhorn regularly ringed Snowfinches between 1964 and 2004 in winter. Also, in these data, a strong negative correlation between temperature during the breeding season and female apparent survival is visible (own analyses in prep.). The average apparent annual survival was 0.63 (95% 0.56 -  0.70) in males and 0.50 (0.36 - 0.64) in females [@zauner_apparent_2022].
+There is, as far as we know, only one published study on apparent survival in Snowfinches. It is from the Appennines [@Strinella.2020]. The mark-recapture study took place between 2003 and 2017, and a couple of different mark-recapture models accounting for transients [@Pradel.1997] were used to estimate annual apparent survival. Depending on the model used, they found annual apparent survival to be between 0.51 and 0.64 for adult females, between 0.44 and 0.54 for adult males and between 0.09 and 0.13 for first year birds. In addition, they found a strong negative correlation between apparent annual survival of adult females and average temperature during the breeding season. Similarly, Ambros Aichhorn ringed Snowfinches in the Austrian Alps between 1964 and 2004, which also depicted a strong negative correlation between female apparent survival and temperature during the breeding season (own analyses in prep.). The averages apparent annual survival were found to be 0.63 (95% 0.56 -  0.70) in males and 0.50 (0.36 - 0.64) in females [@zauner_apparent_2022].
 
 #### Own data on survival
 
-In the project at the Swiss Ornithological Institute, we are marking individuals since May 2015 and we perform systematic searches for marked individuals. Until August 2023 we collected over 8000 resightings and over 900 recaptures (Fig. \@ref(fig:dataprepsurv)). Here, we present first, preliminary, analyses of those data and analyses results. The results are far from being perfect, but they serve to get an impression on how well we can estimate apparent survival, to identify gaps in the data and lack of knowledge, so that we can better plan our future research activities. 
+In our study at the Swiss Ornithological Institute, we have been marking individuals since May 2015 and conducting systematic searches for marked individuals. Until August 2023 we collected over 8000 resightings and over 900 recaptures (Fig. \@ref(fig:dataprepsurv)). In this section, we present preliminary analyses and results based on these data. While the results are far from being perfect, they provide an initial understanding of how well we can estimate apparent survival. Furthermore, they help us to identify gaps in the data and areas where knowledge is lacking, enabling us to better plan our future research activities. 
 
 <div class="figure">
-<img src="figures/CH_Snowfinch.jpg" alt="Marking- and capture/resighting data of Snowfinches in the project of the Swiss Ornithological Institute. Individuals are presented on the y-axis, the time is given on the x-axis. Dots are captures (blue as nestling, orange as fledged bird), open circles are resightings and brown crosses are findings of dead birds. Horizontal lines connect recaptures, resightings or findings of the same individual." width="3000" />
-<p class="caption">(\#fig:dataprepsurv)Marking- and capture/resighting data of Snowfinches in the project of the Swiss Ornithological Institute. Individuals are presented on the y-axis, the time is given on the x-axis. Dots are captures (blue as nestling, orange as fledged bird), open circles are resightings and brown crosses are findings of dead birds. Horizontal lines connect recaptures, resightings or findings of the same individual.</p>
+<img src="figures/CH_Snowfinch.jpg" alt="Marking- and capture/resighting data of Snowfinches in the project at the Swiss Ornithological Institute. While individuals are listed on the y-axis, the x-axis corresponds to the timeline. Captures are depicted as dots, with blue indicating nestling and orange representing fledged birds. Resightings are represented by open circles, and dead recoveries are depicted by brown crosses. Horizontal lines connect recaptures, resightings or dead recoveries of the same individual" width="3000" />
+<p class="caption">(\#fig:dataprepsurv)Marking- and capture/resighting data of Snowfinches in the project at the Swiss Ornithological Institute. While individuals are listed on the y-axis, the x-axis corresponds to the timeline. Captures are depicted as dots, with blue indicating nestling and orange representing fledged birds. Resightings are represented by open circles, and dead recoveries are depicted by brown crosses. Horizontal lines connect recaptures, resightings or dead recoveries of the same individual</p>
 </div>
 
-We used alpha-numeric plastic rings to enable resightings of birds. Likely due to the cold in winter, the plastic rings break and get lost after some months. Birds without plastic rings only can get recaptured but no longer resighted. To account for that loss of plastic rings, we usesd a multi-state/multi-event model [@Arnason.1972, @pradel_multievent_2005] adapted so that it accounts for loss of plastic rings [@laake_hidden_2014]. We divided the study period into 3-months intervals and collated the capture-recapture/resightings into an observation history matrix with a row per individual and plastic ring respectively. When an individual that has lost its plastic ring got a new plastic ring on a recapture, we defined that recapture to be a new release, i.e. we added a new observation history to the data matrix. Following @laake_hidden_2014, we defined that the birds can be in 3 different states: 1=alive with metallic and plastic ring, 2=alive with metallic ring only, 3= dead. Transitions between states $T$ were defined by apparent survival probability $\phi$ and the probability to lose a plastic ring $m$.  
+We used alpha-numeric plastic rings in addition to the official aluminium ring of the Swiss ringing scheme to enable resightings of birds. However, due to the cold winter conditions, these plastic rings often break and become lost after some months. Birds without plastic rings can only be recaptured but no longer be resighted. To account for the loss of plastic rings, we used a multi-state model designed to incorporate loss of marks described by @laake_hidden_2014 which we adapted for the Snowfinch data. In contrast to the Black bear *Ursus americanus* data of @laake_hidden_2014, where only a sub-sample of individuals had a permanent mark, all our individuals had a permanent mark, i.e., the aluminium ring. Further, in our data, recapture/resighting probability depended on whether the bird has a plastic ring or not because only the code on the plastic rings but not the one on the aluminium ring can be identified with a scope. 
+
+Data organisation: We divided the study period into 3-months intervals and we organised the capture-recapture/resightings into a history matrix with each row representing an individual. When an individual that has lost its plastic ring was recaptured and given a new plastic ring, we defined that recapture to be a new release, thus adding a new row to the history matrix $y$. Thus, the number of rows in the history matrix corresponded to the number of unique bird-plastic ring combinations, and $y_{i,t}$ contained the observation event of the bird-plastic ring combination $i$ in time interval $t$. The observations were categorised as follows: 1=individual is recorded wearing its plastic ring (a resighting or a recapture of the individual wearing its plastic ring), 2=individual is recorded without plastic ring (a recapture of the individual without plastic ring), 3=individual has not been seen or recaptured during the 3-months interval.   
+
+Model for the biological process: Following the approach from @laake_hidden_2014, we defined that a bird $i$ can be in 3 different states at each time interval $t$, $C_{i,t}$: 1=alive with both metallic and plastic ring, 2=alive with only the metallic ring, 3= dead. Transitions between states were defined by apparent survival probability $\phi$ and the probability to lose a plastic ring $\theta$. The parameters $\phi$ and $\theta$ used to construct the transition matrix $T$ that defines on each row with what probability a bird in state $C_{i,t-1}$ changes its state to state $C_{i,t}$ (columns of $T$). 
 
 \[T = 
   \left[ {\begin{array}{ccc}
-    (1-m)\phi_{i,t} & m\phi_{i,t} & 1-\phi_{i,t} \\
+    (1-\theta)\phi_{i,t} & \theta\phi_{i,t} & 1-\phi_{i,t} \\
     0 & \phi_{i,t} & 1-\phi_{i,t}\\
     0 & 0 &  1\\
   \end{array} } \right]
 \]
 
-Observation events are 1=individual is recorded wearing its plastic ring (resightings and recaptures), 2=individual is recorded without plastic ring (e.g. a recapture), 3=individual has not been seen or recaptured during the 3-months interval. We defined two different probabilities to record an individual during a 3-months interval, one for individuals having a plastic ring $p^*$ and one for individuals without a plastic ring $p$. Depending on the state of the individuals, they can be recorded according to the observation matrix: 
+
+Model for the observation process: We defined two different probabilities to record an individual during a 3-months interval, one for individuals with a plastic ring $p^*$ and another for individuals without a plastic ring $p$. Individuals are recorded with recapture/resighting probabilities defined in the observation matrix (rows depict state $C_t$ and columns observation $y_{i,t}$): 
 
 \[O = 
   \left[ {\begin{array}{ccc}
@@ -144,24 +149,34 @@ Observation events are 1=individual is recorded wearing its plastic ring (resigh
   \end{array} } \right]
 \]
 
-Apparent survival and recapture/resighting probabilities were estimated independently for each age class (first half year vs. older than half a year), sex and season. We assume that ring loss probability is constant. 
+Likelihood: We used a categorical distribution for the observations $y_{i,t} \sim categorical(\bm(p)_{i,t})$ with $\bm(p)_{i,t} = I_i \times T_{i,1} \times ... \times T_{i,t-1}\times O_{i,t}$ where  $I_i$ is an indicator of the initial state of the bird-plastic ring combination, i.e. $(1,0,0)$ for birds released with a plastic ring and $(0,1,0)$ for birds released without plastic ring.  
 
-The preliminary results presented here, need to be handled with care because important relevant structures are still missing from the model. For example:  
+Apparent survival and recapture/resighting probabilities were estimated independently for each age class (first half year vs. older than half a year), sex and season.  
+$\phi_{i,t} = logit^{-1}(\beta[age[individual[i], t], sex[individual[t]], season[t]])$  
 
-- Probability that a plastic ring is lost varies among ring series. A random factor for the ring series could be added as predictor for re-sighting probability $p^*$.  
+$p^*_{i,t} = logit^{-1}(\alpha^*[age[individual[i], t], sex[individual[t]], season[t]])$  
 
-- Many individuals are first captured in winter which makes it likely that our data contains a high amount of so-called transients, i.e. individuals that are marked and then move away from our study site. It could be accounted for such transients in the model.  
+$p_{i,t} = logit^{-1}(\alpha[age[individual[i], t], sex[individual[t]], season[t]])$  
+
+We assume that the probability of losing a plastic ring $\theta$ remains constant. 
+
+
+It is important to carefully interpret the preliminary results presented here, as important relevant structures are still missing from the model. For example:  
+
+- The probability of losing a plastic ring may vary among different ring series.   
+
+- Many individuals are first captured during winter, thus it is probable that our data contains so-called transients, i.e. individuals that are marked but then moved away from the study site. It would be possible to account also for such transients in the model.  
 
 - Among-year variance in apparent survival is not yet included in the model.  
 
 - Among-individual variance in either apparent survival or in recapture/resighting probability other than age and sex is not yet included in the model.  
 
-- First year birds are only treated as first year birds until December. Later, it is assumed that apparent survival of these birds is equal to adults (see below).  
+- First year birds are only treated as first year birds until December, after which their apparent survival is assumed to be equal to that of adults (see below).  
 
-- Resightings made outside our study area (currently 25 cases) could be used to model movements and, consequently, we could get closer to true instead of apparent survival. 
+- Resightings made outside our study area (currently 25 cases) could be used to model movements, enabling estimation of true survival instead of apparent survival. 
 
 
-We are happy to hear of further thoughts and ideas on how to improve the survival estimation. 
+We welcome any further thoughts and ideas to improve the survival estimation. 
 
 We fitted the model using Markov chain Monte Carlo simulations as implemented in Jags [@Plummer2003]. The Jags code is provided in the code repository of this Github project. 
 
@@ -171,26 +186,26 @@ We fitted the model using Markov chain Monte Carlo simulations as implemented in
 <p class="caption">(\#fig:survest)Three-months apparent survival estimates for juvenile (first half year) and adult Snowfinches in the Swiss Alps. Vertical bars are 95% intervals of the posterior distributions.</p>
 </div>
 
-Our preliminary results indicate that adult apparent survival is lowest in late winter. Survival may be lower in females compared to males in late summer. Apparent survival of the freshly fledged birds in late summer may be underestimated because we assume that during the second half of their first year, their apparent survival equals adult apparent survival, which may not be true. However, after the post-juvenile moult in late summer, first year and older birds are no longer distinguishable. Therefore, we only know of birds captured for the first time in winter, that they are at least half a year old. To be able to separately estimate first year apparent survival for the whole first year, we would need to deal with unidentified ages. 
+Our preliminary results suggest that adult apparent survival is lowest in late winter. Survival may be lower in females compared to males in late summer. Apparent survival of the freshly fledged birds in late summer might be underestimated as we currently assume that during the second half of their first year, their apparent survival equals that of adults, which may not be accurat However, after the post-juvenile moult in late summer, first year and older birds become indistinguishable. This means that we can only confirm that birds captured for the first time in winter are at least half a year old. To separately estimate the apparent survival of first-year birds for the entire span of their first year, we would need to deal with unidentified ages. 
 
 
 
-From our preliminary model, we get an annual apparent survival estimate for adult females of 0.45 (95% CrI: 0.39 - 0.51), for adult males 0.54 (0.51 - 0.57), and of first year females 0.14 (0.06 - 0.29), and for first year males 0.09 (0.04 - 0.16).
+Preliminary results from our model, yielded an annual apparent survival estimate for adult females of 0.45 (95% CrI: 0.39 - 0.51), for adult males 0.54 (0.51 - 0.57), and of first year females 0.14 (0.06 - 0.29), and for first year males 0.09 (0.04 - 0.16).
 
 Table: Half-year apparent survival estimates (preliminary results). Note, winter apparent survival of first years is assumed to be equal to adult apparent survival. 
 
 | Age |  Sex | Apparent survival May - Nov | Apparent survival Nov - May| 
 |:---|---:|----:|----:|
-|first year | female | 0.24 (0.1 - 0.46) | 0.71 (0.57 - 0.88)|
-|first year | male |  0.15 (0.07 - 0.26)| 0.72 (0.65 - 0.79)|
+|first-year | female | 0.24 (0.1 - 0.46) | 0.71 (0.57 - 0.88)|
+|first-year | male |  0.15 (0.07 - 0.26)| 0.72 (0.65 - 0.79)|
 |adult| female |  0.63 (0.5 - 0.79) |0.71 (0.57 - 0.88) |
 |adult | male | 0.75 (0.68 - 0.83)  | 0.72 (0.65 - 0.79) |
 
-The probability that a plastic ring is lost within three months is 0.027 (0.02 - 0.037), which means that one year after having got a plastic ring, 10.47% of the individuals have lost their ring. 
+The probability that a plastic ring is lost within three months was estimated to be 0.027 (0.02 - 0.037), indicating that one year after receiving a plastic ring, approximately 10.47% of the individuals are expected to have lost their plastic ring. 
 
 #### Survival function of the predictive population model
 
-From the survival analyses that are available up to now, we collated a survival function that produces a survival probability for summer and winter for each age and sex class dependent on a standardised environmental variable (Fig. \@ref(fig:survivalfunctions)). Intercepts are taken from the analyses of our own data (presented above) and effect of the environmental variables are taken from the long-term data from Austria [@zauner_apparent_2022]. For every run of the population model, we draw a random intercept and slope for each age and sex class and we keep these values for the whole population trajectory. In this way, the uncertainty of survival propagates into the uncertainty of the population trajectory. 
+Based on the available survival analyses, we compiled a survival function that generates a survival probability for summer and winter for each age and sex class, dependent on a standardised environmental variable  (Fig. \@ref(fig:survivalfunctions)). The intercepts defining the average survival for an average value of the environmental variable were derived from the analyses of our own data (presented above), while the effects of the environmental variables were based on a the long-term study from Austria [@zauner_apparent_2022]. For each run of the population model, we draw a random intercept and slope for each age and sex class, retaining these values for the entire population trajectory. This approach ensures that the uncertainty of survival propagates into the uncertainty of the population trajectory. 
 
 
 <div class="figure">
@@ -203,7 +218,7 @@ From the survival analyses that are available up to now, we collated a survival 
 
 ## Starting population
 
-We start with a population of 7000 individuals just before the breeding season (pre-breeding census) consisting of 1000 adult females, 1000 adult males and each 2500 first year males and females. The age composition corresponds to a stable age structure of a population with a fecundity of 2.5, first year survival of 0.2 and adult survival of 0.5. 
+We initiated the model with a population of 7000 individuals just before the breeding season (pre-breeding census), consisting of 1000 adult females, 1000 adult males and 2500 first year males and females each. This age composition corresponds to a stable age structure of a population with a fecundity of 2.5, first year survival of 0.2 and adult survival of 0.5. 
 
 
 
@@ -213,15 +228,15 @@ We start with a population of 7000 individuals just before the breeding season (
 
 To simulate the population trajectory, we follow the structure presented in Figure \@ref(fig:modelstr). The steps are the following:  
 
-1. Build breeding pairs: With the females and  males present in the population, the breeding pairs are formed. The number of brereding pairs corresponds to the minimum of the number of males and females.  
+1. Building breeding pairs: Matching females and males in the population to form the breeding pairs. The number of breeding pairs corresponds to the minimum number of males and females.  
 
-2. The number of broods per breeding pair is simulated based on the temperature early and late in the breeding season according to Figure \@ref(fig:funnrbrood). At this step, a certain proportion of pairs are assigned to be non-breeders (number of broods is zero).    
+2. The number of broods per breeding pair is simulated based on the early and late temperatures in the breeding season, as shown in Figure  \@ref(fig:funnrbrood). At this step a certain proportion of pairs are designated as non-breeders (having zero broods).    
 
-3. Number of fledglings per brood is simulated based on the date of the brood (Figure \@ref(fig:nrfeldglings)). To keep the model simple for the moment, we assume that the first broods hatch at day 162 and the second broods at day 190.
+3. The number of fledglings per brood is simulated based on the date of the brood (as shown in Figure \@ref(fig:nrfeldglings)). To keep the model simple for the moment, we assume that the first broods hatch at day 162 and the second broods at day 190.
 
-4. Summer and winter survival is simulated for each individual assuming a survival probability defined by the functions visualised in Figure \@ref(fig:survivalfunctions). We use the average temperature during breeding season (average over early and late) as predictor for survival.  
+4. Summer and winter survival is simulated for each individual assuming a survival probability determined by the functions depicted in Figure \@ref(fig:survivalfunctions). We use the average temperature during breeding season (average over early and late) as predictor for survival.  
 
-5. The simulation proceeds wit step 1. with the individuals that survived until the beginning of the following breeding season.  
+5. Subsequently, the simulation resumes with step 1, involving the individuals that survived until the onset of the following breeding season.  
 
 
 
@@ -237,46 +252,44 @@ To simulate the population trajectory, we follow the structure presented in Figu
 
 
 
-With the above collated information on the number of broods per female and year, the number of fledglings per brood and survival we predict that a population of 3500 females decreases in average to around 1000 within 10 years (Figure \@ref(fig:vispopcurrentknow)). The population trend is 0.85 (95% CI: 0.66 - 1.1).  
+Based on our incorporated information, i.e. the number of broods per female and year, the number of fledglings per brood, and survival rates, the model predicted that a population of 3500 females decreases in average to around 1000 within 10 years  (Figure \@ref(fig:vispopcurrentknow)). The population trend is 0.85 (95% CI: 0.66 - 1.1).  
 
 
-Before the population trajectory can be used as a prediction of the future of Snowfinch populations several points need to be improved in the population model, for example:  
+Before the population trajectory can be used as a prediction for the future of Snowfinch populations, several refinement points need to be addressed in the population model, such as:  
 
-- As average survival we used the estimates for apparent survival instead of true survival. Apparent survival normally is lower than true survival because it is the product of fidelity to the study area and survival. Therefore, our model may use too low survival probabilities. To get estimates for true survival we could either account for emigration in the survival model (see above) or we could gradually increase the survival estimates in the population model until the resulting trend corresponds to the observed population trend in Switzerland (https://www.vogelwarte.ch/de/voegel-der-schweiz/schneesperling/).  
+- Our model currently uses estimates for apparent survival as average survival instead of true survival. This may lead to an underestimation due to the lower values of apparent survival, a product of fidelity to the study area and overall survival, compared to true survival. This discrepancy can be mitigated by accounting for emigration in the survival model (see above) or we could gradually increase the survival estimates in the population model until the resulting trend corresponds to the observed population trend in Switzerland  (https://www.vogelwarte.ch/de/voegel-der-schweiz/schneesperling/).  
 
-- The (standardised) temperature values we now used to simulate among-year variance in the number of broods and survival would be needed to be measured relative to the temperature when the demographic parameters were measured. The current model assumes that the average temperature in the 10 virtual "future" years is the same as it was when the demographic parameters were measured.   
+- The (standardised) temperature values used to simulate among-year variance in the number of broods and survival should be recorded relative to the temperature when the demographic parameters were measured. The current model assumes that the average temperature in the 10 virtual “future” years remains the same as at the time when the demographic parameters were measured.   
 
-- We assumed that in average (i.e. for average temperature values) the proportion of non-breeders is 10%, and that this proportion increases or decreases depending on the length of the breeding season that is defined by temperature early and late in the breeding season. The value of 10% is nothing else than a gut-feeling, no data is yet available. We are currently using data loggers to collect exactly that data. Alternatively, we could use our model to reconstruct the population trend since 1990 and vary the proportion of non-breeders until the trend correspond to the observed one (https://www.vogelwarte.ch/de/voegel-der-schweiz/schneesperling/). This alternative is possible as soon as we have empirical estimates of true survival.  
+- We currently assume that the proportion of non-breeders is 10%, fluctuating depending on the length of the breeding season. This length on the other hand is determined by early and late temperatures of the breeding season. However, the 10% value is purely based on intuition as no empirical data are available. We are currently using data loggers on birds to gather precise information on the number non-breeders (and second broods). As an alternative approach, once we have empirical estimates of true survival, we could use our model to reconstruct the population trend since 1990, and adjust the proportion of non-breeders until it corresponds to the observed trend (https://www.vogelwarte.ch/de/voegel-der-schweiz/schneesperling/). 
 
 - For sure, there are further points to be considered.   
 
 
 <div class="figure">
-<img src="predictive_model_files/figure-html/vispopcurrentknow-1.png" alt="90% range of simulated population trajectories based on current knowledge on demographic parameters." width="672" />
-<p class="caption">(\#fig:vispopcurrentknow)90% range of simulated population trajectories based on current knowledge on demographic parameters.</p>
+<img src="predictive_model_files/figure-html/vispopcurrentknow-1.png" alt="90% simulation range of population trajectories based on current demographic parameter knowledge." width="672" />
+<p class="caption">(\#fig:vispopcurrentknow)90% simulation range of population trajectories based on current demographic parameter knowledge.</p>
 </div>
 
 
-## Sensitivity of the population model to changes in different parameters
+## Sensitivity of the population model to parameter changes
 
-To assess how sensitive the population trend $\lambda$ is to changes of specific parameter values, we used a deterministic matrix model to calculate the population growth rate as the dominant eigenvalue of the Lefkovitch matrix [@Caswell.2001; @Pastor.2008]. We varied one of demographic parameter at a time, while we kept all other parameters at their average values used for the simulation above. We only considered the females for this sensitivity analysis, and we calculated fecundity, i.e. the average number of females produced by a female, as $(1-P(non-breeder))*(f_{1st brood} + P(2nd brood)*f_{2nd brood})/2$, where $P(non-breeder)$ is the proportion of non-breeders, $f_{1st brood}$ and $f_{2nd brood}$ the number of fledglings in the first and second brood and $P(2nd brood)$ the proportion of females doing a second brood among the breeding females. We assume a sex ratio of 1:1 among the fledglings as we also do in the stochastic population model (simulation above). 
+To evaluate the sensitivity of the population trend $\lambda$ ito alterations in specific parameter values, we used a deterministic matrix model to calculate the population growth rate, determined by the dominant eigenvalue of the Lefkovitch matrix [@Caswell.2001; @Pastor.2008]. We systematically varied one of demographic parameter at a time while keeping the other parameters at their average values, as used for the simulation above. For this sensitivity analysis, we considered females only. We calculated fecundity, the average number of female offspring produced by a female, using the equation $(1-P(non-breeder))*(f_{1st brood} + P(2nd brood)*f_{2nd brood})/2$, where $P(non-breeder)$ represents the proportion of non-breeders, $f_{1st brood}$ and $f_{2nd brood}$ the number of fledglings in the first and second brood and $P(2nd brood)$ stands for the proportion of females doing a second brood among the breeding females. We assume a sex ratio of 1:1 among the fledglings as it was also the case for the stochastic population model (simulation above). 
 
-Even though the units with which the different demographic parameters are measured are not directly comparable, we may conclude that small changes in survival, particularly juvenile survival have a strong effect on population growth rate, whereas a change in the average number of nestlings only has a small effect on the population growth rate (Figure \@ref(fig:sensan)). The proportion of non-breeders has a larger effect on the population growth (per unit change) compared to the proportion of second broods. However, we think the variance, and consequently the range of plausible average values, in the proportion of non-breeding females may be lower than in the proportion of second broods among the breeding females. 
+Even though the units of measurements for different demographic parameters are not directly comparable, we conclude that minor changes in survival, particularly juvenile survival, have a substantial impact on population growth rate. Conversely, altering the average number of nestlings from two to five has only a minor effect on the population growth rate (Figure \@ref(fig:sensan)). The proportion of non-breeders has a more substantial impact on the population growth compared to the proportion of second broods. However, the question which of the two parameters is the more important driver of population growth, also depends on the variance in the parameters. Data on these parameters are currently  being collected. 
 
-From these results, we conclude that for a prediction of future population trends, it is most important to have a solid understanding of how survival is related to environmental variables. Further, it is more important to know the proportion of non-breeders and the proportion of second broods compared to the average number of fledglings. 
+These findings lead us to conclude that, for predicting future population trends, it is critical to understand how survival is linked to environmental variables. Furthermore, knowing the proportion of non-breeders and the proportion of second broods is more crucial than accurately estimating the average number of fledglings. 
 
 <div class="figure">
-<img src="predictive_model_files/figure-html/sensan-1.png" alt="Sensitivity of the population growth rate to changes in single demographic parameters inferred from a deterministic matrix model. Only one parameter is changed at a time whereas all others were kept at the values used for the simulation. The scales of the x-axes are chosen so that they span the range of plausible average values. The grey horizontal line indicates the population trend for average parameter values." width="672" />
-<p class="caption">(\#fig:sensan)Sensitivity of the population growth rate to changes in single demographic parameters inferred from a deterministic matrix model. Only one parameter is changed at a time whereas all others were kept at the values used for the simulation. The scales of the x-axes are chosen so that they span the range of plausible average values. The grey horizontal line indicates the population trend for average parameter values.</p>
+<img src="predictive_model_files/figure-html/sensan-1.png" alt="Sensitivity of the population growth rate to changes in single demographic parameters deduced from a deterministic matrix model. A single parameter is modified at a time while all others were retained at the values used for the simulation. The scales of the x-axes are chosen so that they span the range of currently plausible seeming average values. The grey horizontal line indicates the population trend for average parameter values." width="672" />
+<p class="caption">(\#fig:sensan)Sensitivity of the population growth rate to changes in single demographic parameters deduced from a deterministic matrix model. A single parameter is modified at a time while all others were retained at the values used for the simulation. The scales of the x-axes are chosen so that they span the range of currently plausible seeming average values. The grey horizontal line indicates the population trend for average parameter values.</p>
 </div>
   
   
   
-## For which demographic parameter would additional data be most valuable?
+## Additional data on which parameter would improve predicted population trends most?
 
-To assess what information increases precision of the predicted population trajectories most, we re-run the simulations pretending that we exactly know a specific parameter value. We pretend to know a parameter exactly for each parameter at a time for 1) the proportions of non-breeders, single and double brooded pairs, 2) the number of fledglings per brood, and 3) survival .
-
-
+To determine which information increases precision of the predicted population trajectories the most, we conducted simulations, presuming we exactly knew a specific parameter value. We run separate analyses for1) the proportions of non-breeders, single and double brooded pairs, 2) the number of fledglings per brood, and 3) survival.
 
 
 
@@ -289,12 +302,14 @@ To assess what information increases precision of the predicted population traje
 
 
 
-Knowing exactly the average number of broods per pair (i.e. the proportions of non-breeders, single and double brooded pairs) and the number of fledglings per brood has similar effects on the precision of the predicted population trends (Figure \@ref(fig:vispopdiffknowl)). It reduces the uncertainty of the predicted population size in 10 years from a range of 140 - 6430 females to ranges of 123 - 5625 females if the average number of broods is exactly known and 108 - 5476 females if the average number of fledglings is exactly known. We get a remarkable increase in precision of the predicted population size if we know survival exactly. Then the predicted number of females in 10 years is between 812- 2566.
+
+
+Having precise knowledge of the average number of broods per pair (i.e. the proportions of non-breeders, single and double brooded pairs), and the number of fledglings per brood has similar effects on the precision of the predicted population trends (Figure \@ref(fig:vispopdiffknowl)). In both cases, the uncertainty of the predicted population size in 10 years is reduced from 140 - 6430 females to ranges of 123 - 5625 females if the average number of broods is exactly known and 108 - 5476 females if the average number of fledglings is exactly known. WHowever, the most pronounced increase in precision of the projected population size occurs when survival is exactly known. In this scenario, the predicted number of females in 10 years ranges between 812 to 2566.
 
 
 <div class="figure">
-<img src="predictive_model_files/figure-html/vispopdiffknowl-1.png" alt="90% range of simulated population trajectories based on current knowledge on demographic parameters." width="672" />
-<p class="caption">(\#fig:vispopdiffknowl)90% range of simulated population trajectories based on current knowledge on demographic parameters.</p>
+<img src="predictive_model_files/figure-html/vispopdiffknowl-1.png" alt="90% simulation range of population trajectories based on current demographic parameters knowledge." width="672" />
+<p class="caption">(\#fig:vispopdiffknowl)90% simulation range of population trajectories based on current demographic parameters knowledge.</p>
 </div>
 
 
