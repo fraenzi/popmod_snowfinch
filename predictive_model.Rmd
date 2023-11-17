@@ -409,7 +409,16 @@ Model for the observation process: We defined two different probabilities to rec
   \end{array} } \right]
 \]
 
-Likelihood: We used a categorical distribution for the observations $y_{i,t} \sim categorical(\bm(p)_{i,t})$ with $\bm(p)_{i,t} = I_i \times T_{i,1} \times ... \times T_{i,t-1}\times O_{i,t}$ where  $I_i$ is an indicator of the initial state of the bird-plastic ring combination, i.e. $(1,0,0)$ for birds released with a plastic ring and $(0,1,0)$ for birds released without plastic ring.  
+Likelihood: We used a categorical distribution for the observations $y_{i,t} \sim categorical(\mathbf{p}_{i,t})$ with $(\mathbf{p})_{i,t} = I_i \times T_{i,1} \times ... \times T_{i,t-1}\times O_{i,t}$ where  $I_i$ is an indicator of the initial state of the bird-plastic ring combination, i.e. $$\begin{pmatrix} 
+1 \\ 
+0 \\
+0 \\
+\end{pmatrix}$$
+for birds released with a plastic ring and $$\begin{pmatrix} 
+0 \\ 
+1 \\
+0 \\
+\end{pmatrix}$$ for birds released without plastic ring.  
 
 Apparent survival and recapture/resighting probabilities were estimated independently for each age class (first half year vs. older than half a year), sex and season.  
 $\phi_{i,t} = logit^{-1}(\beta[age[individual[i], t], sex[individual[t]], season[t]])$  

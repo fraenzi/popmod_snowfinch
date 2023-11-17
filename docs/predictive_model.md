@@ -76,7 +76,7 @@ We employ a hierarchical meta-analysis to combine the information from the diffe
 The resulting average proportion of second broods exhibits a high uncertainty. Its 95% uncertainty interval ranges from 0.19 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
-For the population model, we adapted an average proportion of non-breeding females of 0.1 along with an uncertainty interval of 0.03 to 0.23. The large uncertainty interval accounts for the fact that we know little about this demographic parameter. 
+For the population model, we adapted an average proportion of non-breeding females of 0.1 along with an uncertainty interval of 0.02 to 0.21. The large uncertainty interval accounts for the fact that we know little about this demographic parameter. 
 
 Using Monte Carlo simulations to propagate the uncertainty, we derived two intercepts for a multinomial model based on the proportion of non-breeders and the proportion of females with second broods among the breeding females. The proportions (of non-breeders, females with one and two broods) defined by the intercepts were used for average temperature values in our model. 
 
@@ -149,7 +149,16 @@ Model for the observation process: We defined two different probabilities to rec
   \end{array} } \right]
 \]
 
-Likelihood: We used a categorical distribution for the observations $y_{i,t} \sim categorical(\bm(p)_{i,t})$ with $\bm(p)_{i,t} = I_i \times T_{i,1} \times ... \times T_{i,t-1}\times O_{i,t}$ where  $I_i$ is an indicator of the initial state of the bird-plastic ring combination, i.e. $(1,0,0)$ for birds released with a plastic ring and $(0,1,0)$ for birds released without plastic ring.  
+Likelihood: We used a categorical distribution for the observations $y_{i,t} \sim categorical(\mathbf{p}_{i,t})$ with $(\mathbf{p})_{i,t} = I_i \times T_{i,1} \times ... \times T_{i,t-1}\times O_{i,t}$ where  $I_i$ is an indicator of the initial state of the bird-plastic ring combination, i.e. $$\begin{pmatrix} 
+1 \\ 
+0 \\
+0 \\
+\end{pmatrix}$$
+for birds released with a plastic ring and $$\begin{pmatrix} 
+0 \\ 
+1 \\
+0 \\
+\end{pmatrix}$$ for birds released without plastic ring.  
 
 Apparent survival and recapture/resighting probabilities were estimated independently for each age class (first half year vs. older than half a year), sex and season.  
 $\phi_{i,t} = logit^{-1}(\beta[age[individual[i], t], sex[individual[t]], season[t]])$  
