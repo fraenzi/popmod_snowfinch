@@ -41,13 +41,13 @@ Correlations between Snowfinch population dynamics and environmental variables a
 
 - A negative correlation was found between the average ambient temperature during the breeding season and apparent survival of female Snowfinches in the Apennines between 2003 and 2017 [@Strinella.2020].  
 
-- In the Austrian Alps between 1964 and 2004, the average ambient temperature during the breeding season showed a strong negative correlation with female apparent survival and moderate negative correlation in males  (Aichhorn in prep.).  
+- In the Austrian Alps between 1964 and 2004, the average ambient temperature during the breeding season showed a strong negative correlation with female apparent survival and moderate negative correlation in males [@hille_are_nodate].  
 
-- The timing of the broods was correlated with early spring precipitation but did not follow the long-term advance of the snow melt in citizen science data from Switzerland from 1998 to 2019 [@Schano.2021].  
+- The timing of broods was correlated with early spring precipitation but did not follow the long-term advance of the snow melt in citizen science data from Switzerland from 1998 to 2019 [@Schano.2021].  
 
 - Nestling growth rate was higher during snow melt compared to after snow melt in 87 nestlings of 24 broods in the Swiss Alps (data from 2016 to 2020) [@Ijjas.2022].  
 
-- Temperature early in the breeding season correlated positively with the length of the breeding season (and consequently, the number of broods possible), while average temperature late in the breeding season correlated negatively with the length of the breeding season as inferred from citizen science data in Switzerland between 1999 and 2021 (Niffenegger in prep.). 
+- Temperature early in the breeding season correlated positively with the length of the breeding season (and consequently, the number of broods possible), while average temperature late in the breeding season correlated negatively with the length of the breeding season as inferred from citizen science data in Switzerland between 1999 and 2021 [@niffenegger_how_nodate]. 
 
 
 In the current version of the population model, we relate the number of broods per female and year, and survival (first-year and adult female and male survival) to temperature during the breeding season. We use average temperature values for the Swiss Alps early and late in the breeding season as predicted by the climate scenario RCP26 [@ch2018_project_team_ch2018_2018]. We use these data to have a somewhat realistic among-year variance in temperature values for simulating the population trajectories.  
@@ -61,7 +61,7 @@ In the current version of the population model, we relate the number of broods p
 ### Number of broods
 
 
-The number of broods a female raises in one year is only known for a few study sites. In the Apennines, all 26 females observed did a second brood [@strinella_biologia_2011]. In the Pyrenees, @grange_biologie_2008 noted that 50% of the breeding pairs undertook a second brood. Little is known for the Alps. @Aichhorn.1966 reported that 9 of 11 breeding pairs did a second brood in the Austrian Alps. In our study in the Swiss Alps, we found that only 7 out of 49 females reported to breed did a second brood. However, we might have missed a large part of the second broods because females may leave the study area for the second brood. 
+The total number of broods a female raises in one year is only known for a few study sites. In the Apennines, all 26 females observed did a second brood [@strinella_biologia_2011]. In the Pyrenees, @grange_biologie_2008 noted that 50% of the breeding pairs undertook a second brood. Little is known for the Alps. @Aichhorn.1966 reported that 9 of 11 breeding pairs did a second brood in the Austrian Alps. In our study in the Swiss Alps, we found that only 7 out of 49 females reported to breed did a second brood. However, we might have missed a large part of the second broods because females may leave the study area for the second brood. 
 The proportion of non-breeding females is not known at all.
 
 To more precisely evaluate the proportion of females skipping breeding, doing one or two broods, tracking of females throughout the entire breeding season would be needed. This has not been accomplished yet. 
@@ -73,16 +73,16 @@ We employ a hierarchical meta-analysis to combine the information from the diffe
 <p class="caption">(\#fig:metanrbrood)Proportion of second broods in different studies (point) with 95% uncertainty intervals. The mean (grey) represents the average across all studies, accounting for different sample sizes. The sample sizes, i.e. number of females doing at least one brood, are given for each study.</p>
 </div>
 
-The resulting average proportion of second broods exhibits a high uncertainty. Its 95% uncertainty interval ranges from 0.19 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
+The resulting average proportion of second broods exhibits a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
-For the population model, we adapted an average proportion of non-breeding females of 0.1 along with an uncertainty interval of 0.02 to 0.21. The large uncertainty interval accounts for the fact that we know little about this demographic parameter. 
+For the population model, we adapted an average proportion of non-breeding females of 0.1 along with an uncertainty interval of 0.03 to 0.21. The large uncertainty interval accounts for the fact that we know little about this demographic parameter. 
 
 Using Monte Carlo simulations to propagate the uncertainty, we derived two intercepts for a multinomial model based on the proportion of non-breeders and the proportion of females with second broods among the breeding females. The proportions (of non-breeders, females with one and two broods) defined by the intercepts were used for average temperature values in our model. 
 
 
 
-Citizen science data (ornitho.ch) from the last 20 years revealed that the Snowfinch breeding season started already mid-May when June temperatures were high and it started mid-June, when June temperatures were low (Niffenegger in prep.). Additionally, we saw a variation in the ending of the breeding season depending on July temperature. Higher temperatures in July led to an earlier end of the breeding season. Thus, both June and July temperature may affect the total number of broods per year and female. Both variables affected the start and end of the breeding season, respectively, by around one month along the range of their values. A brood needs around one month to be completed. Therefore, we included June and July temperature as predictors in the function use to simulate the number of broods per female and year so that the average number of broods differed by one between the lowest and the highest temperature values. 
+Citizen science data (ornitho.ch) from the last 20 years revealed that the Snowfinch breeding season in Switzerland started already mid-May when June temperatures were high but it started mid-June, when June temperatures were low (Niffenegger in prep.). Additionally, we saw a variation in the ending of the breeding season depending on July temperature. Higher temperatures in July led to an earlier end of the breeding season. Thus, both June and July temperature may affect the total number of broods per year and female. Both variables affected the start and end of the breeding season, respectively, by around one month along the range of their values. A brood needs around one month to be completed. Therefore, we included June and July temperature as predictors in the function use to simulate the number of broods per female and year so that the average number of broods differed by one between the lowest and the highest temperature values. 
 
 
 <div class="figure">
@@ -113,7 +113,7 @@ To simulate the population trajectory, we drew the number of fledglings for each
 
 #### Literature view on survival estimates for Snowfinches
 
-There is, as far as we know, only one published study on apparent survival in Snowfinches. It is from the Appennines [@Strinella.2020]. The mark-recapture study took place between 2003 and 2017, and a couple of different mark-recapture models accounting for transients [@Pradel.1997] were used to estimate annual apparent survival. Depending on the model used, they found annual apparent survival to be between 0.51 and 0.64 for adult females, between 0.44 and 0.54 for adult males and between 0.09 and 0.13 for first year birds. In addition, they found a strong negative correlation between apparent annual survival of adult females and average temperature during the breeding season. Similarly, Ambros Aichhorn ringed Snowfinches in the Austrian Alps between 1964 and 2004, which also depicted a strong negative correlation between female apparent survival and temperature during the breeding season (own analyses in prep.). The averages apparent annual survival were found to be 0.63 (95% 0.56 -  0.70) in males and 0.50 (0.36 - 0.64) in females [@zauner_apparent_2022].
+To our knowledge so far, there is only one published study on apparent survival in Snowfinches [@Strinella.2020]. The mark-recapture study took place between 2003 and 2017 in the Appenines, and a couple of different mark-recapture models accounting for transients [@Pradel.1997] were used to estimate annual apparent survival. Depending on the model used, they found annual apparent survival to be between 0.51 and 0.64 for adult females, between 0.44 and 0.54 for adult males and between 0.09 and 0.13 for first year birds. In addition, they discovered a strong negative correlation between apparent annual survival of adult females and average temperature during the breeding season. Similarly, Ambros Aichhorn ringed Snowfinches in the Austrian Alps between 1964 and 2004, which also depicted a strong negative correlation between female apparent survival and temperature during the breeding season [@hille_are_nodate]. The averages apparent annual survival were identified to be 0.63 (95% 0.56 -  0.70) in males and 0.50 (0.36 - 0.64) in females [@zauner_apparent_2022;  @hille_are_nodate].
 
 #### Own data on survival
 
@@ -124,7 +124,7 @@ In our study at the Swiss Ornithological Institute, we have been marking individ
 <p class="caption">(\#fig:dataprepsurv)Marking- and capture/resighting data of Snowfinches in the project at the Swiss Ornithological Institute. While individuals are listed on the y-axis, the x-axis corresponds to the timeline. Captures are depicted as dots, with blue indicating nestling and orange representing fledged birds. Resightings are represented by open circles, and dead recoveries are depicted by brown crosses. Horizontal lines connect recaptures, resightings or dead recoveries of the same individual</p>
 </div>
 
-We used alpha-numeric plastic rings in addition to the official aluminium ring of the Swiss ringing scheme to enable resightings of birds. However, due to the cold winter conditions, these plastic rings often break and become lost after some months. Birds without plastic rings can only be recaptured but no longer be resighted. To account for the loss of plastic rings, we used a multi-state model designed to incorporate loss of marks described by @laake_hidden_2014 which we adapted for the Snowfinch data. In contrast to the Black bear *Ursus americanus* data of @laake_hidden_2014, where only a sub-sample of individuals had a permanent mark, all our individuals had a permanent mark, i.e., the aluminium ring. Further, in our data, recapture/resighting probability depended on whether the bird has a plastic ring or not because only the code on the plastic rings but not the one on the aluminium ring can be identified with a scope. 
+We used alpha-numeric plastic rings in addition to the official aluminium ring of the Swiss ringing scheme to enable resightings of birds. However, due to the cold winter conditions, these plastic rings in some cases break and become lost after some months. Birds without plastic rings have to be recaptured, because they can  no longer be individually identified by resighting alone. To account for the loss of plastic rings, we used a multi-state model designed to incorporate loss of marks described by @laake_hidden_2014 which we adapted for the Snowfinch data. In contrast to the Black bear *Ursus americanus* data of @laake_hidden_2014, where only a sub-sample of individuals had a permanent mark, all our captured individuals had a permanent mark, i.e., the aluminium ring. Further, in our data, recapture/resighting probability depended on whether the bird has a plastic ring because only the code on the plastic rings but not the one on the aluminium ring can be identified with a scope. 
 
 Data organisation: We divided the study period into 3-months intervals and we organised the capture-recapture/resightings into a history matrix with each row representing an individual. When an individual that has lost its plastic ring was recaptured and given a new plastic ring, we defined that recapture to be a new release, thus adding a new row to the history matrix $y$. Thus, the number of rows in the history matrix corresponded to the number of unique bird-plastic ring combinations, and $y_{i,t}$ contained the observation event of the bird-plastic ring combination $i$ in time interval $t$. The observations were categorised as follows: 1=individual is recorded wearing its plastic ring (a resighting or a recapture of the individual wearing its plastic ring), 2=individual is recorded without plastic ring (a recapture of the individual without plastic ring), 3=individual has not been seen or recaptured during the 3-months interval.   
 
@@ -195,7 +195,7 @@ We fitted the model using Markov chain Monte Carlo simulations as implemented in
 <p class="caption">(\#fig:survest)Three-months apparent survival estimates for juvenile (first half year) and adult Snowfinches in the Swiss Alps. Vertical bars are 95% intervals of the posterior distributions.</p>
 </div>
 
-Our preliminary results suggest that adult apparent survival is lowest in late winter. Survival may be lower in females compared to males in late summer. Apparent survival of the freshly fledged birds in late summer might be underestimated as we currently assume that during the second half of their first year, their apparent survival equals that of adults, which may not be accurat However, after the post-juvenile moult in late summer, first year and older birds become indistinguishable. This means that we can only confirm that birds captured for the first time in winter are at least half a year old. To separately estimate the apparent survival of first-year birds for the entire span of their first year, we would need to deal with unidentified ages. 
+Our preliminary results suggest that adult apparent survival is lowest in late winter. Survival may be lower in females compared to males in late summer. Apparent survival of the freshly fledged birds in late summer might be underestimated as we currently assume that during the second half of their first year, their apparent survival equals that of adults, which may not be accurate. However, after the post-juvenile moult in late summer, first year and older birds become indistinguishable. This means that we can only confirm that birds captured for the first time in winter are at least half a year old. To separately estimate the apparent survival of first-year birds for the entire span of their first year, we would need to deal with unidentified ages. 
 
 
 
@@ -214,7 +214,7 @@ The probability that a plastic ring is lost within three months was estimated to
 
 #### Survival function of the predictive population model
 
-Based on the available survival analyses, we compiled a survival function that generates a survival probability for summer and winter for each age and sex class, dependent on a standardised environmental variable  (Fig. \@ref(fig:survivalfunctions)). The intercepts defining the average survival for an average value of the environmental variable were derived from the analyses of our own data (presented above), while the effects of the environmental variables were based on a the long-term study from Austria [@zauner_apparent_2022]. For each run of the population model, we draw a random intercept and slope for each age and sex class, retaining these values for the entire population trajectory. This approach ensures that the uncertainty of survival propagates into the uncertainty of the population trajectory. 
+Based on the available survival analyses, we compiled a survival function that generates a survival probability for summer and winter for each age and sex class, dependent on a standardised environmental variable  (Fig. \@ref(fig:survivalfunctions)). The intercepts defining the average survival for an average value of the environmental variable were derived from the analyses of our own data (presented above), while the effects of the environmental variables were based on the long-term study from Austria [@hille_are_nodate]. For each run of the population model, we draw a random intercept and slope for each age and sex class, retaining these values for the entire population trajectory. This approach ensures that the uncertainty of survival propagates into the uncertainty of the population trajectory. 
 
 
 <div class="figure">
@@ -296,11 +296,9 @@ These findings lead us to conclude that, for predicting future population trends
   
   
   
-## Additional data on which parameter would improve predicted population trends most?
+## For which parameter would additional data improve predicted population trends most?
 
-To determine which information increases precision of the predicted population trajectories the most, we conducted simulations, presuming we exactly knew a specific parameter value. We run separate analyses for1) the proportions of non-breeders, single and double brooded pairs, 2) the number of fledglings per brood, and 3) survival.
-
-
+To determine which information increases precision of the predicted population trajectories the most, we conducted simulations, presuming we exactly knew a specific parameter value. We run separate analyses for 1) the proportions of non-breeders, single and double brooded pairs, 2) the number of fledglings per brood, and 3) survival.
 
 
 
@@ -313,7 +311,9 @@ To determine which information increases precision of the predicted population t
 
 
 
-Having precise knowledge of the average number of broods per pair (i.e. the proportions of non-breeders, single and double brooded pairs), and the number of fledglings per brood has similar effects on the precision of the predicted population trends (Figure \@ref(fig:vispopdiffknowl)). In both cases, the uncertainty of the predicted population size in 10 years is reduced from 140 - 6430 females to ranges of 123 - 5625 females if the average number of broods is exactly known and 108 - 5476 females if the average number of fledglings is exactly known. WHowever, the most pronounced increase in precision of the projected population size occurs when survival is exactly known. In this scenario, the predicted number of females in 10 years ranges between 812 to 2566.
+
+
+Having precise knowledge of 1) the average number of broods per pair (i.e. the proportions of non-breeders, single and double brooded pairs), and 2) the number of fledglings per brood, it will have similar effects on the precision of the predicted population trends (Figure \@ref(fig:vispopdiffknowl)). In both cases, the uncertainty of the predicted population size in 10 years is reduced from 140 - 6430 females to ranges of 123 - 5625 females if 1) the average number of broods is exactly known and 108 - 5476 females if 2) the average number of fledglings is exactly known. However, the most pronounced increase in precision of the projected population size occurs when survival is exactly known. In this scenario, the predicted number of females in 10 years ranges between 812 to 2566.
 
 
 <div class="figure">

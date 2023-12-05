@@ -1,7 +1,7 @@
 --- 
 title: "A predictive population model for a high-elevation specialist bird species"
 author: "Fränzi Korner-Nievergelt, Sebastian Dirren, Sabine Hille, Carole Niffenegger"
-date: "2023-11-14"
+date: "2023-12-05"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [PopModSnowfinch.bib]
