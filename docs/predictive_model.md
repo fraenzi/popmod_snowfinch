@@ -76,7 +76,7 @@ We employ a hierarchical meta-analysis to combine the information from the diffe
 The resulting average proportion of second broods exhibits a high uncertainty. Its 95% uncertainty interval ranges from 0.2 to  0.97, and the mean is 0.75 (Figure \@ref(fig:metanrbrood)).
 
 
-For the population model, we adapted an average proportion of non-breeding females of 0.1 along with an uncertainty interval of 0.03 to 0.21. The large uncertainty interval accounts for the fact that we know little about this demographic parameter. 
+For the population model, we adapted an average proportion of non-breeding females of 0.1 along with an uncertainty interval of 0.03 to 0.23. The large uncertainty interval accounts for the fact that we know little about this demographic parameter. 
 
 Using Monte Carlo simulations to propagate the uncertainty, we derived two intercepts for a multinomial model based on the proportion of non-breeders and the proportion of females with second broods among the breeding females. The proportions (of non-breeders, females with one and two broods) defined by the intercepts were used for average temperature values in our model. 
 
@@ -117,7 +117,12 @@ To our knowledge so far, there is only one published study on apparent survival 
 
 #### Own data on survival
 
-In our study at the Swiss Ornithological Institute, we have been marking individuals since May 2015 and conducting systematic searches for marked individuals. Until August 2023 we collected over 8000 resightings and over 900 recaptures (Fig. \@ref(fig:dataprepsurv)). In this section, we present preliminary analyses and results based on these data. While the results are far from being perfect, they provide an initial understanding of how well we can estimate apparent survival. Furthermore, they help us to identify gaps in the data and areas where knowledge is lacking, enabling us to better plan our future research activities. 
+
+```r
+load("data/datax.rda")
+```
+
+In our study at the Swiss Ornithological Institute, we have been marking over 1600 individuals since May 2015 and conducting systematic searches for marked individuals. Until August 2023 we collected over 8000 resightings and over 900 recaptures (Fig. \@ref(fig:dataprepsurv)). In this section, we present preliminary analyses and results based on the 1580 individuals marked before June 2023. While the results are far from being perfect, they provide an initial understanding of how well we can estimate apparent survival. Furthermore, they help us to identify gaps in the data and areas where knowledge is lacking, enabling us to better plan our future research activities. 
 
 <div class="figure">
 <img src="figures/CH_Snowfinch.jpg" alt="Marking- and capture/resighting data of Snowfinches in the project at the Swiss Ornithological Institute. While individuals are listed on the y-axis, the x-axis corresponds to the timeline. Captures are depicted as dots, with blue indicating nestling and orange representing fledged birds. Resightings are represented by open circles, and dead recoveries are depicted by brown crosses. Horizontal lines connect recaptures, resightings or dead recoveries of the same individual" width="3000" />
